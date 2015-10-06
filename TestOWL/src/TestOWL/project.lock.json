@@ -1,0 +1,57 @@
+{
+  "locked": false,
+  "version": -9996,
+  "targets": {
+    "DNX,Version=v4.5.1": {
+      "dnx-clr-win-x86/1.0.0-beta7": {}
+    }
+  },
+  "libraries": {
+    "dnx-clr-win-x86/1.0.0-beta7": {
+      "serviceable": true,
+      "sha512": "UC2/kyD2PNm7hTQPFD7XlcEIKtZlraRuMgwiag6cIbg07fudYTwG92/ZRhNKiTopsENi6vjjeRJIQXlmqXSVUw==",
+      "files": [
+        "dnx-clr-win-x86.1.0.0-beta7.nupkg",
+        "dnx-clr-win-x86.1.0.0-beta7.nupkg.sha512",
+        "dnx-clr-win-x86.nuspec",
+        "bin/dnu.cmd",
+        "bin/dnx.clr.dll",
+        "bin/dnx.exe",
+        "bin/dnx.onecore.dll",
+        "bin/dnx.win32.dll",
+        "bin/Microsoft.CodeAnalysis.CSharp.dll",
+        "bin/Microsoft.CodeAnalysis.dll",
+        "bin/Microsoft.Dnx.ApplicationHost.dll",
+        "bin/Microsoft.Dnx.Compilation.Abstractions.dll",
+        "bin/Microsoft.Dnx.Compilation.CSharp.Abstractions.dll",
+        "bin/Microsoft.Dnx.Compilation.CSharp.Common.dll",
+        "bin/Microsoft.Dnx.Compilation.CSharp.dll",
+        "bin/Microsoft.Dnx.Compilation.DesignTime.dll",
+        "bin/Microsoft.Dnx.Compilation.dll",
+        "bin/Microsoft.Dnx.DesignTimeHost.Abstractions.dll",
+        "bin/Microsoft.Dnx.Host.Clr.dll",
+        "bin/Microsoft.Dnx.Host.dll",
+        "bin/Microsoft.Dnx.Loader.dll",
+        "bin/Microsoft.Dnx.Runtime.Abstractions.dll",
+        "bin/Microsoft.Dnx.Runtime.dll",
+        "bin/Microsoft.Framework.HashCodeCombiner.Sources.dll",
+        "bin/System.Collections.Immutable.dll",
+        "bin/System.Reflection.Metadata.dll",
+        "bin/vcruntime140.dll",
+        "bin/lib/Microsoft.Dnx.DesignTimeHost/Microsoft.Dnx.DesignTimeHost.dll",
+        "bin/lib/Microsoft.Dnx.DesignTimeHost/Microsoft.Framework.NotNullAttribute.Sources.dll",
+        "bin/lib/Microsoft.Dnx.DesignTimeHost/Newtonsoft.Json.dll",
+        "bin/lib/Microsoft.Dnx.Project/Microsoft.Dnx.Project.dll",
+        "bin/lib/Microsoft.Dnx.Tooling/Microsoft.Dnx.Tooling.dll",
+        "bin/lib/Microsoft.Dnx.Tooling/Microsoft.Framework.NotNullAttribute.Sources.dll",
+        "bin/lib/Microsoft.Dnx.Tooling/Newtonsoft.Json.dll"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "dnx-clr-win-x86 >= 1.0.0-beta7"
+    ],
+    "DNX,Version=v4.5.1": []
+  }
+}
