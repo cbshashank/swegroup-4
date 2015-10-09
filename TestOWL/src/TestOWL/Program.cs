@@ -23,7 +23,7 @@ namespace TestOWL
                 string json = "{\"LeafCount\":\"4\"," +
                               "\"Color\":\"Green\","  +
                               "\"Name\":\"Ted\"," +
-                              "\"Extra\":\"Notes\"" +
+                              "\"Extra\":\"\"" +
                               "}";
 
                 streamWriter.Write(json);
@@ -69,7 +69,7 @@ namespace TestOWL
             try
             {
                 HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
-                GETRequest.Method = "POST";
+                GETRequest.Method = "PUT";
 
                 string json = "{\"Location\":\"Northeast US\"," +
                                  "\"Setting\":\"city\"," +

@@ -41,12 +41,12 @@ public class Service :  IHttpHandler
                 READ(context);
                 break;
             case "POST":
-                //Perform CREATE Operation
-                CREATE(context);
+                //Perform UPDATE Operation
+                QUERY(context);
                 break;
             case "PUT":
-                //Perform UPDATE Operation
-                UPDATE(context);
+                //Perform CREATE Operation
+                CREATE(context);
                 break;
             case "DELETE":
                 //Perform DELETE Operation
@@ -70,9 +70,21 @@ public class Service :  IHttpHandler
     }
 
 
-    public void UPDATE(HttpContext context)
+    public void QUERY(HttpContext context)
     {
-       
+        string json = new StreamReader(context.Request.InputStream).ReadToEnd();
+        try
+        {
+
+            FloraObj newObj = JsonConvert.DeserializeObject<FloraObj>(json);
+            IList<FloraObj> FloraObjList = DAO.Query(newObj);
+            context.Response.Write(JsonConvert.SerializeObject(FloraObjList));
+        }
+        catch (Exception e)
+        {
+            //---Do logging here about message - could be a post message for the server, could be a badly formed JSON
+            context.Response.Write("Invalid Message!");
+        }
     }
 
 
@@ -90,6 +102,7 @@ public class Service :  IHttpHandler
         catch(Exception e)
         {
             //---Do logging here about message - could be a post message for the server, could be a badly formed JSON
+            context.Response.Write("Invalid Message!");
         }
         
 

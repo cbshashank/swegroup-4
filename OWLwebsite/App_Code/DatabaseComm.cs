@@ -15,6 +15,93 @@ public class DatabaseComm
         conn_string = connection;
     }
 
+    /// <summary>
+    /// Given a partially complete FloraObj, query the database for a complete one.
+    /// </summary>
+    /// <param name="FLO"></param>
+    /// <returns></returns>
+    public IList<FloraObj> Query(FloraObj FLO)
+    {
+        IList<FloraObj> floraObjList = new List<FloraObj>();
+
+        string sqlQueryString =
+          "SELECT Name, Color, LeafCount, Extra FROM FLORA";
+
+        SqlConnection conn = new SqlConnection(conn_string);
+        SqlCommand command = new SqlCommand();
+        command.Connection = conn;
+        
+    
+        int count = 0;  
+        if(!string.IsNullOrEmpty(FLO.Name))
+        {
+            sqlQueryString += " WHERE Name = @Name";
+            SqlParameter Name = new SqlParameter("@Name", FLO.Name);
+            command.Parameters.Add(Name);
+            count++;
+        }
+        if(!string.IsNullOrEmpty(FLO.Color))
+        {
+            if (count > 0)
+                sqlQueryString += " AND ";
+            else
+                sqlQueryString += " WHERE ";
+            sqlQueryString += "Color=@Color";
+            SqlParameter Color = new SqlParameter("@Color", FLO.Color);
+            command.Parameters.Add(Color);
+            count++;
+
+        }
+        if (FLO.LeafCount != -1)
+        {
+            if (count > 0)
+                sqlQueryString += " AND ";
+            else
+                sqlQueryString += " WHERE ";
+
+            sqlQueryString += "LeafCount=@LeafCount";
+            SqlParameter LeafCount = new SqlParameter("@LeafCount", FLO.LeafCount);
+            command.Parameters.Add(LeafCount);
+            count++;
+
+        }
+        if (!string.IsNullOrEmpty(FLO.Extra))
+        {
+            if (count > 0)
+                sqlQueryString += " AND ";
+            else
+                sqlQueryString += " WHERE ";
+
+            sqlQueryString += "Extra = @Extra";
+            SqlParameter Extra = new SqlParameter("@Extra", FLO.Extra);
+            command.Parameters.Add(Extra);
+            count++;
+        }
+       
+
+        
+        command.Connection.Open();
+
+        command.CommandText = sqlQueryString;
+
+       SqlDataReader ReturnResult = command.ExecuteReader();
+
+        while(ReturnResult.Read())
+        {
+            FloraObj AddObj = new FloraObj();
+            AddObj.Name = ReturnResult.GetString(0);
+            AddObj.Color = ReturnResult.GetString(1);
+            AddObj.LeafCount = ReturnResult.GetInt16(2);
+            AddObj.Extra = ReturnResult.GetString(3);
+            floraObjList.Add(AddObj);
+        }
+        
+        
+        command.Connection.Close();
+        return floraObjList;
+
+    }
+
     public void Insert(FloraObj FLO)
     {
         //using parametirized query
@@ -40,24 +127,5 @@ public class DatabaseComm
 
     }
 
-    /// <summary>
-    /// Query the database based upon the values in the FloraObj
-    /// </summary>
-    /// <param name="FLO"></param>
-    /// <returns></returns>
-    public IList<FloraObj> Query(FloraObj FLO)
-    {
-        IList<FloraObj> ItemsFound = null;
-
-        //---Form the query based on the FloraObj
-
-        //---Send the Query
-
-        //---Get the Query objects back
-
-        //---Store Query results in FloraObjs
-        
-        //---Return list of found items
-        return ItemsFound;
-    }
+   
 }

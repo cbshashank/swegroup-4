@@ -56,6 +56,6 @@ public class FloraObj
 
     public FloraObj()
     {
-        
+        LeafCount = -1;
     }
 }
