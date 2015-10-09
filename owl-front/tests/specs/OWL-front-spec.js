@@ -2,8 +2,11 @@
  * Created by Scott on 10/7/2015.
  */
 //There are multiple selections titled: �Location�, �Setting�, �Color�, �Shape�, �Texture�, �Smell�, and �Pattern�.
-define( ['SystemInputs','ClientCommunicationModule','ResultDisplay'], function(input) {
+define( ['SystemInputs','ClientCommunicationModule','ResultDisplay'], function(SystemInputs) {
+    input = new SystemInputs();
+
     describe("System input testing", function() {
+
         it('outputs a selected location', function () {
             expect(input.getInput("Location")).toEqual("Location:Western_US");
         });
@@ -35,16 +38,16 @@ define( ['SystemInputs','ClientCommunicationModule','ResultDisplay'], function(i
     });
 
     describe("Client communication module testing", function() {
-        //it('outputs a selected color', function() {
-        //    expect(input.getInput("Color")).toEqual("Color:Red");
-        //});
+        it('outputs a selected color', function() {
+            expect(input.getInput("Color")).toEqual("Color:Red");
+        });
 
     });
 
     describe("Result display testing", function() {
-        //it('outputs a selected color', function() {
-        //    expect(input.getInput("Color")).toEqual("Color:Red");
-        //});
+        it('outputs a selected color', function() {
+            expect(input.getInput("Color")).toEqual("Color:Red");
+        });
 
     });
 
