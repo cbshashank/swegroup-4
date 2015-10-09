@@ -1,8 +1,8 @@
 /**
  * Created by Scott on 10/7/2015.
  */
-//There are multiple selections titled: “Location”, “Setting”, “Color”, “Shape”, “Texture”, “Smell”, and “Pattern”.
-define( ['../../src/SystemInputs','../../src/ClientCommunicationModule','../../src/ResultDisplay'], function(input) {
+//There are multiple selections titled: ï¿½Locationï¿½, ï¿½Settingï¿½, ï¿½Colorï¿½, ï¿½Shapeï¿½, ï¿½Textureï¿½, ï¿½Smellï¿½, and ï¿½Patternï¿½.
+define( ['SystemInputs','ClientCommunicationModule','ResultDisplay'], function(input) {
     describe("System input testing", function() {
         it('outputs a selected location', function () {
             expect(input.getInput("Location")).toEqual("Location:Western_US");

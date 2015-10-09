@@ -1,15 +1,16 @@
 /**
  * Created by Scott on 10/7/2015.
  */
-define([], function(){
+define(function(){
     // Need to tie this (or something like this) to whatever interface widgets are used. Actual structure may vary from this extremely simple placeholder
-    var input = (function(){})();
+    function SystemInputs(){
+    }
 
-    input.prototype.getInput = function(input_id){
+    SystemInputs.prototype.getInput = function(input_id){
         var result = "";
         if (input_id.equals("Color")) result = "Color:Red";
         return result;
     };
 
-    return input;
+    return SystemInputs;
 });
