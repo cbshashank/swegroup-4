@@ -3,7 +3,9 @@ require.config({
   paths: {
       'jasmine': ['../tests/lib/jasmine'],
       'jasmine-html': ['../tests/lib/jasmine-html'],
-      'jasmine-boot': ['../tests/lib/boot']
+      'jasmine-boot': ['../tests/lib/boot'],
+      'core/*': ['../src/core'],
+      'engine': ['../src/engine']
   },
   shim: {
     'jasmine-html': {
@@ -17,11 +19,9 @@ require.config({
 
 //Add the path to your specs bellow
 require(['jasmine-boot'], function () {
-    var specs = [
-        '../tests/specs/OWL-front-spec'
-//        'specs/my-library-specs'
-    ];
-    require(specs, function(){
-        window.onload();
-    })
+  require([
+      '../tests/specs/example-spec'
+  ], function(){
+    window.onload();
+  })
 });
