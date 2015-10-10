@@ -8,7 +8,9 @@ using System.Web;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-
+/// <summary>
+/// Restful C# Service class, based upon tutorial located at 
+/// </summary>
 public class Service :  IHttpHandler
 {
     //---Database object

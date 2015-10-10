@@ -69,16 +69,10 @@ namespace TestOWL
             try
             {
                 HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
-                GETRequest.Method = "PUT";
+                GETRequest.Method = "POST";
 
-                string json = "{\"Location\":\"Northeast US\"," +
-                                 "\"Setting\":\"city\"," +
-                                 "\"Color\":\"red\"," +
-                                 "\"Shape\":\"Value\"" +
-                                 "\"Texture\":\"Rough\"" +
-                                 "\"Smell\":\"Tropical\"" +
-                                 "\"Pattern\":\"Spotted\"" +
-                                 "\"Plant Growth\":\"Vine\"" +
+                string json = "{\"PlantId\":\"\"," +
+                                 "\"USState\":\"MA\"," +
                                  "}";
 
                 using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
