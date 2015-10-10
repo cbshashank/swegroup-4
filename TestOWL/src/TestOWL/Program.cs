@@ -63,7 +63,7 @@ namespace TestOWL
         /// <summary>
         /// Test the database fields to make sure they exist
         /// </summary>
-        void TestR2()
+        void TestQueryState(string state, string queryval)
         {
             Console.WriteLine("Testing R2");
             try
@@ -71,9 +71,7 @@ namespace TestOWL
                 HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
                 GETRequest.Method = "POST";
 
-                string json = "{\"PlantId\":\"\"," +
-                                 "\"USState\":\"MA\"," +
-                                 "}";
+                string json = "{\"" + state +"\":\""+ queryval + "\"," +"}";
 
                 using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
                 {
@@ -109,9 +107,18 @@ namespace TestOWL
             }
         }
 
-        void TestR3()
+        void TestR2()
         {
-
+            TestQueryState("PlantId", "TES");
+            TestQueryState("Name", "testvalue");
+            TestQueryState("ColorFlower", "red");
+            TestQueryState("ColorFoliage", "green");
+            TestQueryState("ColorFruitSeed", "blue");
+            TestQueryState("TextureFoliage", "foil");
+            TestQueryState("Shape", "square");
+            TestQueryState("Pattern", "spotted");
+            TestQueryState("USState", "MA");
+            TestQueryState("Type", "vine");
         }
 
         public void Main(string[] args)

@@ -45,7 +45,7 @@ public class DatabaseComm
         int count = 2;
 
         //---Build the query string - for each field, add a WHERE clause
-        sqlQueryString = BuildSQLWhere("plant_id", FLO.PlantId, "@plantid", count, sqlQueryString, command, out count);
+        sqlQueryString = BuildSQLWhere("Plant.plant_id", FLO.PlantId, "@plantid", count, sqlQueryString, command, out count);
         sqlQueryString = BuildSQLWhere("name", FLO.Name, "@name", count, sqlQueryString, command, out count);
         sqlQueryString = BuildSQLWhere("color_flower", FLO.ColorFlower, "@color_flower", count, sqlQueryString, command, out count);
         sqlQueryString = BuildSQLWhere("color_foliage", FLO.ColorFoliage, "@color_foliage", count, sqlQueryString, command, out count);
