@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace TestOWL
     public class Program
     {
        private string url = "http://localhost:32297";
+        private FloraObj TestObj;
+        private int error;
+        private int success;
+        private int total;
 
         void GenerateGetRequest()
         {
@@ -23,7 +28,7 @@ namespace TestOWL
                 string json = "{\"LeafCount\":\"4\"," +
                               "\"Color\":\"Green\","  +
                               "\"Name\":\"Ted\"," +
-                              "\"Extra\":\"Notes\"" +
+                              "\"Extra\":\"\"" +
                               "}";
 
                 streamWriter.Write(json);
@@ -45,41 +50,36 @@ namespace TestOWL
         /// <summary>
         /// Test the connection to the database
         /// </summary>
-        void TestR1()
+        void TestConnection()
         {
-            Console.WriteLine("Testing R1");
+            Console.WriteLine("Testing Connection");
             try
             {
+                success++;
                 GenerateGetRequest();
-                Console.WriteLine("R1 Success");
+                Console.WriteLine("Connection Success");
             }
             catch(Exception e)
             {
+                error++;
                 Console.WriteLine(e.ToString());
-                Console.WriteLine("R1 Failed");
+                Console.WriteLine("Connection Failed");
             }
+            total++;
         }
 
         /// <summary>
         /// Test the database fields to make sure they exist
         /// </summary>
-        void TestR2()
+        void TestQueryState(string state, string queryval)
         {
-            Console.WriteLine("Testing R2");
+            Console.WriteLine("Testing Query State:  " + state);
             try
             {
                 HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
                 GETRequest.Method = "POST";
 
-                string json = "{\"Location\":\"Northeast US\"," +
-                                 "\"Setting\":\"city\"," +
-                                 "\"Color\":\"red\"," +
-                                 "\"Shape\":\"Value\"" +
-                                 "\"Texture\":\"Rough\"" +
-                                 "\"Smell\":\"Tropical\"" +
-                                 "\"Pattern\":\"Spotted\"" +
-                                 "\"Plant Growth\":\"Vine\"" +
-                                 "}";
+                string json = "{\"" + state +"\":\""+ queryval + "\"," +"}";
 
                 using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
                 {
@@ -96,35 +96,150 @@ namespace TestOWL
                 StreamReader sr = new StreamReader(GETResponseStream);
 
                 string resultjson = sr.ReadToEnd();
-                Console.WriteLine(resultjson);
+                IList<FloraObj> FLO = JsonConvert.DeserializeObject<List<FloraObj>>(resultjson);
 
-                if(resultjson == json)
+
+
+                //Console.WriteLine(resultjson);
+
+
+
+                if (CompareObjects(TestObj, FLO[0]))
                 {
-                    Console.WriteLine("R2 Success");
+                    Console.WriteLine("TestQuery " + state + ": SUCCESS");
+                    success++;
                 }
                 else
                 {
-                    Console.WriteLine("R2 Failed");
+                    Console.WriteLine("TestQuery " + state + ": FAILED");
+                    error++;
                 }
                 
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.ToString());
-                Console.WriteLine("R2 Failed");
+                Console.WriteLine("TestQuery " + state + ": FAILED");
+                error++;
             }
+            total++;
         }
 
-        void TestR3()
+        void TestQueryFields()
         {
-
+            TestQueryState("PlantId", "TES");
+            TestQueryState("Name", "testvalue");
+            TestQueryState("ColorFlower", "red");
+            TestQueryState("ColorFoliage", "green");
+            TestQueryState("ColorFruitSeed", "blue");
+            TestQueryState("TextureFoliage", "foil");
+            TestQueryState("Shape", "square");
+            TestQueryState("Pattern", "spotted");
+            TestQueryState("USState", "MA");
+            TestQueryState("Type", "vine");
         }
+
+        void TestORFields()
+        {
+            TestQueryState("USState", "MA,CA,ME");
+            TestQueryState("Type", "vine,table,wine");
+        }
+
+
+        bool CompareObjects(FloraObj FO, FloraObj FO2)
+        {
+            bool bMatch = FO.PlantId.Trim() == FO2.PlantId.Trim();
+            bMatch = bMatch && (FO.Name.Trim() == FO2.Name.Trim());
+            bMatch = bMatch && (FO.Pattern.Trim() == FO2.Pattern.Trim());
+            bMatch = bMatch && (FO.ImageURL.Trim() == FO2.ImageURL.Trim() && FO.Shape.Trim() == FO2.Shape.Trim());
+            bMatch = bMatch && (FO.TextureFoliage.Trim() == FO2.TextureFoliage.Trim());
+            bMatch = bMatch && (FO.ColorFlower.Trim() == FO2.ColorFlower.Trim());
+            bMatch = bMatch && (FO.ColorFoliage.Trim() == FO2.ColorFoliage.Trim() && FO.ColorFruitSeed.Trim() == FO2.ColorFruitSeed.Trim());
+
+            if (bMatch)
+            {
+                string[] types1 = FO.Type.Split(',');
+                string[] types2 = FO2.Type.Split(',');
+
+                int length1 = types1.GetLength(0);
+                int length2 = types2.GetLength(0);
+                bMatch = compareSplit(types1, types2, length1, length2);
+            }
+
+            if (bMatch)
+            {
+                string[] state1 = FO.USState.Split(',');
+                string[] state2 = FO2.USState.Split(',');
+
+                int length1 = state1.GetLength(0);
+                int length2 = state2.GetLength(0);
+                bMatch = compareSplit(state1, state2, length1, length2);
+            }
+
+            return bMatch;
+        }
+
+
+        private bool compareSplit(string[] str1, string[] str2, int length1, int length2)
+        {
+            bool bMatch = true;
+
+            if (length1 != length2)
+                bMatch = false;
+            else
+            {
+
+                for (int ii = 0; ii < length1; ii++)
+                {
+                    if (str1[ii].Trim() != str2[ii].Trim())
+                    {
+                        bMatch = false;
+                        break;
+                    }
+                }
+            }
+
+            return bMatch;
+        }
+
+
+        private void FillTestObject()
+        {
+            TestObj = new FloraObj();
+            TestObj.PlantId = "TES";
+            TestObj.Name = "testvalue";
+            TestObj.ColorFlower = "red";
+           TestObj.ColorFoliage = "green";
+           TestObj.ColorFruitSeed = "blue";
+           TestObj.TextureFoliage = "foil";
+           TestObj.Shape = "square";
+           TestObj.Pattern = "spotted";
+           TestObj.USState = "MA,CA";
+           TestObj.Type = "vine";
+            TestObj.ImageURL = "test.com";
+        }
+
 
         public void Main(string[] args)
         {
-            
-            TestR1();
-            TestR2();
+            error = 0;
+            success = 0;
+            total = 0;
+
+            //---Set up the comparison object
+            FillTestObject();
+
+            //---Test insert
+            TestConnection();
+
+            //---Test the query
+            TestQueryFields();
+
+            //---Test the comple queries
+            TestORFields();
+
+            Console.WriteLine("There were " + error + " errors and " + success + " successful tests out of " + total + " total tests.");
+
             Console.ReadLine();
         }
     }
