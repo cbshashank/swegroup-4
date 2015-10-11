@@ -54,10 +54,11 @@ public class DatabaseComm
         sqlQueryString = BuildSQLWhere("shape", FLO.Shape, "@shape", count, sqlQueryString, command, out count);
         sqlQueryString = BuildSQLWhere("pattern", FLO.Pattern, "@pattern", count, sqlQueryString, command, out count);
         sqlQueryString = BuildSQLWhere("image", FLO.ImageURL, "@pattern", count, sqlQueryString, command, out count);
-        sqlQueryString = BuildSQLWhereLike("type", FLO.Type, "@type", count, sqlQueryString, command, out count);
+        
 
-        //---Special case query for US state
-        sqlQueryString = BuildSQLWhereLike("us_state", FLO.USState, "@us_state", count, sqlQueryString, command, out count);
+        //---Special case query for US state and type
+        sqlQueryString = BuildSQLWhereOr("us_state", FLO.USState, "@us_state", count, sqlQueryString, command, out count);
+        sqlQueryString = BuildSQLWhereOr("type", FLO.Type, "@type", count, sqlQueryString, command, out count);
 
         //---Open the connection
         command.Connection.Open();
@@ -69,28 +70,82 @@ public class DatabaseComm
         //---cycle through the return values and build a list of the floraobjs which match
         while(ReturnResult.Read())
         {
-            FloraObj AddObj = new FloraObj();
-            AddObj.PlantId = ReturnResult.GetString(0);
-            AddObj.Name = ReturnResult.GetString(1);
-            AddObj.ColorFlower = ReturnResult.GetString(2);
-            AddObj.ColorFoliage = ReturnResult.GetString(3);
-            AddObj.ColorFruitSeed = ReturnResult.GetString(4);
-            AddObj.TextureFoliage = ReturnResult.GetString(5);
-            AddObj.Shape = ReturnResult.GetString(6);
-            AddObj.Pattern = ReturnResult.GetString(7);
-            AddObj.ImageURL = ReturnResult.GetString(8);
-            AddObj.USState = ReturnResult.GetString(9);
-            AddObj.Type = ReturnResult.GetString(10);
+    
+            //---Get the plant id to start
+            string plant_id = ReturnResult.GetString(0);
 
-            //---Add this floraobj to our list of objects
-            floraObjList.Add(AddObj);
+
+            //---Determine if an object already exists
+            FloraObj AddObj = findPlant_Id(floraObjList, plant_id);
+            if(AddObj == null)
+            {
+                AddObj = new FloraObj();
+                AddObj.PlantId = plant_id;
+                AddObj.Name = ReturnResult.GetString(1);
+                AddObj.ColorFlower = ReturnResult.GetString(2);
+                AddObj.ColorFoliage = ReturnResult.GetString(3);
+                AddObj.ColorFruitSeed = ReturnResult.GetString(4);
+                AddObj.TextureFoliage = ReturnResult.GetString(5);
+                AddObj.Shape = ReturnResult.GetString(6);
+                AddObj.Pattern = ReturnResult.GetString(7);
+                AddObj.ImageURL = ReturnResult.GetString(8);
+                AddObj.USState = ReturnResult.GetString(9);
+                AddObj.Type = ReturnResult.GetString(10);
+                //---Add this floraobj to our list of objects
+                floraObjList.Add(AddObj);
+            }
+            else
+            {
+                //---This object exists.  All the values should be the same except for location or type
+                int length;
+
+                //---Check if this state value is here
+                bool bFound = UpdateComplexField(AddObj.USState, ReturnResult.GetString(9), out length);
+                if(!bFound && length > 0)
+                {
+                    AddObj.USState += "," + ReturnResult.GetString(9);
+                }
+                else if(length == 0)
+                {
+                    AddObj.USState = ReturnResult.GetString(9);
+                }
+
+                //---Check if the type value is here
+                bFound = UpdateComplexField(AddObj.Type, ReturnResult.GetString(10), out length);
+                if (!bFound && length > 0)
+                {
+                    AddObj.Type += "," + ReturnResult.GetString(10);
+                }
+                else if(length == 0)
+                {
+                    AddObj.Type = ReturnResult.GetString(10);
+                }
+
+
+            }   
         }
         
-        
+       
         //---Close the database connection.  Do we want a persistent connection?  For now, we will just do connections on a case-by-case basis
         command.Connection.Close();
         return floraObjList;
 
+    }
+
+    FloraObj findPlant_Id(IList<FloraObj> FLO, string plant_id)
+    {
+        FloraObj FO = null;
+
+        foreach(FloraObj F in FLO)
+        {
+            if(F.PlantId == plant_id)
+            {
+                FO = F;
+                break;
+            }
+        }
+        
+        return FO;
     }
 
 
@@ -154,6 +209,65 @@ public class DatabaseComm
         newcount = count;
 
         return sqlQueryString;
+    }
+
+
+
+    string BuildSQLWhereOr(string strField, string strValue, string parameter, int count, string sqlQueryString, SqlCommand command, out int newcount)
+    {
+
+        newcount = count;
+        if (!string.IsNullOrEmpty(strValue))
+        {
+            int totalsplit = 0;
+            string[] searchparameters = strValue.Split(',');
+
+            totalsplit = searchparameters.GetLength(0);
+
+            if (count > 0)
+                sqlQueryString += " AND (";
+            else
+                sqlQueryString += " WHERE (";
+
+            for (int ii = 0; ii < totalsplit; ii++)
+            {
+                if(ii > 0)
+                {
+                    sqlQueryString += " OR (";
+                }
+                else
+                {
+                    sqlQueryString += "(";
+                }
+                sqlQueryString += strField + " = " + parameter + ii;
+                SqlParameter Param = new SqlParameter(parameter + ii, searchparameters[ii]);
+                command.Parameters.Add(Param);
+                count++;
+                sqlQueryString += ")";
+            }
+            sqlQueryString += ")";
+        }
+
+        return sqlQueryString;
+    }
+
+    private bool UpdateComplexField(string Values, string newValue, out int length)
+    {
+        bool bFound = false;
+        string[] values = Values.Split(',');
+        length = values.GetLength(0);
+
+        for(int ii = 0; ii < length; ii++)
+        {
+            if(newValue == values[ii])
+            {
+                //---Already present, don't add
+                bFound = true;
+                break;
+            }
+        }
+        
+        return bFound;
     }
 
 
