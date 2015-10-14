@@ -67,6 +67,59 @@ namespace TestOWL
             }
             total++;
         }
+        
+        void TestQueryState(string state, int queryval)
+        {
+            Console.WriteLine("Testing Query State:  " + state);
+            try
+            {
+                HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
+                GETRequest.Method = "POST";
+
+                string json = "{\"" + state + "\":" + queryval + "," + "}";
+
+                using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
+                {
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+
+                HttpWebResponse GETResponse = (HttpWebResponse)GETRequest.GetResponse();
+
+                Stream GETResponseStream = GETResponse.GetResponseStream();
+                StreamReader sr = new StreamReader(GETResponseStream);
+
+                string resultjson = sr.ReadToEnd();
+                IList<FloraObj> FLO = JsonConvert.DeserializeObject<List<FloraObj>>(resultjson);
+
+                if(FLO == null || FLO.Count < 0)
+                {
+                    Console.WriteLine("TestQuery " + state + ": FAILED");
+                    error++;
+                }
+                else if (CompareObjects(TestObj, FLO[0]))
+                {
+                    Console.WriteLine("TestQuery " + state + ": SUCCESS");
+                    success++;
+                }
+                else
+                {
+                    Console.WriteLine("TestQuery " + state + ": FAILED");
+                    error++;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                Console.WriteLine("TestQuery " + state + ": FAILED");
+                error++;
+            }
+            total++;
+        }
 
         /// <summary>
         /// Test the database fields to make sure they exist
@@ -98,13 +151,12 @@ namespace TestOWL
                 string resultjson = sr.ReadToEnd();
                 IList<FloraObj> FLO = JsonConvert.DeserializeObject<List<FloraObj>>(resultjson);
 
-
-
-                //Console.WriteLine(resultjson);
-
-
-
-                if (CompareObjects(TestObj, FLO[0]))
+                if (FLO == null || FLO.Count < 0)
+                {
+                    Console.WriteLine("TestQuery " + state + ": FAILED");
+                    error++;
+                }
+                else if (CompareObjects(TestObj, FLO[0]))
                 {
                     Console.WriteLine("TestQuery " + state + ": SUCCESS");
                     success++;
@@ -127,7 +179,7 @@ namespace TestOWL
 
         void TestQueryFields()
         {
-            TestQueryState("PlantId", "TES");
+            TestQueryState("PlantId", 1);
             TestQueryState("Name", "testvalue");
             TestQueryState("ColorFlower", "red");
             TestQueryState("ColorFoliage", "green");
@@ -135,7 +187,7 @@ namespace TestOWL
             TestQueryState("TextureFoliage", "foil");
             TestQueryState("Shape", "square");
             TestQueryState("Pattern", "spotted");
-            TestQueryState("USState", "MA");
+            TestQueryState("USState", "MA,CA");
             TestQueryState("Type", "vine");
         }
 
@@ -148,7 +200,7 @@ namespace TestOWL
 
         bool CompareObjects(FloraObj FO, FloraObj FO2)
         {
-            bool bMatch = FO.PlantId.Trim() == FO2.PlantId.Trim();
+            bool bMatch = FO.PlantId == FO2.PlantId;
             bMatch = bMatch && (FO.Name.Trim() == FO2.Name.Trim());
             bMatch = bMatch && (FO.Pattern.Trim() == FO2.Pattern.Trim());
             bMatch = bMatch && (FO.ImageURL.Trim() == FO2.ImageURL.Trim() && FO.Shape.Trim() == FO2.Shape.Trim());
@@ -206,7 +258,7 @@ namespace TestOWL
         private void FillTestObject()
         {
             TestObj = new FloraObj();
-            TestObj.PlantId = "TES";
+            TestObj.PlantId = 1;
             TestObj.Name = "testvalue";
             TestObj.ColorFlower = "red";
            TestObj.ColorFoliage = "green";

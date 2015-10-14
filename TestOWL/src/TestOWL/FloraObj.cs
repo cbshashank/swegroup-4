@@ -7,7 +7,7 @@ using System.Web;
 /// </summary>
 public class FloraObj
 {
-    private string plant_id;
+    private int plant_id;
     private string name;
     private string color_flower;
     private string color_foliage;
@@ -31,7 +31,7 @@ public class FloraObj
     /// <summary>
     /// The primary key and plant id, typically a three character string
     /// </summary>
-    public string PlantId
+    public int PlantId
     {
         get
         {

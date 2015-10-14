@@ -72,7 +72,7 @@ public class DatabaseComm
         {
     
             //---Get the plant id to start
-            string plant_id = ReturnResult.GetString(0);
+            int plant_id = ReturnResult.GetInt32(0);
 
 
             //---Determine if an object already exists
@@ -132,7 +132,7 @@ public class DatabaseComm
 
     }
 
-    FloraObj findPlant_Id(IList<FloraObj> FLO, string plant_id)
+    FloraObj findPlant_Id(IList<FloraObj> FLO, int plant_id)
     {
         FloraObj FO = null;
 
@@ -170,6 +170,25 @@ public class DatabaseComm
                 sqlQueryString += " WHERE ";
             sqlQueryString += strField + "=" + parameter;
             SqlParameter Param = new SqlParameter(parameter, strValue);
+            command.Parameters.Add(Param);
+            count++;
+
+        }
+        newcount = count;
+
+        return sqlQueryString;
+    }
+
+    private string BuildSQLWhere(string strField, int nValue, string parameter, int count, string sqlQueryString, SqlCommand command, out int newcount)
+    {
+        if (nValue != null && nValue != 0)
+        {
+            if (count > 0)
+                sqlQueryString += " AND ";
+            else
+                sqlQueryString += " WHERE ";
+            sqlQueryString += strField + "=" + parameter;
+            SqlParameter Param = new SqlParameter(parameter, nValue);
             command.Parameters.Add(Param);
             count++;
 
