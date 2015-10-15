@@ -1,20 +1,21 @@
 {
-  "version": "1.0.0-*",
-  "description": "TestOWL Console Application",
-  "authors": [ "ORNSTEIN" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+    "version": "1.0.0-*",
+    "description": "TestOWL Console Application",
+    "authors": [ "ORNSTEIN" ],
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
 
-  "dependencies": {
-    "dnx-clr-win-x86": "1.0.0-beta7"
-  },
+    "dependencies": {
+        "dnx-clr-win-x86": "1.0.0-beta7",
+        "Newtonsoft.Json": "7.0.1"
+    },
 
-  "commands": {
-    "TestOWL": "TestOWL"
-  },
+    "commands": {
+        "TestOWL": "TestOWL"
+    },
 
-  "frameworks": {
-    "dnx451": { }
-  }
+    "frameworks": {
+        "dnx451": { }
+    }
 }
