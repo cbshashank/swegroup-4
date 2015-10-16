@@ -29,10 +29,12 @@ define(function(){
                 var questnText = questnView(model.questions[i].text);
                 questionText.appendChild(questnText);
 
+                var form = document.createElement('form');
                 // present option choices
                 for(var j = 0; j < model.questions[i].options.length; j++){
                     var widget = optionView(model.questions[i].options[j]);
-                    questionText.appendChild(widget);
+                    form.appendChild(widget);
+                    questionText.appendChild(form);
                 }
             }
         };
