@@ -32,9 +32,9 @@ define(function(){
         var testInput2 = {"us_state":"MA", "type":"vine", "shape":"Rounded"};
 
         view.setModel({
-            // questions,
-            text: 'Is it a plant?',
-            options: ['yes', 'no']
+            questions
+            // text: 'Is it a plant?',
+            // options: ['yes', 'no']
         });
 
         view.onAnswer(function(){
