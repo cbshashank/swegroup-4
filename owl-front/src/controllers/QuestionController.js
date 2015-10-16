@@ -1,6 +1,4 @@
 define(function(){
-<<<<<<< HEAD
-
     var us_state = {text: 'Where is the plant in the US?', 
                 options: ["AK", "AL", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "AS", "DC", "FM", "GU", "MH", "MP", "PW", "PR", "VI"
                 ]};
@@ -29,14 +27,14 @@ define(function(){
                     color_flower, color_foliage, color_fruit_seed, 
                     shape, texture_foliage, pattern];
 
-    function QuestionController(view){
-=======
     function QuestionController(view, clientCommunicationModule){
-        var testInput = {"Color":"Red","Shape":"Vine","Texture":"Rough"};
+        //var testInput = {"Color":"Red","Shape":"Vine","Texture":"Rough"};
+        var testInput2 = {"us_state":"MA", "type":"vine", "shape":"Rounded"};
 
->>>>>>> origin/master
         view.setModel({
-            questions
+            // questions,
+            text: 'Is it a plant?',
+            options: ['yes', 'no']
         });
 
         view.onAnswer(function(){
@@ -47,3 +45,4 @@ define(function(){
 
     return QuestionController;
 });
+
