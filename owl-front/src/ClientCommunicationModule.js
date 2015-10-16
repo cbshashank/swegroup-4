@@ -8,13 +8,14 @@ define(['jquery','ResultDisplay'], function($,ResultDisplay){
 
     var output_display = new ResultDisplay();
     var serverAddress = "http://localhost:32297"
+//    var serverAddress = "http://localhost:3000"
 
     ClientCommunicationModule.prototype.sendCharacteristics = function(output){
 
         $.ajax({
             url: serverAddress, 		// Location of the service
             type: "POST", 		//GET or POST or PUT or DELETE verb
-            data: JSON.stringify(output),// "{\"Color\":\"Red\",\"Shape\":\"Vine\",\"Texture\":\"Rough\"}", 		//Data sent to server
+            data: JSON.stringify(output), //Data sent to server //"This is a test",
             dataType: "text/plain",
             success: function (in_data) {//On Successful service call
                 var result = JSON.parse(in_data);

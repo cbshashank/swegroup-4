@@ -7,7 +7,10 @@ define(['jquery'], function($){
     function ResultDisplay(){}
 
     ResultDisplay.prototype.updateResultDisplay = function(input){
-        $("#result_display").html(input.Color + " " + input.Shape + " " + input.Texture);
+//        $("#output_img").html("<img src=" + input.ImageUrl + "><//img>");
+//        $("#output_desc").html(input.Description);
+        $("#output_img").html("img url = " + input.ImageUrl);
+        $("#output_desc").html("description = " + input.Description);
     };
 
     return ResultDisplay;
