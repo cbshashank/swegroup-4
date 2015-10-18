@@ -12,10 +12,13 @@ namespace populateDB
     {
         static void Main(string[] args)
         {
-            SqlConnection conn = new SqlConnection("user id=username;" + "password=password;" + "server=.\\SQLExpress;" + "Trusted_Connection=yes;" + "database=OWL;" + "connection timeout=10");
+            SqlConnection conn = new SqlConnection("user id=username;" + "password=password;" + "server=.\\SQLExpress;" + "Trusted_Connection=yes;" + "database=OWL;" + "Connect Timeout=6000000");
             conn.Open();
             createTables(conn);
-            loadtable(makePlantdt(conn), makeLocationDt(conn), makeplantTypedt(conn), conn);
+            DataTable plant=makePlantdt(conn);
+            DataTable location = makeLocationDt(conn);
+            DataTable planttype =makeplantTypedt(conn);
+            loadtable(plant,location,planttype, conn);
 
             conn.Close();
             
@@ -31,7 +34,7 @@ namespace populateDB
             StringBuilder query = new StringBuilder();
             //These are attributes of Plant Table
             String[] plantColumns = { "plant_id", "name", "color_flower", "color_foliage", "color_fruit_seed", "texture_foliage", "shape", "pattern", "image" };
-            String[] plantColumnTypes = { "VARCHAR(30) NOT NULL PRIMARY KEY", "VARCHAR(200)", "VARCHAR(100)", "VARCHAR(200)", "VARCHAR(100)", "VARCHAR(100)", "VARCHAR(150)", "VARCHAR(150)", "VARCHAR(5000)" };
+            String[] plantColumnTypes = { "VARCHAR(30)", "VARCHAR(200)", "VARCHAR(100)", "VARCHAR(200)", "VARCHAR(100)", "VARCHAR(100)", "VARCHAR(150)", "VARCHAR(150)", "VARCHAR(5000)" };
 
             //These are attributes of Location Table
             String[] locationColumns = { "plant_id", "us_state" };
@@ -51,7 +54,7 @@ namespace populateDB
                 query.Append(",");
             }
             query.Length -= 1;
-            query.Append(")");
+            query.Append(");");
             try
             {
                 SqlCommand sqlplantQuery = new SqlCommand(query.ToString(), conn);
@@ -77,7 +80,7 @@ namespace populateDB
                 query.Append(",");
             }
             query.Length -= 1;
-            query.Append(")");
+            query.Append(");");
             try
             {
                 SqlCommand sqllocQuery = new SqlCommand(query.ToString(), conn);
@@ -102,7 +105,7 @@ namespace populateDB
                 query.Append(",");
             }
             query.Length -= 1;
-            query.Append(")");
+            query.Append(");");
             try
             {
                 SqlCommand sqlptQuery = new SqlCommand(query.ToString(), conn);
@@ -141,6 +144,7 @@ namespace populateDB
                         Row[f] = Fields[f];
                     dtPlant.Rows.Add(Row);
                 }
+                Console.WriteLine("Plant DataTable Created");
             }
             catch (Exception e)
             {
@@ -172,6 +176,8 @@ namespace populateDB
                         Row[f] = Fields[f];
                     locdt.Rows.Add(Row);
                 }
+                Console.WriteLine("Location DataTable Created");
+
             }
             catch (Exception e)
             {
@@ -204,6 +210,8 @@ namespace populateDB
                         Row[f] = Fields[f];
                     plantTypedt.Rows.Add(Row);
                 }
+                Console.WriteLine("PlantType DataTable Created");
+
             }
             catch (Exception e)
             {
@@ -215,38 +223,60 @@ namespace populateDB
         //loads the datatables onto the DB
         public static void loadtable(DataTable plant, DataTable location, DataTable plantType, SqlConnection conn)
         {
-           StringBuilder Plantsquery = new StringBuilder();
-           StringBuilder Locationquery = new StringBuilder();
-           StringBuilder Ptquery = new StringBuilder();
+           String Plantsquery ="";
+           String Locationquery="";
+           String Ptquery = "";
+           Console.WriteLine("Now Loading data onto tables.");
+
+            Console.WriteLine("Loading data into plant table.");
 
             for (int i=0; i<plant.Rows.Count;i++)
             {
-                    Plantsquery.Append("INSERT INTO plant(plant_id,name,color_flower,color_foliage,color_fruit_seed,texture_foliage,shape,pattern,image) VALUES('" + plant.Rows[i][0].ToString().Trim() + "','" + plant.Rows[i][1].ToString().Trim() + "','" + plant.Rows[i][3].ToString().Trim() + "','" + plant.Rows[i][4].ToString().Trim() + "','" + plant.Rows[i][6].ToString().Trim() + "','" + plant.Rows[i][5].ToString().Trim() + "','" + plant.Rows[i][7].ToString().Trim() + "','" + plant.Rows[i][2].ToString().Trim() + "','plants.usda.gov/gallery/standard/" + plant.Rows[i][0].ToString().Trim() + "_001_shp.jpg');");
+                    Plantsquery=("INSERT INTO plant(plant_id,name,color_flower,color_foliage,color_fruit_seed,texture_foliage,shape,pattern,image) VALUES('" + plant.Rows[i][0].ToString().Trim() + "','" + plant.Rows[i][1].ToString().Trim() + "','" + plant.Rows[i][3].ToString().Trim() + "','" + plant.Rows[i][4].ToString().Trim() + "','" + plant.Rows[i][6].ToString().Trim() + "','" + plant.Rows[i][5].ToString().Trim() + "','" + plant.Rows[i][7].ToString().Trim() + "','" + plant.Rows[i][2].ToString().Trim() + "','plants.usda.gov/gallery/standard/" + plant.Rows[i][0].ToString().Trim() + "_001_shp.jpg');");
+                try {
+                    SqlCommand pQuery = new SqlCommand(Plantsquery, conn);
+                    pQuery.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
+            Console.WriteLine("Loaded all data into plant table.");
+            Console.WriteLine("Now loading data into location table");
+
             for (int i = 0; i < location.Rows.Count; i++)
             {
-                Locationquery.Append("INSERT INTO location(plant_id, us_state) VALUES('" + location.Rows[i][0].ToString().Trim() + "','" + location.Rows[i][1].ToString().Trim()+"');");
+                Locationquery=("INSERT INTO location(plant_id, us_state) VALUES('" + location.Rows[i][0].ToString().Trim() + "','" + location.Rows[i][1].ToString().Trim()+"');");
+                try {
+                    SqlCommand lQuery = new SqlCommand(Locationquery, conn);
+                    lQuery.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
+            Console.WriteLine("Loaded data into location table.");
+            Console.WriteLine("Now loading data into PlantType table.");
+
+
             for (int i = 0; i < plantType.Rows.Count; i++)
             {
-                Ptquery.Append("INSERT INTO plantType(plant_id, type) VALUES('" + plantType.Rows[i][0].ToString().Trim() + "','" + plantType.Rows[i][1].ToString().Trim()+"');");
+                Ptquery=("INSERT INTO plantType(plant_id, type) VALUES('" + plantType.Rows[i][0].ToString().Trim() + "','" + plantType.Rows[i][1].ToString().Trim('"')+"');");
+                try {
+                    SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
+                    ptQuery.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
-            try {
-                SqlCommand pQuery = new SqlCommand(Plantsquery.ToString(), conn);
-                pQuery.ExecuteNonQuery();
-                Console.WriteLine("Loaded all data into Table plant");
-                SqlCommand lQuery = new SqlCommand(Locationquery.ToString(), conn);
-                lQuery.ExecuteNonQuery();
-                Console.WriteLine("Loaded all data into Table location");
-                SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
-                ptQuery.ExecuteNonQuery();
-                Console.WriteLine("Loaded all data into Table plantType");
+            Console.WriteLine("Loaded data into plantType table.");
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+
+           
         }
 
         
