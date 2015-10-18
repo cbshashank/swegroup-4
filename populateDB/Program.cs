@@ -15,7 +15,8 @@ namespace populateDB
             SqlConnection conn = new SqlConnection("user id=username;" + "password=password;" + "server=.\\SQLExpress;" + "Trusted_Connection=yes;" + "database=OWL;" + "connection timeout=10");
             conn.Open();
             createTables(conn);
-            loadtable(makedt(conn),conn);
+            loadtable(makePlantdt(conn), makeLocationDt(conn), makeplantTypedt(conn), conn);
+
             conn.Close();
             
             
@@ -116,62 +117,130 @@ namespace populateDB
             query.Clear();
 
         }
-        //This creates a c# datatable from the csv file
-        public static DataTable makedt(SqlConnection conn)
+        //This creates a c# datatable for Plant from the csv file
+        public static DataTable makePlantdt(SqlConnection conn)
         {
             
-            DataTable dt = new DataTable();
+            DataTable dtPlant = new DataTable();
+
             try
             {
-                string[] Lines = File.ReadAllLines("SourceData.csv");
+                string[] Lines = File.ReadAllLines("TABLE_plant.csv");
                 string[] Fields;
                 Fields = Lines[0].Split(new char[] { ',' });
                 int Cols = Fields.GetLength(0);
                 //1st row must be column names; force lower case to ensure matching later on.
                 for (int i = 0; i < Cols; i++)
-                    dt.Columns.Add(Fields[i].ToLower(), typeof(string));
+                    dtPlant.Columns.Add(Fields[i].ToLower(), typeof(string));
                 DataRow Row;
                 for (int i = 1; i < Lines.GetLength(0); i++)
                 {
                     Fields = Lines[i].Split(new char[] { ',' });
-                    Row = dt.NewRow();
+                    Row = dtPlant.NewRow();
                     for (int f = 0; f < Cols; f++)
                         Row[f] = Fields[f];
-                    dt.Rows.Add(Row);
+                    dtPlant.Rows.Add(Row);
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-            return dt;
+            return dtPlant;
 
         }
-        public static void loadtable(DataTable dt, SqlConnection conn)
+        public static DataTable makeLocationDt(SqlConnection conn)
+        {
+
+            DataTable locdt = new DataTable();
+
+            try
+            {
+                string[] Lines = File.ReadAllLines("TABLE_Location.csv");
+                string[] Fields;
+                Fields = Lines[0].Split(new char[] { ',' });
+                int Cols = Fields.GetLength(0);
+                //1st row must be column names; force lower case to ensure matching later on.
+                for (int i = 0; i < Cols; i++)
+                    locdt.Columns.Add(Fields[i].ToLower(), typeof(string));
+                DataRow Row;
+                for (int i = 1; i < Lines.GetLength(0); i++)
+                {
+                    Fields = Lines[i].Split(new char[] { ',' });
+                    Row = locdt.NewRow();
+                    for (int f = 0; f < Cols; f++)
+                        Row[f] = Fields[f];
+                    locdt.Rows.Add(Row);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return locdt;
+
+        }
+        //This makes a plantType Datatable 
+        public static DataTable makeplantTypedt(SqlConnection conn)
+        {
+
+            DataTable plantTypedt = new DataTable();
+
+            try
+            {
+                string[] Lines = File.ReadAllLines("TABLE_plant_type.csv");
+                string[] Fields;
+                Fields = Lines[0].Split(new char[] { ',' });
+                int Cols = Fields.GetLength(0);
+                //1st row must be column names; force lower case to ensure matching later on.
+                for (int i = 0; i < Cols; i++)
+                    plantTypedt.Columns.Add(Fields[i].ToLower(), typeof(string));
+                DataRow Row;
+                for (int i = 1; i < Lines.GetLength(0); i++)
+                {
+                    Fields = Lines[i].Split(new char[] { ',' });
+                    Row = plantTypedt.NewRow();
+                    for (int f = 0; f < Cols; f++)
+                        Row[f] = Fields[f];
+                    plantTypedt.Rows.Add(Row);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return plantTypedt;
+
+        }
+        //loads the datatables onto the DB
+        public static void loadtable(DataTable plant, DataTable location, DataTable plantType, SqlConnection conn)
         {
            StringBuilder Plantsquery = new StringBuilder();
            StringBuilder Locationquery = new StringBuilder();
            StringBuilder Ptquery = new StringBuilder();
 
-            for (int i=0; i<dt.Rows.Count;i++)
+            for (int i=0; i<plant.Rows.Count;i++)
             {
-  
-                    Plantsquery.Append("INSERT INTO plant(plant_id,name,color_flower,color_foliage,color_fruit_seed,texture_foliage,shape,pattern,image) VALUES('" + dt.Rows[i][0].ToString().Trim() + "','" + dt.Rows[i][2].ToString().Trim() + "','" + dt.Rows[i][8].ToString().Trim() + "','" + dt.Rows[i][9].ToString().Trim() + "','" + dt.Rows[i][11].ToString().Trim() + "','" + dt.Rows[i][10].ToString().Trim() + "','" + dt.Rows[i][12].ToString().Trim() + "','" + dt.Rows[i][4].ToString().Trim() + "','plants.usda.gov/gallery/standard/" + dt.Rows[i][0].ToString().Trim() + "_001_shp.jpg');");
-                    //Locationquery.Append("INSERT INTO location(plant_id, us_state) VALUES('" + dt.Rows[i][0].ToString().Trim() + "','" + dt.Rows[i][3].ToString().Trim()"');";
-                    //Ptquery.Append("INSERT INTO plantType(plant_id, type) VALUES('" + dt.Rows[i][0].ToString().Trim() + "','" + dt.Rows[i][5].ToString().Trim()"');";
+                    Plantsquery.Append("INSERT INTO plant(plant_id,name,color_flower,color_foliage,color_fruit_seed,texture_foliage,shape,pattern,image) VALUES('" + plant.Rows[i][0].ToString().Trim() + "','" + plant.Rows[i][1].ToString().Trim() + "','" + plant.Rows[i][3].ToString().Trim() + "','" + plant.Rows[i][4].ToString().Trim() + "','" + plant.Rows[i][6].ToString().Trim() + "','" + plant.Rows[i][5].ToString().Trim() + "','" + plant.Rows[i][7].ToString().Trim() + "','" + plant.Rows[i][2].ToString().Trim() + "','plants.usda.gov/gallery/standard/" + plant.Rows[i][0].ToString().Trim() + "_001_shp.jpg');");
             }
-
-
+            for (int i = 0; i < location.Rows.Count; i++)
+            {
+                Locationquery.Append("INSERT INTO location(plant_id, us_state) VALUES('" + location.Rows[i][0].ToString().Trim() + "','" + location.Rows[i][1].ToString().Trim()+"');");
+            }
+            for (int i = 0; i < plantType.Rows.Count; i++)
+            {
+                Ptquery.Append("INSERT INTO plantType(plant_id, type) VALUES('" + plantType.Rows[i][0].ToString().Trim() + "','" + plantType.Rows[i][1].ToString().Trim()+"');");
+            }
             try {
                 SqlCommand pQuery = new SqlCommand(Plantsquery.ToString(), conn);
                 pQuery.ExecuteNonQuery();
                 Console.WriteLine("Loaded all data into Table plant");
-                //SqlCommand lQuery = new SqlCommand(Locationquery.ToString(), conn);
-                //lQuery.ExecuteNonQuery();
-                //Console.WriteLine("Loaded all data into Table location");
-                //SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
-                //ptQuery.ExecuteNonQuery();
-                //Console.WriteLine("Loaded all data into Table plantType");
+                SqlCommand lQuery = new SqlCommand(Locationquery.ToString(), conn);
+                lQuery.ExecuteNonQuery();
+                Console.WriteLine("Loaded all data into Table location");
+                SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
+                ptQuery.ExecuteNonQuery();
+                Console.WriteLine("Loaded all data into Table plantType");
 
             }
             catch (Exception e)
