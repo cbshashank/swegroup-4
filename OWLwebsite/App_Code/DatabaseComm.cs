@@ -33,7 +33,7 @@ public class DatabaseComm
 
         //---The basic query
         string sqlQueryString =
-          "SELECT Plant.plant_id, name, color_flower, color_foliage, color_fruit_seed, texture_foliage, shape, pattern, image, us_state, type FROM Plant,Location,Plant_Type WHERE Plant.plant_id=Location.plant_id AND Plant.plant_id=Plant_Type.plant_id";
+          "SELECT Plant.plant_id, name, color_flower, color_foliage, color_fruit_seed, texture_foliage, shape, pattern, image, us_state, type FROM Plant,Location,PlantType WHERE Plant.plant_id=Location.plant_id AND Plant.plant_id=PlantType.plant_id";
 
         //---set up the database connection
         SqlConnection conn = new SqlConnection(conn_string);
@@ -72,7 +72,7 @@ public class DatabaseComm
         {
     
             //---Get the plant id to start
-            int plant_id = ReturnResult.GetInt32(0);
+            string plant_id = ReturnResult.GetString(0);
 
 
             //---Determine if an object already exists
@@ -132,7 +132,7 @@ public class DatabaseComm
 
     }
 
-    FloraObj findPlant_Id(IList<FloraObj> FLO, int plant_id)
+    FloraObj findPlant_Id(IList<FloraObj> FLO, string plant_id)
     {
         FloraObj FO = null;
 

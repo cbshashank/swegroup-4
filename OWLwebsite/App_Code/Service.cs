@@ -17,7 +17,7 @@ public class Service :  IHttpHandler
     private DatabaseComm DAO;
 
     //String to connect to the database
-    private const string Connect = "Data Source=.\\SQLEXPRESS;Initial Catalog=model;Integrated Security=True;MultipleActiveResultSets=True";
+    private const string Connect = "Data Source=.\\SQLEXPRESS;Initial Catalog=OWL;Integrated Security=True;MultipleActiveResultSets=True";
 
     public Service()
     {

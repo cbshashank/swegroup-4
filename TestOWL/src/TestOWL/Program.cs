@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace TestOWL
@@ -15,6 +16,50 @@ namespace TestOWL
         private int error;
         private int success;
         private int total;
+
+        void TestGarbage()
+        {
+            try
+            {
+                HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
+                GETRequest.Method = "POST";
+
+                Console.WriteLine("Sending POST Request");
+                using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
+                {
+                    string json = "FAILVALUE";
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+
+                HttpWebResponse GETResponse = (HttpWebResponse)GETRequest.GetResponse();
+
+                Stream GETResponseStream = GETResponse.GetResponseStream();
+                StreamReader sr = new StreamReader(GETResponseStream);
+
+                Console.WriteLine("Response from Server");
+                string text = sr.ReadToEnd();
+                Console.WriteLine("Response from Server");
+                Console.WriteLine(text);
+
+                if (text == "Invalid Message!")
+                {
+                    total++;
+                    success++;
+                    Console.WriteLine("Invalid Data test SUCCESS");
+                }
+            }
+            catch(Exception e)
+            {
+                total++;
+                error++;
+                Console.WriteLine("Invalid Data test FAILURE");
+            }
+        }
+
 
         void GenerateGetRequest()
         {
@@ -41,9 +86,12 @@ namespace TestOWL
             
             Stream GETResponseStream = GETResponse.GetResponseStream();
             StreamReader sr = new StreamReader(GETResponseStream);
-
+            string text = sr.ReadToEnd();
             Console.WriteLine("Response from Server");
-            Console.WriteLine(sr.ReadToEnd());
+            Console.WriteLine(text);
+
+         
+
         }
         
 
@@ -77,7 +125,7 @@ namespace TestOWL
                 GETRequest.Method = "POST";
 
                 string json = "{\"" + state + "\":" + queryval + "," + "}";
-
+              
                 using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
                 {
 
@@ -94,8 +142,8 @@ namespace TestOWL
 
                 string resultjson = sr.ReadToEnd();
                 IList<FloraObj> FLO = JsonConvert.DeserializeObject<List<FloraObj>>(resultjson);
-
-                if(FLO == null || FLO.Count < 0)
+                Console.WriteLine(resultjson);
+                if (FLO == null || FLO.Count < 0)
                 {
                     Console.WriteLine("TestQuery " + state + ": FAILED");
                     error++;
@@ -150,8 +198,8 @@ namespace TestOWL
 
                 string resultjson = sr.ReadToEnd();
                 IList<FloraObj> FLO = JsonConvert.DeserializeObject<List<FloraObj>>(resultjson);
-
-                if (FLO == null || FLO.Count < 0)
+                Console.WriteLine(resultjson);
+                if (FLO == null || FLO.Count <= 0)
                 {
                     Console.WriteLine("TestQuery " + state + ": FAILED");
                     error++;
@@ -179,34 +227,78 @@ namespace TestOWL
 
         void TestQueryFields()
         {
-            TestQueryState("PlantId", 1);
-            TestQueryState("Name", "testvalue");
-            TestQueryState("ColorFlower", "red");
-            TestQueryState("ColorFoliage", "green");
-            TestQueryState("ColorFruitSeed", "blue");
-            TestQueryState("TextureFoliage", "foil");
-            TestQueryState("Shape", "square");
-            TestQueryState("Pattern", "spotted");
-            TestQueryState("USState", "MA,CA");
-            TestQueryState("Type", "vine");
+            TestQueryState("PlantId", TestObj.PlantId);
+            TestQueryState("Name", TestObj.Name);
+            TestQueryState("ColorFlower", TestObj.ColorFlower);
+            TestQueryState("ColorFoliage", TestObj.ColorFoliage);
+            TestQueryState("ColorFruitSeed", TestObj.ColorFruitSeed);
+            TestQueryState("TextureFoliage", TestObj.TextureFoliage);
+            TestQueryState("Shape", TestObj.Shape);
+            TestQueryState("Pattern", TestObj.Pattern);
+            TestQueryState("USState", TestObj.USState);
+            TestQueryState("Type", TestObj.Type);
         }
 
         void TestORFields()
         {
-            TestQueryState("USState", "MA,CA,ME");
-            TestQueryState("Type", "vine,table,wine");
+            TestQueryState("USState", TestObj.USState + ",FA,CA");
+            TestQueryState("Type", TestObj.Type + "vine,shrub");
+        }
+
+        void TestImageLaunch()
+        {
+            Console.WriteLine("Launching image in browser window...");
+            try
+            {
+                HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
+                GETRequest.Method = "POST";
+
+                string json = "{\"PlantId\":\"" + TestObj.PlantId + "\"," + "}";
+
+                using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
+                {
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+
+                HttpWebResponse GETResponse = (HttpWebResponse)GETRequest.GetResponse();
+
+                Stream GETResponseStream = GETResponse.GetResponseStream();
+                StreamReader sr = new StreamReader(GETResponseStream);
+
+                string resultjson = sr.ReadToEnd();
+                IList<FloraObj> FLO = JsonConvert.DeserializeObject<List<FloraObj>>(resultjson);
+                if (FLO != null && FLO.Count > 0)
+                {
+                    Process.Start("HTTP://WWW." + FLO[0].ImageURL);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Image Launch failed.");
+            }
+
         }
 
 
+        //These are the URLs for the plant jpgs from USDA
+        public static string imageURL(string plant_id)
+        {
+            return "http://plants.usda.gov/gallery/pubs/" + plant_id + "_001_pvp.jpg";
+        }
+
         bool CompareObjects(FloraObj FO, FloraObj FO2)
         {
-            bool bMatch = FO.PlantId == FO2.PlantId;
-            bMatch = bMatch && (FO.Name.Trim() == FO2.Name.Trim());
-            bMatch = bMatch && (FO.Pattern.Trim() == FO2.Pattern.Trim());
-            bMatch = bMatch && (FO.ImageURL.Trim() == FO2.ImageURL.Trim() && FO.Shape.Trim() == FO2.Shape.Trim());
-            bMatch = bMatch && (FO.TextureFoliage.Trim() == FO2.TextureFoliage.Trim());
-            bMatch = bMatch && (FO.ColorFlower.Trim() == FO2.ColorFlower.Trim());
-            bMatch = bMatch && (FO.ColorFoliage.Trim() == FO2.ColorFoliage.Trim() && FO.ColorFruitSeed.Trim() == FO2.ColorFruitSeed.Trim());
+            bool bMatch = FO.PlantId.Trim().ToLower() == FO2.PlantId.Trim().ToLower();
+            bMatch = bMatch && (FO.Name.Trim().ToLower() == FO2.Name.Trim().ToLower());
+            bMatch = bMatch && (FO.Pattern.Trim().ToLower() == FO2.Pattern.Trim().ToLower());
+            bMatch = bMatch &&  FO.Shape.Trim().ToLower() == FO2.Shape.Trim().ToLower();
+            bMatch = bMatch && (FO.TextureFoliage.Trim().ToLower() == FO2.TextureFoliage.Trim().ToLower());
+            bMatch = bMatch && (FO.ColorFlower.Trim().ToLower() == FO2.ColorFlower.Trim().ToLower());
+            bMatch = bMatch && (FO.ColorFoliage.Trim().ToLower() == FO2.ColorFoliage.Trim().ToLower() && FO.ColorFruitSeed.Trim().ToLower() == FO2.ColorFruitSeed.Trim().ToLower());
 
             if (bMatch)
             {
@@ -228,6 +320,11 @@ namespace TestOWL
                 bMatch = compareSplit(state1, state2, length1, length2);
             }
 
+            if(bMatch)
+            {
+              //  bMatch = (FO2.ImageURL == imageURL(FO.PlantId));
+            }
+
             return bMatch;
         }
 
@@ -243,7 +340,7 @@ namespace TestOWL
 
                 for (int ii = 0; ii < length1; ii++)
                 {
-                    if (str1[ii].Trim() != str2[ii].Trim())
+                    if (str1[ii].Trim().ToLower() != str2[ii].Trim().ToLower())
                     {
                         bMatch = false;
                         break;
@@ -258,17 +355,17 @@ namespace TestOWL
         private void FillTestObject()
         {
             TestObj = new FloraObj();
-            TestObj.PlantId = 1;
-            TestObj.Name = "testvalue";
-            TestObj.ColorFlower = "red";
-           TestObj.ColorFoliage = "green";
-           TestObj.ColorFruitSeed = "blue";
-           TestObj.TextureFoliage = "foil";
-           TestObj.Shape = "square";
-           TestObj.Pattern = "spotted";
-           TestObj.USState = "MA,CA";
-           TestObj.Type = "vine";
-            TestObj.ImageURL = "test.com";
+            TestObj.PlantId = "ABGR4";
+            TestObj.Name = "Abelia ??grandiflora";
+            TestObj.ColorFlower = "Purple";
+           TestObj.ColorFoliage = "Dark Green";
+           TestObj.ColorFruitSeed = "Brown";
+           TestObj.TextureFoliage = "Medium";
+           TestObj.Shape = "Semi-Erect";
+           TestObj.Pattern = "Dicot";
+           TestObj.USState = "FL";
+           TestObj.Type = "Shrub";
+            TestObj.ImageURL = "";
         }
 
 
@@ -278,8 +375,11 @@ namespace TestOWL
             success = 0;
             total = 0;
 
+           
             //---Set up the comparison object
             FillTestObject();
+
+            TestGarbage();
 
             //---Test insert
             TestConnection();
@@ -289,6 +389,10 @@ namespace TestOWL
 
             //---Test the comple queries
             TestORFields();
+
+            //---Test the image launching code
+            TestImageLaunch();
+ 
 
             Console.WriteLine("There were " + error + " errors and " + success + " successful tests out of " + total + " total tests.");
 
