@@ -17,7 +17,7 @@ define(function () {
             var answers = [];
             for(var i = 0; i < widgets.length; i++){
                 var answer = widgets[i].getAnswer();
-                if(answer.value)
+                if(Object.keys(answer).length > 0)
                     answers.push(answer);
             }
             return answers;
@@ -35,7 +35,7 @@ define(function () {
      */
     function QuestionWidget(question) {
 
-        var answer = {term: question.term, value: null};
+        var answer = {};
 
         this.getAnswer = function () {
             return answer;
@@ -64,7 +64,7 @@ define(function () {
             radio.type = 'radio';
             radio.name = 'option';
             radio.onclick = function () {
-                answer.value = option;
+                answer[question.term] = option;
             };
             label.innerHTML = option;
             container.appendChild(radio);
