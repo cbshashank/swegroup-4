@@ -55,6 +55,7 @@ define(function () {
     function QuestionController(view, clientCommunicationModule) {
         view.setModel(questions);
         view.onAnswer(function () {
+            console.log(view.getAnswers());
             clientCommunicationModule.sendCharacteristics(view.getAnswers());
         });
     }

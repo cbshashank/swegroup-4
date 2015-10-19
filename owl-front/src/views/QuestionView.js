@@ -14,11 +14,11 @@ define(function () {
         };
 
         this.getAnswers = function () {
-            var answers = [];
+            var answers = {};
             for(var i = 0; i < widgets.length; i++){
                 var answer = widgets[i].getAnswer();
-                if(Object.keys(answer).length > 0)
-                    answers.push(answer);
+                if(answer)
+                    answers[widgets[i].getTerm()] = answer;
             }
             return answers;
         };
@@ -35,10 +35,14 @@ define(function () {
      */
     function QuestionWidget(question) {
 
-        var answer = {};
+        var answer;
 
         this.getAnswer = function () {
             return answer;
+        };
+
+        this.getTerm = function(){
+            return question.term;
         };
 
         this.asHTML = function () {
@@ -64,7 +68,7 @@ define(function () {
             radio.type = 'radio';
             radio.name = 'option';
             radio.onclick = function () {
-                answer[question.term] = option;
+                answer = option;
             };
             label.innerHTML = option;
             container.appendChild(radio);
