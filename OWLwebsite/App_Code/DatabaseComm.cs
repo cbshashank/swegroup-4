@@ -31,18 +31,37 @@ public class DatabaseComm
     {
         IList<FloraObj> floraObjList = new List<FloraObj>();
 
-        //---The basic query
-        string sqlQueryString =
+        string sqlQueryString = "";
+        bool bAdvancedQuery = false;
+        int count;
+
+        if (string.IsNullOrEmpty(FLO.Type) && string.IsNullOrEmpty(FLO.USState))
+        {
+            //---The basic query
+            sqlQueryString =
+          "SELECT Plant.plant_id, name, color_flower, color_foliage, color_fruit_seed, texture_foliage, shape, pattern, image FROM Plant";
+
+            //---There are no WHERE statements
+            count = 0;
+        }
+        else
+        {
+            bAdvancedQuery = true;
+            //---The advanced query
+            sqlQueryString =
           "SELECT Plant.plant_id, name, color_flower, color_foliage, color_fruit_seed, texture_foliage, shape, pattern, image, us_state, type FROM Plant,Location,PlantType WHERE Plant.plant_id=Location.plant_id AND Plant.plant_id=PlantType.plant_id";
+            //---There are two conditionals here
+            count = 2;
+        }
 
         //---set up the database connection
         SqlConnection conn = new SqlConnection(conn_string);
         SqlCommand command = new SqlCommand();
         command.Connection = conn;
-        
-    
+
+
         //---Because we have 2 assignments, we set the count of fields we are checking to 2
-        int count = 2;
+  
 
         //---Build the query string - for each field, add a WHERE clause
         sqlQueryString = BuildSQLWhere("Plant.plant_id", FLO.PlantId, "@plantid", count, sqlQueryString, command, out count);
@@ -54,11 +73,13 @@ public class DatabaseComm
         sqlQueryString = BuildSQLWhere("shape", FLO.Shape, "@shape", count, sqlQueryString, command, out count);
         sqlQueryString = BuildSQLWhere("pattern", FLO.Pattern, "@pattern", count, sqlQueryString, command, out count);
         sqlQueryString = BuildSQLWhere("image", FLO.ImageURL, "@pattern", count, sqlQueryString, command, out count);
-        
 
-        //---Special case query for US state and type
-        sqlQueryString = BuildSQLWhereOr("us_state", FLO.USState, "@us_state", count, sqlQueryString, command, out count);
-        sqlQueryString = BuildSQLWhereOr("type", FLO.Type, "@type", count, sqlQueryString, command, out count);
+        if (bAdvancedQuery)
+        {
+            //---Special case query for US state and type
+            sqlQueryString = BuildSQLWhereOr("us_state", FLO.USState, "@us_state", count, sqlQueryString, command, out count);
+            sqlQueryString = BuildSQLWhereOr("type", FLO.Type, "@type", count, sqlQueryString, command, out count);
+        }
 
         //---Open the connection
         command.Connection.Open();
@@ -89,8 +110,12 @@ public class DatabaseComm
                 AddObj.Shape = ReturnResult.GetString(6);
                 AddObj.Pattern = ReturnResult.GetString(7);
                 AddObj.ImageURL = ReturnResult.GetString(8);
-                AddObj.USState = ReturnResult.GetString(9);
-                AddObj.Type = ReturnResult.GetString(10);
+
+                if(bAdvancedQuery)
+                { 
+                    AddObj.USState = ReturnResult.GetString(9);
+                    AddObj.Type = ReturnResult.GetString(10);
+                }
                 //---Add this floraobj to our list of objects
                 floraObjList.Add(AddObj);
             }
@@ -130,6 +155,12 @@ public class DatabaseComm
         command.Connection.Close();
         return floraObjList;
 
+    }
+
+    //These are the URLs for the plant jpgs from USDA
+    public static string imageURL(string plant_id)
+    {
+        return "http://plants.usda.gov/gallery/pubs/" + plant_id + "_001_pvp.jpg";
     }
 
     FloraObj findPlant_Id(IList<FloraObj> FLO, string plant_id)
