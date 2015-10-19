@@ -35,7 +35,7 @@ define(function () {
      */
     function QuestionWidget(question) {
 
-        var answer = {id: question.id, value: null};
+        var answer = {term: question.term, value: null};
 
         this.getAnswer = function () {
             return answer;
