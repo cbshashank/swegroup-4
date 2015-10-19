@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
 /// <summary>
-/// Restful C# Service class, based upon tutorial located at 
+/// Restful C# Service class, based upon tutorial located at www.codeproject.com/articles/112470/Developing-a-REST-Web-Service-using-C-A-walkthroug
 /// </summary>
 public class Service :  IHttpHandler
 {

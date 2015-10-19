@@ -148,7 +148,7 @@ namespace TestOWL
                     Console.WriteLine("TestQuery " + state + ": FAILED");
                     error++;
                 }
-                else if (CompareObjects(TestObj, FLO[0]))
+                else if (CompareObjects(TestObj, FLO[0],false))
                 {
                     Console.WriteLine("TestQuery " + state + ": SUCCESS");
                     success++;
@@ -204,7 +204,7 @@ namespace TestOWL
                     Console.WriteLine("TestQuery " + state + ": FAILED");
                     error++;
                 }
-                else if (CompareObjects(TestObj, FLO[0]))
+                else if (CompareObjects(TestObj, FLO[0],false))
                 {
                     Console.WriteLine("TestQuery " + state + ": SUCCESS");
                     success++;
@@ -290,7 +290,7 @@ namespace TestOWL
             return "http://plants.usda.gov/gallery/pubs/" + plant_id + "_001_pvp.jpg";
         }
 
-        bool CompareObjects(FloraObj FO, FloraObj FO2)
+        bool CompareObjects(FloraObj FO, FloraObj FO2, bool bFullQuery)
         {
             bool bMatch = FO.PlantId.Trim().ToLower() == FO2.PlantId.Trim().ToLower();
             bMatch = bMatch && (FO.Name.Trim().ToLower() == FO2.Name.Trim().ToLower());
@@ -300,7 +300,7 @@ namespace TestOWL
             bMatch = bMatch && (FO.ColorFlower.Trim().ToLower() == FO2.ColorFlower.Trim().ToLower());
             bMatch = bMatch && (FO.ColorFoliage.Trim().ToLower() == FO2.ColorFoliage.Trim().ToLower() && FO.ColorFruitSeed.Trim().ToLower() == FO2.ColorFruitSeed.Trim().ToLower());
 
-            if (bMatch)
+            if (bMatch && bFullQuery)
             {
                 string[] types1 = FO.Type.Split(',');
                 string[] types2 = FO2.Type.Split(',');
@@ -310,7 +310,7 @@ namespace TestOWL
                 bMatch = compareSplit(types1, types2, length1, length2);
             }
 
-            if (bMatch)
+            if (bMatch && bFullQuery)
             {
                 string[] state1 = FO.USState.Split(',');
                 string[] state2 = FO2.USState.Split(',');
