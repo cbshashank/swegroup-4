@@ -1,5 +1,33 @@
 define(function () {
 
+    function QuestionView() {
+        var questionContainer = document.getElementById('system_inputs');
+        var answerButton = document.getElementById('answerButton');
+        var widgets = [];
+
+        this.setModel = function (questions) {
+            for (var i = 0; i < questions.length; i++) {
+                var widget = new QuestionWidget(questions[i]);
+                questionContainer.appendChild(widget.asHTML());
+                widgets.push(widget);
+            }
+        };
+
+        this.getAnswers = function () {
+            var answers = [];
+            for(var i = 0; i < widgets.length; i++){
+                var answer = widgets[i].getAnswer();
+                if(answer.value)
+                    answers.push(answer);
+            }
+            return answers;
+        };
+
+        this.onAnswer = function (action) {
+            answerButton.addEventListener('click', action);
+        };
+    }
+
     /***
      * Widget for a single question. Contains a question text and a set of radio buttons for each option.
      * When a radio button is selected the answer value is updated.
@@ -7,7 +35,7 @@ define(function () {
      */
     function QuestionWidget(question) {
 
-        var answer = {text: question.text, value: null};
+        var answer = {id: question.id, value: null};
 
         this.getAnswer = function () {
             return answer;
@@ -43,35 +71,6 @@ define(function () {
             container.appendChild(label);
             return container;
         }
-    }
-
-
-    function QuestionView() {
-        var questionContainer = document.getElementById('system_inputs');
-        var answerButton = document.getElementById('answerButton');
-        var widgets = [];
-
-        this.setModel = function (questions) {
-            for (var i = 0; i < questions.length; i++) {
-                var widget = new QuestionWidget(questions[i]);
-                questionContainer.appendChild(widget.asHTML());
-                widgets.push(widget);
-            }
-        };
-
-        this.getAnswers = function () {
-            var answers = [];
-            for(var i = 0; i < widgets.length; i++){
-                var answer = widgets[i].getAnswer();
-                if(answer.value)
-                    answers.push(answer);
-            }
-            return answers;
-        };
-
-        this.onAnswer = function (action) {
-            answerButton.addEventListener('click', action);
-        };
     }
 
     return QuestionView;
