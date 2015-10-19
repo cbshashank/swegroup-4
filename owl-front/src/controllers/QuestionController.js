@@ -15,7 +15,7 @@ define(function(){
                 options: ["Black", "Blue", "Brown", "Green", "Orange", "Purple", "Red", "White", "Yellow"
                 ]};
     var shape = {text: 'What shape does the plant have?', 
-                options: ["Climbing", "Columnar", "Conical", "Decumbent", "Erect", "Irregular", "Oval", "Prostrate", "Rounded", "Semi-Erect", "Vase"
+                options: ["Climbing", "Columnar", "Conical", "Decsumbent", "Erect", "Irregular", "Oval", "Prostrate", "Rounded", "Semi-Erect", "Vase"
                 ]};
     var texture_foliage = {text: 'What kind of texture do the leaves have?', 
                 options: ["Fine", "Medium", "Coarse"
@@ -31,15 +31,10 @@ define(function(){
         //var testInput = {"Color":"Red","Shape":"Vine","Texture":"Rough"};
         var testInput2 = {"us_state":"MA", "type":"vine", "shape":"Rounded"};
 
-        view.setModel({
-            questions
-            // text: 'Is it a plant?',
-            // options: ['yes', 'no']
-        });
+        view.setModel(questions);
 
         view.onAnswer(function(){
-            clientCommunicationModule.sendCharacteristics(testInput);
-           //alert('send to');
+            clientCommunicationModule.sendCharacteristics(view.getAnswers());
         });
     }
 

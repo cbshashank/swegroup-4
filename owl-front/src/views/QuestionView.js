@@ -1,45 +1,75 @@
-define(function(){
-    function QuestionView(){
-        var questionText = document.getElementById('questionText');
-        var answerButton = document.getElementById('answerButton');
+define(function () {
 
-        function questnView(question){
-            var container = document.createElement('div');
-            var paragraph = document.createElement('p');
-            paragraph.innerHTML = question;
-            container.appendChild(paragraph);
+    /***
+     * Widget for a single question. Contains a question text and a set of radio buttons for each option.
+     * When a radio button is selected the answer value is updated.
+     * @param question model
+     */
+    function QuestionWidget(question) {
+
+        var answer = {text: question.text, value: null};
+
+        this.getAnswer = function () {
+            return answer;
+        };
+
+        this.asHTML = function () {
+            var container = document.createElement('form');
+            container.appendChild(questionLabelHTML());
+            for (var i = 0; i < question.options.length; i++) {
+                var radio = optionRadioHTML(question.options[i]);
+                container.appendChild(radio);
+            }
             return container;
+        };
+
+        function questionLabelHTML() {
+            var label = document.createElement('p');
+            label.innerHTML = question.text;
+            return label;
         }
 
-        function optionView(optionText){
+        function optionRadioHTML(option) {
             var container = document.createElement('div');
             var radio = document.createElement('input');
             var label = document.createElement('label');
             radio.type = 'radio';
             radio.name = 'option';
-            label.innerHTML = optionText;
+            radio.onclick = function () {
+                answer.value = option;
+            };
+            label.innerHTML = option;
             container.appendChild(radio);
             container.appendChild(label);
             return container;
         }
+    }
 
-        this.setModel = function(model){
-            for(var i = 0; i < model.questions.length; i++){
-                // state question
-                var questnText = questnView(model.questions[i].text);
-                questionText.appendChild(questnText);
 
-                var form = document.createElement('form');
-                // present option choices
-                for(var j = 0; j < model.questions[i].options.length; j++){
-                    var widget = optionView(model.questions[i].options[j]);
-                    form.appendChild(widget);
-                    questionText.appendChild(form);
-                }
+    function QuestionView() {
+        var questionContainer = document.getElementById('system_inputs');
+        var answerButton = document.getElementById('answerButton');
+        var widgets = [];
+
+        this.setModel = function (questions) {
+            for (var i = 0; i < questions.length; i++) {
+                var widget = new QuestionWidget(questions[i]);
+                questionContainer.appendChild(widget.asHTML());
+                widgets.push(widget);
             }
         };
 
-        this.onAnswer = function(action){
+        this.getAnswers = function () {
+            var answers = [];
+            for(var i = 0; i < widgets.length; i++){
+                var answer = widgets[i].getAnswer();
+                if(answer.value)
+                    answers.push(answer);
+            }
+            return answers;
+        };
+
+        this.onAnswer = function (action) {
             answerButton.addEventListener('click', action);
         };
     }
