@@ -37,6 +37,7 @@ public class DatabaseComm
 
         if (string.IsNullOrEmpty(FLO.Type) && string.IsNullOrEmpty(FLO.USState))
         {
+            //****--assumes that all of the other fields are filled in.
             //---The basic query
             sqlQueryString =
           "SELECT Plant.plant_id, name, color_flower, color_foliage, color_fruit_seed, texture_foliage, shape, pattern, image FROM Plant";
@@ -47,6 +48,7 @@ public class DatabaseComm
         else
         {
             bAdvancedQuery = true;
+            //****--NEED WHERE CLAUSES.
             //---The advanced query
             sqlQueryString =
           "SELECT Plant.plant_id, name, color_flower, color_foliage, color_fruit_seed, texture_foliage, shape, pattern, image, us_state, type FROM Plant,Location,PlantType WHERE Plant.plant_id=Location.plant_id AND Plant.plant_id=PlantType.plant_id";
