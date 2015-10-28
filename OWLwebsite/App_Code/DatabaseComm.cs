@@ -110,8 +110,11 @@ public class DatabaseComm
                 AddObj.Shape = ReturnResult.GetString(6);
                 AddObj.Pattern = ReturnResult.GetString(7);
                 AddObj.ImageURL = ReturnResult.GetString(8);
+                AddObj.GoogleURL = ThirdPartyLinks.GoogleLink(AddObj.Name);
+                AddObj.GoogleImageURL = ThirdPartyLinks.GoogleImageLink(AddObj.Name);
 
-                if(bAdvancedQuery)
+
+                if (bAdvancedQuery)
                 { 
                     AddObj.USState = ReturnResult.GetString(9);
                     AddObj.Type = ReturnResult.GetString(10);

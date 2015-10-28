@@ -19,6 +19,9 @@ public class FloraObj
     private string description;
     private string us_state;
     private string type;
+    private string googleURL;
+    private string googleImageURL;
+
 
     /// <summary>
     /// The constructor for the FloraObj - is currently empty, JSON.net fills in the fields
@@ -57,6 +60,37 @@ public class FloraObj
             name = value;
         }
     }
+
+    /// <summary>
+    /// The google URL
+    /// </summary>
+    public string GoogleURL
+    {
+        get
+        {
+            return googleURL;
+        }
+        set
+        {
+            googleURL = value;
+        }
+    }
+
+    /// <summary>
+    /// The image URL from Google
+    /// </summary>
+    public string GoogleImageURL
+    {
+        get
+        {
+            return googleImageURL;
+        }
+        set
+        {
+            googleImageURL = value;
+        }
+    }
+
 
     /// <summary>
     /// The color of plant flower value

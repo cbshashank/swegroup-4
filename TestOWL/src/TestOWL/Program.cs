@@ -96,6 +96,28 @@ namespace TestOWL
         
 
         /// <summary>
+        /// Given a list, find the given plant name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public FloraObj FindItem(string name, IList<FloraObj> list)
+        {
+            int idx = 0;
+            for(int ii = 0; ii < list.Count; ii++)
+            {
+                if(list[ii].Name == name)
+                {
+                    idx = ii;
+                    break;
+                }
+            }
+
+            return list[idx];
+
+        }
+
+        /// <summary>
         /// Test the connection to the database
         /// </summary>
         void TestConnection()
@@ -142,13 +164,13 @@ namespace TestOWL
 
                 string resultjson = sr.ReadToEnd();
                 IList<FloraObj> FLO = JsonConvert.DeserializeObject<List<FloraObj>>(resultjson);
-                Console.WriteLine(resultjson);
+
                 if (FLO == null || FLO.Count < 0)
                 {
                     Console.WriteLine("TestQuery " + state + ": FAILED");
                     error++;
                 }
-                else if (CompareObjects(TestObj, FLO[0],false))
+                else if (CompareObjects(TestObj, FindItem(TestObj.Name,FLO),false))
                 {
                     Console.WriteLine("TestQuery " + state + ": SUCCESS");
                     success++;
@@ -198,13 +220,13 @@ namespace TestOWL
 
                 string resultjson = sr.ReadToEnd();
                 IList<FloraObj> FLO = JsonConvert.DeserializeObject<List<FloraObj>>(resultjson);
-                Console.WriteLine(resultjson);
+
                 if (FLO == null || FLO.Count <= 0)
                 {
                     Console.WriteLine("TestQuery " + state + ": FAILED");
                     error++;
                 }
-                else if (CompareObjects(TestObj, FLO[0],false))
+                else if (CompareObjects(TestObj, FindItem(TestObj.Name, FLO), false))
                 {
                     Console.WriteLine("TestQuery " + state + ": SUCCESS");
                     success++;
@@ -274,6 +296,8 @@ namespace TestOWL
                 if (FLO != null && FLO.Count > 0)
                 {
                     Process.Start("HTTP://WWW." + FLO[0].ImageURL);
+                    Process.Start(FLO[0].GoogleURL);
+                    Process.Start(FLO[0].GoogleImageURL);
                 }
             }
             catch

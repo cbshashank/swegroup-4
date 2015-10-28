@@ -84,8 +84,10 @@ public class Service :  IHttpHandler
         }
         catch (Exception e)
         {
+
             //---Do logging here about message - could be a post message for the server, could be a badly formed JSON
             context.Response.Write("Invalid Message!");
+            
         }
     }
 
