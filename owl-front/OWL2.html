@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script data-main="src/main" src="lib/require.js"></script>
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>OWL</h1>
+
+        <p>Resize this responsive page to see the effect!</p>
+        <video id="bgvid" autoplay poster="./pictures/bgvid.mp4" style="{position: absolute}" loop muted>
+            <source src="./pictures/bgvid.mp4" type="video/mp4"/>
+        </video>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Column 1</h3>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        </div>
+        <div class="col-sm-4">
+            <h3>Column 2</h3>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        </div>
+        <div class="col-sm-4">
+            <h3>Column 3</h3>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+        </div>
+    </div>
+    <div id="system_inputs"></div>
+    <button type="button" id="answerButton">answer</button>
+    <div id="result_display">
+        <div id="output_img"></div>
+        <div id="output_desc"></div>
+        <!--    <button id="test_button">TEST INPUTS</button> -->
+    </div>
+</div>
+</body>
+</html>
