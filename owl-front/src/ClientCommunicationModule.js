@@ -8,7 +8,7 @@ define(['jquery', 'ResultDisplay'], function ($, ResultDisplay) {
     }
 
     var output_display = new ResultDisplay();
-    var serverAddress = "http://localhost:32297"
+    var serverAddress = "https://localhost:32297"
 //    var serverAddress = "http://localhost:3000"
 
     ClientCommunicationModule.prototype.sendCharacteristics = function (output) {
