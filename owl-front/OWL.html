@@ -4,29 +4,126 @@
     <meta charset="UTF-8">
     <title>Online Wildlife Library (OWL)</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script data-main="src/main" src="lib/require.js"></script>
+    <link rel="stylesheet" href="main.css">
 </head>
 
-
-
 <body>
-<div id="introduction"></div>
-<div id="system_inputs"></div>
-<button type="button" id="answerButton">answer</button>
-<div id="result_display">
-    <div id="output_img"></div>
-    <div id="output_desc"></div>
-    <!--    <button id="test_button">TEST INPUTS</button> -->
-</div>
-<<<<<<< Updated upstream
-<video id="bgvid" autoplay poster ="./pictures/bgvid.mp4" loop muted>
-	<source src="pictures/bgvid.mp4" type="video/mp4" />
-</video>
-=======
+<!-- OWL ICON -->
+<div id="page-header">
 
->>>>>>> Stashed changes
+
+<div class="row">
+  <div class="col-xs-3 col-sm-2">
+    <a href="#" class="thumbnail">
+      <img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:100px;height:150px" class="img-rounded">
+    </a>
+  </div>
+
+<!-- Banner in the background -->
+<div class="container">
+  <div id="banner" class="jumbotron">
+    <h1>Online Wildlife Library</h1>      
+    <h3>Try Our Interactive Identifier to Discover and Learn about Plants</h3>
+  </div>     
+</div>
+</div>
+<!-- MISSING big plants search icon -->
+<!-- <img src="./pictures/tree_dummy.png" alt="Plant Search" style="width:171px;height:171px" class="img-rounded"> -->
+
+<!-- MISSING big animals search icon -->
+<!-- <img src="./pictures/owl.jpg" alt="Plant Search" style="width:171px;height:171px" class="img-rounded"> -->
+
+</div>
+
+<div class="container">
+<div id="search">
+<h1>Your Search</h1>
+
+<!-- big navigation bar for each search question -->
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="#USState" aria-controls="USState" role="tab" data-toggle="tab">Location</a></li>
+    <li role="presentation"><a href="#Type" aria-controls="Type" role="tab" data-toggle="tab">Type</a></li>
+    <li role="presentation"><a href="#ColorFlower" aria-controls="ColorFlower" role="tab" data-toggle="tab">Flower Colors</a></li>
+    <li role="presentation"><a href="#ColorFoliage" aria-controls="ColorFoliage" role="tab" data-toggle="tab">Leaf Colors</a></li>
+    <li role="presentation"><a href="#ColorFruitSeed" aria-controls="ColorFruitSeed" role="tab" data-toggle="tab">Fruit/Seed Colors</a></li>
+    <li role="presentation"><a href="#Shape" aria-controls="Shape" role="tab" data-toggle="tab">Shape</a></li>
+    <li role="presentation"><a href="#TextureFoliage" aria-controls="TextureFoliage" role="tab" data-toggle="tab">Texture</a></li>
+    <li role="presentation"><a href="#Pattern" aria-controls="Pattern" role="tab" data-toggle="tab">Pattern</a></li>
+  </ul>
+
+
+  <!-- Tab panes -->
+  <!-- Name and picture for each question-value -->
+  <div id="system_inputs"></div>
+  <br/>
+<!-- reset button -->
+<div id="buttons">
+<button class="btn btn-default" type="submit">Reset</button>
+<!-- submit button -->
+<input class="btn btn-default" type="submit" value="Submit" id="answerButton">
+</div>
+</div>
+
+<div id="results_display">
+<h1>Your Results</h1>
+<!--  Value picture + Name -->
+        <div id="output_img"></div>
+        <div id="output_desc"></div>
+</div>
+</div>
+
+<!-- Google search results -->
+<div id="GoogleSearch">
+
+<!-- Left half - Google safe search -->
+
+<!-- Right half - Google image safe search -->
+
+</div>
+
+<div class="container-fluid">
+<div id="footer" class="row">
+
+<div id="footer1" class="col-sm-3">
+<img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:90px;height:114px" class="img-rounded">
+</div>
+
+<div id="footer2" class="col-sm-2">
+<p>General</p>
+<p><a href="#">About</a></p>
+<p><a href="#">Quick Links</a></p>
+<p><a href="#">FAQs</a></p>
+</div>
+
+<div id="footer3" class="col-sm-2">
+<p>Contact</p>
+<p><a href="#">Contact us</a></p>
+<p><a href="#">Report a Bug</a></p>
+</div>
+
+<div id="footer4" class="col-xs-3">
+<p>Follow</p>
+<img src="./pictures/LOGOS/Facebook/logos-and-badges_f-logo_online/png/FB-f-Logo__blue_50.png" alt="FB Logo" style="width:57px;height:57px" class="img-rounded">
+<img src="./pictures/LOGOS/Instagram/1Multi-ColorLogo_online/Instagram_Icon_Large.png" alt="Instagram Logo" style="width:60px;height:60px" class="img-rounded">
+<img src="./pictures/LOGOS/Twitter/brand guideline logos/TwitterLogo_55acee.png" alt="Twitter Logo" style="width:62px;height:62px" class="img-rounded">
+
+</div>
+
+<div id="admin" class="col-sm-1">
+<div class="btn-group" role="group" aria-label="...">
+  <button type="button" class="btn btn-default">Admin Login</button>
+ </div>
+</div>
+
+</div>
+</div>
+
 </body>
 </html>
