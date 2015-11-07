@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Online Wildlife Library (OWL)</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script data-main="src/main" src="lib/require.js"></script>
+    <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
@@ -30,10 +30,10 @@
   </div>     
 </div>
 </div>
-<!-- big plants search icon -->
+<!-- MISSING big plants search icon -->
 <!-- <img src="./pictures/tree_dummy.png" alt="Plant Search" style="width:171px;height:171px" class="img-rounded"> -->
 
-<!-- big animals search icon -->
+<!-- MISSING big animals search icon -->
 <!-- <img src="./pictures/owl.jpg" alt="Plant Search" style="width:171px;height:171px" class="img-rounded"> -->
 
 </div>
@@ -47,63 +47,34 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation"><a href="#Location" aria-controls="Location" role="tab" data-toggle="tab">Location</a></li>
+    <li role="presentation"><a href="#USState" aria-controls="USState" role="tab" data-toggle="tab">Location</a></li>
     <li role="presentation"><a href="#Type" aria-controls="Type" role="tab" data-toggle="tab">Type</a></li>
-    <li role="presentation"><a href="#FlowerColors" aria-controls="FlowerColors" role="tab" data-toggle="tab">Flower Colors</a></li>
-    <li role="presentation"><a href="#LeafColors" aria-controls="LeafColors" role="tab" data-toggle="tab">Leaf Colors</a></li>
-    <li role="presentation"><a href="#Fruit-SeedColors" aria-controls="Fruit-SeedColors" role="tab" data-toggle="tab">Fruit/Seed Colors</a></li>
+    <li role="presentation"><a href="#ColorFlower" aria-controls="ColorFlower" role="tab" data-toggle="tab">Flower Colors</a></li>
+    <li role="presentation"><a href="#ColorFoliage" aria-controls="ColorFoliage" role="tab" data-toggle="tab">Leaf Colors</a></li>
+    <li role="presentation"><a href="#ColorFruitSeed" aria-controls="ColorFruitSeed" role="tab" data-toggle="tab">Fruit/Seed Colors</a></li>
     <li role="presentation"><a href="#Shape" aria-controls="Shape" role="tab" data-toggle="tab">Shape</a></li>
-    <li role="presentation"><a href="#Texture" aria-controls="Texture" role="tab" data-toggle="tab">Texture</a></li>
+    <li role="presentation"><a href="#TextureFoliage" aria-controls="TextureFoliage" role="tab" data-toggle="tab">Texture</a></li>
     <li role="presentation"><a href="#Pattern" aria-controls="Pattern" role="tab" data-toggle="tab">Pattern</a></li>
   </ul>
 
+
   <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane" id="Location">
-    	<p>Choose a US Location.</p>
-    	<!-- Name and picture for each question-value -->
-
-
-		<div class="row">
-		  </div><!-- /.col-lg-6 -->
-		  <div class="col-lg-6">
-		    <div class="input-group">
-		      <span class="input-group-addon">
-		        <input type="radio" aria-label="...">
-		      </span>
-		      <input type="text" class="form-control" aria-label="...">
-		    </div><!-- /input-group -->
-		  </div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
-
-
-    </div>
-    <div role="tabpanel" class="tab-pane" id="Type">...</div>
-    <div role="tabpanel" class="tab-pane" id="FlowerColors">...</div>
-    <div role="tabpanel" class="tab-pane" id="LeafColors">...</div>
-    <div role="tabpanel" class="tab-pane" id="Fruit-SeedColors">...</div>
-    <div role="tabpanel" class="tab-pane" id="Shape">...</div>
-    <div role="tabpanel" class="tab-pane" id="Texture">...</div>
-    <div role="tabpanel" class="tab-pane" id="Pattern">...</div>
-  </div>
-
-</div>
-
-
-<!-- name and picture for each question-value -->
-
+  <!-- Name and picture for each question-value -->
+  <div id="system_inputs"></div>
+  <br/>
 <!-- reset button -->
 <div id="buttons">
 <button class="btn btn-default" type="submit">Reset</button>
 <!-- submit button -->
-<input class="btn btn-default" type="submit" value="Submit">
+<input class="btn btn-default" type="submit" value="Submit" id="answerButton">
 </div>
 </div>
 
-<div id="results">
+<div id="results_display">
 <h1>Your Results</h1>
 <!--  Value picture + Name -->
-
+        <div id="output_img"></div>
+        <div id="output_desc"></div>
 </div>
 
 

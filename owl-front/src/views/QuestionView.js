@@ -6,6 +6,8 @@ define(function () {
      */
     function QuestionView() {
         var questionContainer = document.getElementById('system_inputs');
+        questionContainer.className = 'tab-content';
+
         var answerButton = document.getElementById('answerButton');
         var widgets = [];
 
@@ -68,10 +70,14 @@ define(function () {
         };
 
         this.asHTML = function(){
-            var container = document.createElement('form');
-            container.appendChild(questionLabelHTML());
-            container.appendChild(this.optionsHTML(question.options));
-            return container;
+            var tabpanel = document.createElement('div');
+            tabpanel.role = "tabpanel";
+            tabpanel.className = "tab-pane";
+            tabpanel.id = this.getTerm();
+
+            tabpanel.appendChild(questionLabelHTML());
+            tabpanel.appendChild(this.optionsHTML(question.options));
+            return tabpanel;
         };
 
         function questionLabelHTML() {
@@ -89,7 +95,9 @@ define(function () {
         AbstractQuestionWidget.call(this, questions);
 
         this.optionsHTML = function(options){
-            var container = document.createElement('form');
+            var container = document.createElement('div');
+            container.className = "row";
+
             for (var i = 0; i < options.length; i++) {
                 var radio = optionRadioHTML(options[i]);
                 container.appendChild(radio);
@@ -97,18 +105,48 @@ define(function () {
             return container;
         };
 
+        /* Create options as
+          // CODE for enclosing thumbnails in ROW in function RadioQuestionWidget(questions)
+          <div class="row">
+          // Code for creating THUMBNAILS is in function optionRadioHTML(option)
+            <div class="col-sm-6 col-sm-1">
+              <div class="thumbnail">
+                <img src="..." alt="...">
+                <div class="caption">
+                  <p>...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        */
+
         function optionRadioHTML(option) {
             var container = document.createElement('div');
-            var radio = document.createElement('input');
-            var label = document.createElement('label');
-            radio.type = 'radio';
-            radio.name = 'option';
-            radio.onclick = function () {
+            container.className = "col-xs-6 col-sm-1";
+            
+            var thumbnail = document.createElement('div');
+            thumbnail.className = "thumbnail";
+
+            var thumbnailImg = document.createElement('img');
+            thumbnailImg.src = "...";
+            thumbnailImg.alt = option;
+
+            var thumbnailCaption = document.createElement('div');
+            thumbnailCaption.className = "caption";
+
+            var thumbnailCaptionText = document.createElement('p');
+            thumbnailCaptionText.innerHTML = option;
+
+            thumbnailCaption.appendChild(thumbnailCaptionText);
+            thumbnail.appendChild(thumbnailImg);
+            thumbnail.appendChild(thumbnailCaption);
+            container.appendChild(thumbnail);
+
+            // populate the options
+            thumbnail.onclick = function () {
                 answer = option;
             };
-            label.innerHTML = option;
-            container.appendChild(radio);
-            container.appendChild(label);
+
             return container;
         }
     }
@@ -122,6 +160,8 @@ define(function () {
 
         this.optionsHTML = function(options){
             var select = document.createElement('select');
+            select.className = 'form-control';
+            
             select.appendChild(document.createElement('option'));
             for(var i = 0; i < options.length; i++){
                 var option = document.createElement('option');
