@@ -122,9 +122,10 @@ define(function () {
 
         function optionRadioHTML(option) {
             var container = document.createElement('div');
-            container.className = "col-xs-6 col-sm-1";
+            container.className = "col-md-2";
             
-            var thumbnail = document.createElement('div');
+            var thumbnail = document.createElement('a');
+            thumbnail.href = "#";
             thumbnail.className = "thumbnail";
 
             var thumbnailImg = document.createElement('img');
