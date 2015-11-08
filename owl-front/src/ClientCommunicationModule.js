@@ -8,8 +8,8 @@ define(['jquery', 'ResultDisplay'], function ($, ResultDisplay) {
     }
 
     var output_display = new ResultDisplay();
-    var serverAddress = "http://localhost:32297"
-//    var serverAddress = "http://localhost:3000"
+    var serverAddress = "http://localhost:32297";
+//  var serverAddress = "http://localhost:3000"
 
     ClientCommunicationModule.prototype.sendCharacteristics = function (output) {
         var questionText = document.getElementById('form');
