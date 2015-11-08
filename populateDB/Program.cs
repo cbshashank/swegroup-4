@@ -18,14 +18,14 @@ namespace populateDB
             DataTable plant=makePlantdt(conn);
             DataTable location = makeLocationDt(conn);
             DataTable planttype =makeplantTypedt(conn);
-            loadtable(plant,location,planttype, conn);
+            DataTable questionanstable = makequestionanstable(conn);
+            loadtable(plant,location,planttype, questionanstable, conn);
 
             conn.Close();
             
             
            
         }
-
 
         public static void createTables(SqlConnection conn)
         {
@@ -43,6 +43,10 @@ namespace populateDB
             //These are attributes of Plant Type Table
             String[] plantTypeColumns = { "plant_id", "type" };
             String[] ptColumnTypes = { "VARCHAR(20)", "VARCHAR(50)" };
+
+            //These are the attributes of the QuestionAns table
+            String[] questionanscolumns = { "question", "state", "type", "pattern", "flower_color", "foliage_color", "foliage_texture", "fruit_color", "shape" };
+            String[] questionColumnTypes = { "Varchar(100)", "VARCHAR(5)", "VARCHAR(50)", "VARCHAR(50)", "VARCHAR(50)", "VARCHAR(50)", "VARCHAR(50)", "VARCHAR(50)", "VARCHAR(50)" };
 
             //This creates the Plant table
             query.Append("CREATE TABLE plant (");
@@ -110,6 +114,30 @@ namespace populateDB
             {
                 SqlCommand sqlptQuery = new SqlCommand(query.ToString(), conn);
                 sqlptQuery.ExecuteNonQuery();
+                Console.WriteLine("Executed: " + query.ToString());
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            query.Clear();
+
+            //This creates the QuestionAns table
+            query.Append("CREATE TABLE questionans (");
+            for (int i = 0; i < questionanscolumns.Length; i++)
+            {
+                query.Append(questionanscolumns[i]);
+                query.Append(" ");
+                query.Append(questionColumnTypes[i]);
+                query.Append(",");
+            }
+            query.Length -= 1;
+            query.Append(");");
+            try
+            {
+                SqlCommand sqlplantQuery = new SqlCommand(query.ToString(), conn);
+                sqlplantQuery.ExecuteNonQuery();
                 Console.WriteLine("Executed: " + query.ToString());
 
             }
@@ -220,8 +248,39 @@ namespace populateDB
             return plantTypedt;
 
         }
+        public static DataTable makequestionanstable(SqlConnection conn)
+        {
+            DataTable questionans = new DataTable();
+            try
+            {
+                string[] Lines = File.ReadAllLines("answers.csv");
+                string[] Fields;
+                Fields = Lines[0].Split(new char[] { ',' });
+                int Cols = Fields.GetLength(0);
+                //1st row must be column names; force lower case to ensure matching later on.
+                for (int i = 0; i < Cols; i++)
+                    questionans.Columns.Add(Fields[i].ToLower(), typeof(string));
+                DataRow Row;
+                for (int i = 1; i < Lines.GetLength(0); i++)
+                {
+                    Fields = Lines[i].Split(new char[] { ',' });
+                    Row = questionans.NewRow();
+                    for (int f = 0; f < Cols; f++)
+                        Row[f] = Fields[f];
+                    questionans.Rows.Add(Row);
+                }
+                Console.WriteLine("Question Answers DataTable Created");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return questionans;
+
+
+        }
         //loads the datatables onto the DB
-        public static void loadtable(DataTable plant, DataTable location, DataTable plantType, SqlConnection conn)
+        public static void loadtable(DataTable plant, DataTable location, DataTable plantType, DataTable questionans, SqlConnection conn)
         {
            String Plantsquery ="";
            String Locationquery="";
@@ -275,8 +334,24 @@ namespace populateDB
             }
             Console.WriteLine("Loaded data into plantType table.");
 
+            Console.WriteLine("Now loading data into questions table.");
 
-           
+            for (int i = 0; i < questionans.Rows.Count; i++)
+            {
+                Ptquery = ("INSERT INTO questionans(question, state, type, pattern, flower_color, foliage_color, foliage_texture, fruit_color, shape) VALUES('" + questionans.Rows[i][0].ToString().Trim() + "','" + questionans.Rows[i][1].ToString().Trim() + "','" + questionans.Rows[i][2].ToString().Trim() + "','" + questionans.Rows[i][3].ToString().Trim() + "','" + questionans.Rows[i][4].ToString().Trim() + "','" + questionans.Rows[i][5].ToString().Trim() + "','" + questionans.Rows[i][6].ToString().Trim() + "','" + questionans.Rows[i][7].ToString().Trim() + "','"+ questionans.Rows[i][8].ToString().Trim() + "');");
+                try
+                {
+                    SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
+                    ptQuery.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+            Console.WriteLine("Loaded data into Question Answers table.");
+            
+
         }
 
         

@@ -1,0 +1,60 @@
+question,state,type,pattern,color_flower,color_foliage,texture_foliage,color_fruit,shape
+What state did you see the plant?,AK,"Subshrub, Weed/herb",Dicot,Purple,Dark Green,Medium,Brown,Semi-Erect
+What type of plant was it?,AL,Weed/herb,Gymnosperm,Yellow,Gray-Green,Fine,Purple,Standing
+What is the pattern of the plant?,AZ,"Weed/herb, Vine",Moss,Red,Green,Coarse,Black,Conical
+What is the flower color?,AR,"Subshrub, Shrub, Weed/herb",Monocot,Brown,Yellow-Green,,Yellow,Rounded
+What is the foliage color?,CA,"Weed/herb, Subshrub",Lichen,White,Red,,Red,Prostrate
+What is the fruit color?,CO,"Vine, Weed/herb",Fern,Green,White-Gray,,Green,Decumbent
+What is the plant shape?,CT,"Weed/herb, Shrub, Subshrub",Liverwort,Blue,,,Blue,Climbing
+,DE,"Shrub, Weed/herb, Subshrub",Green alga,Orange,,,Orange,Vase
+,FL,"Weed/herb, Shrub, Vine",Horsetail,,,,White,Irregular
+,GA,"Vine, Subshrub, Weed/herb",RA,,,,,Oval
+,HI,"Tree, Shrub, Weed/herb",Lycopod,,,,,Columnar
+,ID,"Weed/herb, Shrub",Quillwort,,,,,
+,IL,"Weed/herb, Shrub, Subshrub, Vine",Whisk-fern,,,,,
+,IN,"Weed/herb, Subshrub, Vine",,,,,,
+,IA,"Shrub, Weed/herb",,,,,,
+,KS,"Subshrub, Shrub, Weed/herb, Tree",,,,,,
+,KY,"Tree, Shrub, Subshrub, Weed/herb",,,,,,
+,LA,"Subshrub, Shrub, Weed/herb, Vine",,,,,,
+,ME,"Shrub, Weed/herb, Vine",,,,,,
+,MD,"Weed/herb, Shrub, Subshrub, Tree",,,,,,
+,MA,"Subshrub, Weed/herb, Vine",,,,,,
+,MI,"Shrub, Weed/herb, Subshrub, Vine",,,,,,
+,MN,Grass,,,,,,
+,MS,"Shrub, Subshrub, Grass",,,,,,
+,MO,"Subshrub, Shrub, Grass",,,,,,
+,MT,"Tree, Shrub, Subshrub, Grass",,,,,,
+,NE,"Subshrub, Shrub, Grass, Vine",,,,,,
+,NV,"Vine, Shrub, Grass",,,,,,
+,NH,"Shrub, Grass",,,,,,
+,NJ,"Grass, Shrub",,,,,,
+,NM,Lichenous,,,,,,
+,NY,Nonvascular,,,,,,
+,NC,Shrub,,,,,,
+,ND,"Subshrub, Shrub",,,,,,
+,OH,"Shrub, Subshrub",,,,,,
+,OK,"Tree, Shrub",,,,,,
+,OR,"Vine, Shrub",,,,,,
+,PA,"Tree, Shrub, Vine",,,,,,
+,RI,"Shrub, Vine",,,,,,
+,SC,"Shrub, Tree",,,,,,
+,SD,"Tree, Subshrub, Shrub",,,,,,
+,TN,"Vine, Tree, Shrub",,,,,,
+,TX,"Subshrub, Shrub, Tree",,,,,,
+,UT,"Shrub, Subshrub, Tree",,,,,,
+,VT,"Shrub, Subshrub, Vine",,,,,,
+,VA,"Shrub, Subshrub, Tree, Vine",,,,,,
+,WA,"Vine, Subshrub, Shrub",,,,,,
+,WV,"Tree, Shrub, Subshrub",,,,,,
+,WI,"Subshrub, Shrub, Vine",,,,,,
+,WY,Subshrub,,,,,,
+,AS,"Tree, Subshrub",,,,,,
+,DC,"Subshrub, Vine",,,,,,
+,FM,"Vine, Subshrub",,,,,,
+,GU,Tree,,,,,,
+,MH,"Tree, Vine",,,,,,
+,MP,Vine,,,,,,
+,PW,,,,,,,
+,PR,,,,,,,
+,VI,,,,,,,
