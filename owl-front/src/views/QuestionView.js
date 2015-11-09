@@ -125,8 +125,12 @@ define(function () {
             container.className = "col-md-2";
             
             var thumbnail = document.createElement('a');
-            thumbnail.href = "#";
             thumbnail.className = "thumbnail";
+
+            // populate the options
+            thumbnail.onclick = function () {
+                answer = option;
+            };
 
             var thumbnailImg = document.createElement('img');
             thumbnailImg.src = "...";
@@ -142,11 +146,6 @@ define(function () {
             thumbnail.appendChild(thumbnailImg);
             thumbnail.appendChild(thumbnailCaption);
             container.appendChild(thumbnail);
-
-            // populate the options
-            thumbnail.onclick = function () {
-                answer = option;
-            };
 
             return container;
         }
