@@ -1,10 +1,10 @@
 define(function () {
 
     function QuestionController(view, communication) {
-        view.setModel(communication.getQuestions());
+        communication.getQuestions(view.setModel.bind(view));
         view.onAnswer(function () {
             console.log(view.getAnswers());
-            communication.sendCharacteristics(view.getAnswers());
+            communication.sendAnswers(view.getAnswers());
         });
     }
 

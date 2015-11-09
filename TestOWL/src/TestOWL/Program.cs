@@ -11,7 +11,7 @@ namespace TestOWL
 {
     public class Program
     {
-       private string url = "http://localhost:32297";
+       private string url = "https://localhost:32297";
         private FloraObj TestObj;
         private int error;
         private int success;
@@ -81,9 +81,11 @@ namespace TestOWL
                 streamWriter.Close();
             }
 
-
+            
             HttpWebResponse GETResponse = (HttpWebResponse)GETRequest.GetResponse();
             
+            
+
             Stream GETResponseStream = GETResponse.GetResponseStream();
             StreamReader sr = new StreamReader(GETResponseStream);
             string text = sr.ReadToEnd();
@@ -398,8 +400,8 @@ namespace TestOWL
             error = 0;
             success = 0;
             total = 0;
+            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
 
-           
             //---Set up the comparison object
             FillTestObject();
 

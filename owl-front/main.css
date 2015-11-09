@@ -1,0 +1,50 @@
+/* This is the CSS file for styling all of the websites */
+body{
+	background-color: #99E699;
+	/*background-image: url("./pictures/landscape-background4.jpg");
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;*/
+}
+
+h1 {
+	color: brown;
+}
+
+p {
+
+}
+
+i {
+	font-style: italic;
+}
+
+a#jumbotron:link    {text-decoration:none}
+a#jumbotron:visited {text-decoration:none}
+a#jumbotron:hover   {text-decoration:none}
+a#jumbotron:active  {text-decoration:none}
+
+#banner {
+	background-image: url("./pictures/landscape-background4.jpg");
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    color: #CC0000;
+}
+
+#nav-tabs {
+	width:100%;
+}
+
+#footer {
+	color:white;
+}
+
+#buttons {
+	text-align: right;
+}
+
+#admin {
+
+}
+
