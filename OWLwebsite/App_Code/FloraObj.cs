@@ -21,6 +21,8 @@ public class FloraObj
     private string type;
     private string googleURL;
     private string googleImageURL;
+    private string username;
+    private string password;
 
 
     /// <summary>
@@ -30,6 +32,29 @@ public class FloraObj
     {
 
     }
+
+
+    public string UserName
+    {
+        get
+        {
+            return userName;
+        }
+        set
+        { userName = value; }
+    }
+
+    public string Password
+    {
+
+        get
+
+        { return password; }
+
+        set
+        { password = value; }
+    }
+
 
     /// <summary>
     /// The primary key and plant id, typically a three character string

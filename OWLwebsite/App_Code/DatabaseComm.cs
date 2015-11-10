@@ -27,6 +27,46 @@ public class DatabaseComm
     /// </summary>
     /// <param name="FLO"></param>
     /// <returns></returns>
+    public string checkAdminLogin(FloraObj admLog) // admin log in test Abhi
+    {
+        string result = "check username & password";
+        string sqlQueryString = "";
+        SqlConnection conn = new SqlConnection(conn_string);
+        SqlCommand command = new SqlCommand();
+        command.Connection = conn;
+
+
+        if (string.IsNullOrEmpty(admLog.UserName) && string.IsNullOrEmpty(admLog.Password))
+        {
+            sqlQueryString = "SELECT *  from AdminTb";
+
+
+
+            command.Connection.Open();
+
+            //---Run the Query
+            command.CommandText = sqlQueryString;
+            SqlDataReader ReturnResult = command.ExecuteReader();
+
+            //---cycle through the return values and build a list of the floraobjs which match
+            if (ReturnResult.HasRows)
+            {
+                ReturnResult.Read();
+                if
+                  (ReturnResult["username"].ToString() == admLog.UserName && ReturnResult["password"].ToString() == admLog.Password)
+                    result = "Authenticated";
+                return (result);
+            }
+            else
+            {
+                result = "check username & password";
+
+                return result;
+            }
+        }
+        return result;
+    }  
+        //end login check 
     public IList<FloraObj> Query(FloraObj FLO)
     {
         IList<FloraObj> floraObjList = new List<FloraObj>();
@@ -63,7 +103,7 @@ public class DatabaseComm
 
 
         //---Because we have 2 assignments, we set the count of fields we are checking to 2
-  
+
 
         //---Build the query string - for each field, add a WHERE clause
         sqlQueryString = BuildSQLWhere("Plant.plant_id", FLO.PlantId, "@plantid", count, sqlQueryString, command, out count);
@@ -88,19 +128,19 @@ public class DatabaseComm
 
         //---Run the Query
         command.CommandText = sqlQueryString;
-       SqlDataReader ReturnResult = command.ExecuteReader();
+        SqlDataReader ReturnResult = command.ExecuteReader();
 
         //---cycle through the return values and build a list of the floraobjs which match
-        while(ReturnResult.Read())
+        while (ReturnResult.Read())
         {
-    
+
             //---Get the plant id to start
             string plant_id = ReturnResult.GetString(0);
 
 
             //---Determine if an object already exists
             FloraObj AddObj = findPlant_Id(floraObjList, plant_id);
-            if(AddObj == null)
+            if (AddObj == null)
             {
                 AddObj = new FloraObj();
                 AddObj.PlantId = plant_id;
@@ -112,12 +152,9 @@ public class DatabaseComm
                 AddObj.Shape = ReturnResult.GetString(6);
                 AddObj.Pattern = ReturnResult.GetString(7);
                 AddObj.ImageURL = ReturnResult.GetString(8);
-                AddObj.GoogleURL = ThirdPartyLinks.GoogleLink(AddObj.Name);
-                AddObj.GoogleImageURL = ThirdPartyLinks.GoogleImageLink(AddObj.Name);
-
 
                 if (bAdvancedQuery)
-                { 
+                {
                     AddObj.USState = ReturnResult.GetString(9);
                     AddObj.Type = ReturnResult.GetString(10);
                 }
@@ -131,11 +168,11 @@ public class DatabaseComm
 
                 //---Check if this state value is here
                 bool bFound = UpdateComplexField(AddObj.USState, ReturnResult.GetString(9), out length);
-                if(!bFound && length > 0)
+                if (!bFound && length > 0)
                 {
                     AddObj.USState += "," + ReturnResult.GetString(9);
                 }
-                else if(length == 0)
+                else if (length == 0)
                 {
                     AddObj.USState = ReturnResult.GetString(9);
                 }
@@ -146,16 +183,16 @@ public class DatabaseComm
                 {
                     AddObj.Type += "," + ReturnResult.GetString(10);
                 }
-                else if(length == 0)
+                else if (length == 0)
                 {
                     AddObj.Type = ReturnResult.GetString(10);
                 }
 
 
-            }   
+            }
         }
-        
-       
+
+
         //---Close the database connection.  Do we want a persistent connection?  For now, we will just do connections on a case-by-case basis
         command.Connection.Close();
         return floraObjList;
@@ -172,15 +209,15 @@ public class DatabaseComm
     {
         FloraObj FO = null;
 
-        foreach(FloraObj F in FLO)
+        foreach (FloraObj F in FLO)
         {
-            if(F.PlantId == plant_id)
+            if (F.PlantId == plant_id)
             {
                 FO = F;
                 break;
             }
         }
-        
+
         return FO;
     }
 
@@ -286,7 +323,7 @@ public class DatabaseComm
 
             for (int ii = 0; ii < totalsplit; ii++)
             {
-                if(ii > 0)
+                if (ii > 0)
                 {
                     sqlQueryString += " OR (";
                 }
@@ -312,16 +349,16 @@ public class DatabaseComm
         string[] values = Values.Split(',');
         length = values.GetLength(0);
 
-        for(int ii = 0; ii < length; ii++)
+        for (int ii = 0; ii < length; ii++)
         {
-            if(newValue == values[ii])
+            if (newValue == values[ii])
             {
                 //---Already present, don't add
                 bFound = true;
                 break;
             }
         }
-        
+
         return bFound;
     }
 
@@ -330,11 +367,112 @@ public class DatabaseComm
     /// Insert an item into the database query
     /// </summary>
     /// <param name="FLO"></param>
+    // method for creating a unique plant id
+
+    public string getplantid(FloraObj FLO) // infinite loop for checking
+    {
+        String plantid = null;
+        plantid = FLO.Name.Substring(0,4);
+        for(int i=1; ; i++)
+        {
+            plantid = plantid + i;
+            if (checkplantid(plantid) == false)
+                return plantid;
+        }
+
+
+    }
+
+    public bool checkplantid(string plantid)
+    {
+        bool found = false;
+        string sqlQueryString = "";
+        SqlConnection conn = new SqlConnection(conn_string);
+        SqlCommand command = new SqlCommand();
+        command.Connection = conn;
+
+
+        if (string.IsNullOrEmpty(plantid))
+        {
+
+            sqlQueryString = "SELECT *  from plant";
+
+            command.Connection.Open();
+
+            //---Run the Query
+            command.CommandText = sqlQueryString;
+            SqlDataReader ReturnResult = command.ExecuteReader();
+
+            //---cycle through the return values and build a list of the floraobjs which match
+            if (ReturnResult.HasRows)
+            {
+                ReturnResult.Read();
+                if
+                  (ReturnResult["plantid"].ToString() == plantid)
+                {
+                    found = true;
+                    return found;
+
+                }
+
+            }
+            else
+                return found;
+        }  //end login check
+        return found;
+    }
+
+
+
     public void Insert(FloraObj FLO)
     {
+
+        FLO.UserName = "Admin";
+        FLO.Password = "Admin";
+
+        if (checkAdminLogin(FLO) == "Authenticated")
+        {
+
+
+            // check user name & password here ok or not
+            //using parametirized query
+            string sqlInserString =
+               "INSERT INTO plant (plant_id,Name, Color_flower,color_foliage,color_fruit_seed,texture_foliage, shape, pattern,image) VALUES (@plant_id,@Name, @Color_flower,@color_foliage,@color_fruit_seed,@texture_foliage,@foliage,@shape,@pattern,@image)";
+
+            SqlConnection conn = new SqlConnection(conn_string);
+            SqlCommand command = new SqlCommand();
+            command.Connection = conn;
+            command.Connection.Open();
+            command.CommandText = sqlInserString;
+
+            SqlParameter plant_id = new SqlParameter("@plant_id", getplantid(FLO));
+            SqlParameter Name = new SqlParameter("@Name", FLO.Name);
+            SqlParameter Color_flower = new SqlParameter("@Color_flower", FLO.Color_flower);
+            SqlParameter Color_foliage = new SqlParameter("@Color_foliage", FLO.ColorFoliage);
+            SqlParameter Color_fruit_seed = new SqlParameter("@color_fruit_seed", FLO.ColorFruitSeed);
+            SqlParameter texture = new SqlParameter("@texture", FLO.TextureFoliage);
+            SqlParameter shape = new SqlParameter("@shape", FLO.Shape);
+            SqlParameter pattern = new SqlParameter("@pattern", FLO.Pattern);
+            SqlParameter image = new SqlParameter("@image", FLO.ImageURL);
+       
+           
+             
+
+
+            command.Parameters.AddRange(new SqlParameter[]{
+                plant_id,Name, Color_flower,Color_foliage,Color_fruit_seed,texture, shape, pattern,image});
+            command.ExecuteNonQuery();
+            command.Connection.Close();
+
+        }
+        // Check Admin USer & pass. 
+    }
+
+    public void Delete(FloraObj FLO)
+    {
         //using parametirized query
-       /* string sqlInserString =
-           "INSERT INTO Flora (Name, Color, LeafCount, Extra) VALUES (@Name, @Color, @LeafCount, @Extra)";
+        string sqlInserString =
+          "DELETE FROM plant WHERE plant_id=@plant_id ";
 
         SqlConnection conn = new SqlConnection(conn_string);
 
@@ -343,17 +481,14 @@ public class DatabaseComm
         command.Connection.Open();
         command.CommandText = sqlInserString;
 
-        SqlParameter Name = new SqlParameter("@Name", FLO.Name);
-        SqlParameter Color = new SqlParameter("@Color", FLO.Color);
-        SqlParameter LeafCount = new SqlParameter("@LeafCount", FLO.LeafCount);
-        SqlParameter Extra = new SqlParameter("@Extra", FLO.Extra);
+        SqlParameter plant_id = new SqlParameter("@plant_id", FLO.PlantId);
+
 
         command.Parameters.AddRange(new SqlParameter[]{
-                Name,Color,LeafCount,Extra});
+                plant_id});
         command.ExecuteNonQuery();
-        command.Connection.Close();*/
+        command.Connection.Close();
 
     }
 
-   
 }
