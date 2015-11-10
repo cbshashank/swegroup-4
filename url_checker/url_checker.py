@@ -7,7 +7,8 @@ plant_ids_file = open("plant_ids.txt")
 sequence_numbers = ["001"]
 sub_folders = ["pvp", "shp", "ahp", "avp", "avd", "lhp", "lv"]
 formats = ["tif", "jpg"]
-checkpoint = "brbr5"
+startpoint = "calyl"
+endpoint = ""
 
 connection = httplib.Http()
 
@@ -17,10 +18,12 @@ def list_pictures_urls():
     for plant_id in plant_ids_file:
         plant_id = plant_id.strip()
         if keep_skipping:
-            if plant_id == checkpoint:
+            if plant_id == startpoint:
                 keep_skipping = False
             else:
                 continue
+	elif plant_id == endpoint:
+		return
         working_url = get_a_working_url(plant_id)
         if working_url:
             print(str(plant_id) + " " + working_url)
