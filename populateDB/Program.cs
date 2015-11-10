@@ -45,8 +45,8 @@ namespace populateDB
             String[] ptColumnTypes = { "VARCHAR(20)", "VARCHAR(50)" };
 
             //These are the attributes of the QuestionAns table
-            String[] questionanscolumns = { "question", "state", "type", "pattern", "flower_color", "foliage_color", "foliage_texture", "fruit_color", "shape" };
-            String[] questionColumnTypes = { "Varchar(100)", "VARCHAR(5)", "VARCHAR(50)", "VARCHAR(50)", "VARCHAR(50)", "VARCHAR(50)", "VARCHAR(50)", "VARCHAR(50)", "VARCHAR(50)" };
+            String[] questionanscolumns = { "question", "answer", "url" };
+            String[] questionColumnTypes = { "Varchar(100)", "VARCHAR(50)", "VARCHAR(50)" };
 
             //This creates the Plant table
             query.Append("CREATE TABLE plant (");
@@ -338,7 +338,7 @@ namespace populateDB
 
             for (int i = 0; i < questionans.Rows.Count; i++)
             {
-                Ptquery = ("INSERT INTO questionans(question, state, type, pattern, flower_color, foliage_color, foliage_texture, fruit_color, shape) VALUES('" + questionans.Rows[i][0].ToString().Trim() + "','" + questionans.Rows[i][1].ToString().Trim() + "','" + questionans.Rows[i][2].ToString().Trim() + "','" + questionans.Rows[i][3].ToString().Trim() + "','" + questionans.Rows[i][4].ToString().Trim() + "','" + questionans.Rows[i][5].ToString().Trim() + "','" + questionans.Rows[i][6].ToString().Trim() + "','" + questionans.Rows[i][7].ToString().Trim() + "','"+ questionans.Rows[i][8].ToString().Trim() + "');");
+                Ptquery = ("INSERT INTO questionans(question, answer, url) VALUES('" + questionans.Rows[i][0].ToString().Trim() + "','" + questionans.Rows[i][1].ToString().Trim() + "','" + questionans.Rows[i][2].ToString().Trim() + "');");
                 try
                 {
                     SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
