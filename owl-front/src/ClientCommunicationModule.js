@@ -12,7 +12,7 @@ define(['jquery', 'ResultDisplay'], function ($, ResultDisplay) {
 
     ClientCommunicationModule.prototype.sendAnswers = function (answers) {
         var questionText = document.getElementById('form');
-
+        //alert(answers);
         $.ajax({
             url: serverAddress, 		// Location of the service
             type: "POST", 		//GET or POST or PUT or DELETE verb
@@ -31,17 +31,7 @@ define(['jquery', 'ResultDisplay'], function ($, ResultDisplay) {
 
     };
 
-    ClientCommunicationModule.prototype.getQuestions = function (onReceive) {
-        $.ajax({
-            url: serverAddress, 		// Location of the service
-            type: "GET", 		//GET or POST or PUT or DELETE verb
-            dataType: "text",
-            success: function (in_data) {//On Successful service call
-                var result = JSON.parse(in_data);
-                onReceive(result);
-            },
-            error: (function () {
-                onReceive([
+    ClientCommunicationModule.prototype.getQuestions = function(onReceive){ onReceive([
                     {
                         term: 'USState',
                         text: 'Where is the plant in the US?',
@@ -90,10 +80,9 @@ define(['jquery', 'ResultDisplay'], function ($, ResultDisplay) {
                         options: ["Dicot", "Fern", "Green Alga", "Gymnosperm", "Hornwort", "Horsetail", "Lichen", "Liverwort", "Lycopod", "Monocot", "Moss", "Quillwort", "Red Algae", "Whisk-fern"
                         ]
                     }]);
-            })
-        });
     };
-
+    
+ 
     return ClientCommunicationModule;
 });
 
