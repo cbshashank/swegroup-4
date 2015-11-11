@@ -447,7 +447,7 @@ public class DatabaseComm
 
             SqlParameter plant_id = new SqlParameter("@plant_id", getplantid(FLO));
             SqlParameter Name = new SqlParameter("@Name", FLO.Name);
-            SqlParameter Color_flower = new SqlParameter("@Color_flower", FLO.ColorFlower);
+            SqlParameter Color_flower = new SqlParameter("@Color_flower", FLO.Color_flower);
             SqlParameter Color_foliage = new SqlParameter("@Color_foliage", FLO.ColorFoliage);
             SqlParameter Color_fruit_seed = new SqlParameter("@color_fruit_seed", FLO.ColorFruitSeed);
             SqlParameter texture = new SqlParameter("@texture", FLO.TextureFoliage);

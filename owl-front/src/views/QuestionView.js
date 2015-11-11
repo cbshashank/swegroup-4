@@ -57,8 +57,7 @@ define(function () {
 
         var answer;
 
-        this.getAnswer = function () {
-            alert(answer);
+        this.getAnswer = function(){
             return answer;
         };
 
@@ -130,7 +129,6 @@ define(function () {
 
             // populate the options
             thumbnail.onclick = function () {
-                alert(option);
                 answer = option;
             };
 
