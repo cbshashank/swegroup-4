@@ -129,7 +129,7 @@ define(function () {
 
             // populate the options
             thumbnail.onclick = function () {
-                answer = option;
+                this.answer = option;
             };
 
             var thumbnailImg = document.createElement('img');
