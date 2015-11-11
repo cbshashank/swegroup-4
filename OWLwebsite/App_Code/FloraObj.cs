@@ -38,10 +38,10 @@ public class FloraObj
     {
         get
         {
-            return userName;
+            return username; 
         }
         set
-        { userName = value; }
+        { username = value; }
     }
 
     public string Password
