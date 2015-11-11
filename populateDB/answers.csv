@@ -1,116 +1,1 @@
-question,answer,url
-location,AK,
-location,AL,
-location,AZ,
-location,AR,
-location,CA,
-location,CO,
-location,CT,
-location,DE,
-location,FL,
-location,GA,
-location,HI,
-location,ID,
-location,IL,
-location,IN,
-location,IA,
-location,KS,
-location,KY,
-location,LA,
-location,ME,
-location,MD,
-location,MA,
-location,MI,
-location,MN,
-location,MS,
-location,MO,
-location,MT,
-location,NE,
-location,NV,
-location,NH,
-location,NJ,
-location,NM,
-location,NY,
-location,NC,
-location,ND,
-location,OH,
-location,OK,
-location,OR,
-location,PA,
-location,RI,
-location,SC,
-location,SD,
-location,TN,
-location,TX,
-location,UT,
-location,VT,
-location,VA,
-location,WA,
-location,WV,
-location,WI,
-location,WY,
-location,AS,
-location,DC,
-location,FM,
-location,GU,
-location,MH,
-location,MP,
-location,PW,
-location,PR,
-location,VI,
-type,shrub,
-type,weed,
-type,herb,
-type,vine,
-type,grass,
-type,tree,
-pattern,Dicot,
-pattern,Gymnosperm,
-pattern,Moss,
-pattern,Monocot,
-pattern,Lichen,
-pattern,Fern,
-pattern,Liverwort,
-pattern,Green alga,
-pattern,Horsetail,
-pattern,RA,
-pattern,Lycopod,
-pattern,Quillwort,
-pattern,Whisk-fern,
-flower color,Purple,
-flower color,Yellow,
-flower color,Red,
-flower color,Brown,
-flower color,White,
-flower color,Green,
-flower color,Blue,
-flower color,Orange,
-foliage color,Dark Green,
-foliage color,Gray-Green,
-foliage color,Green,
-foliage color,Yellow-Green,
-foliage color,Red,
-foliage color,White-Gray,
-foliage texture,Medium,
-foliage texture,Fine,
-foliage texture,Coarse,
-fruit color,Brown,
-fruit color,Purple,
-fruit color,Black,
-fruit color,Yellow,
-fruit color,Red,
-fruit color,Green,
-fruit color,Blue,
-fruit color,Orange,
-fruit color,White,
-plant shape,Semi-Erect,
-plant shape,Standing,
-plant shape,Conical,
-plant shape,Rounded,
-plant shape,Prostrate,
-plant shape,Decumbent,
-plant shape,Climbing,
-plant shape,Vase,
-plant shape,Irregular,
-plant shape,Oval,
-plant shape,Columnar,
+question,answer,urlUSState,AK,USState,AL,USState,AZ,USState,AR,USState,CA,USState,CO,USState,CT,USState,DE,USState,FL,USState,GA,USState,HI,USState,ID,USState,IL,USState,IN,USState,IA,USState,KSUSState,KYUSState,LAUSState,MEUSState,MDUSState,MAUSState,MIUSState,MNUSState,MSUSState,MOUSState,MTUSState,NEUSState,NVUSState,NHUSState,NJUSState,NMUSState,NYUSState,NCUSState,NDUSState,OHUSState,OKUSState,ORUSState,PAUSState,RIUSState,SCUSState,SDUSState,TNUSState,TXUSState,UTUSState,VTUSState,VAUSState,WAUSState,WV,USState,WI,USState,WY,USState,AS,USState,DC,USState,FM,USState,GU,USState,MH,USState,MP,USState,PW,USState,PR,USState,VI,Type,Shrub,./pictures/type/shrub.jpgType,Weed/Herb,./pictures/type/forb_herb.jpgType,Vine,./pictures/type/vine.jpgType,Grass,./pictures/type/graminoid.jpgType,Tree,./pictures/type/tree.jpgType,Lichenous,./pictures/type/lichenous.jpgType,Nonvascular,./pictures/nonvascular.jpgType,Subshrub,./pictures/subshrub.jpgPattern,Dicot,./pictures/pattern/dicot.jpgPattern,Gymnosperm,./pictures/pattern/gymnosperm.jpgPattern,Moss,./pictures/pattern/moss.jpgPattern,Monocot,./pictures/pattern/monocot1.jpgPattern,Lichen,./pictures/pattern/lichen.jpgPattern,Fern,./pictures/pattern/fern.jpgPattern,Liverwort,./pictures/pattern/liverwort.jpgPattern,Green Alga,./pictures/pattern/green_alga.jpgPattern,Horsetail,./pictures/pattern/horsetail.jpgPattern,Red Algae,./pictures/pattern/red_algae.jpgPattern,Lycopod,./pictures/pattern/lycopod.jpgPattern,Quillwort,./pictures/pattern/quillwort.jpgPattern,Whisk-fern,./pictures/pattern/whisk-fern.jpgColorFlower,Purple,./pictures/colorflower/purple.jpgColorFlower,Yellow,./pictures/colorflower/yellow.jpgColorFlower,Red,./pictures/colorflower/red.jpgColorFlower,Brown,./pictures/colorflower/brown.jpgColorFlower,White,./pictures/colorflower/white.jpgColorFlower,Green,./pictures/colorflower/green.jpgColorFlower,Blue,./pictures/colorflower/blue.jpgColorFlower,Orange,./pictures/colorflower/orange.jpgTextureFoliage,Medium,./pictures/texture/medium.jpgTextureFoliage,Fine,./pictures/texture/fine.jpgTextureFoliage,Coarse,./pictures/texture/coarse.jpgColorFruitSeed,Brown,./pictures/colorfruitseed/brown.jpgColorFruitSeed,Purple,./pictures/colorfruitseed/purple.pjgColorFruitSeed,Black,./pictures/colorfruitseed/black.pjgColorFruitSeed,Yellow,./pictures/colorfruitseed/yellow.pjgColorFruitSeed,Red,./pictures/colorfruitseed/red.pjgColorFruitSeed,Green,./pictures/colorfruitseed/green.pjgColorFruitSeed,Blue,./pictures/colorfruitseed/blue.pjgColorFruitSeed,Orange,./pictures/colorfruitseed/orange.pjgColorFruitSeed,White,./pictures/colorfruitseed/white.pjgShape,Semi-Erect,./pictures/shape/semi-errect.jpgShape,Standing,./pictures/shape/erect.jpgShape,Conical,./pictures/shape/conical.jpgShape,Rounded,./pictures/shape/rounded3.jpgShape,Prostrate,./pictures/shape/prostrate.jpgShape,Decumbent,./pictures/shape/decumbent1.jpgShape,Climbing,./pictures/shape/climbing.jpgShape,Vase,./pictures/shape/vase1.jpgShape,Irregular,./pictures/shape/irregular3.jpgShape,Oval,./pictures/shape/oval.jpgShape,Columnar,./pictures/shape/columnar.jpg
