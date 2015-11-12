@@ -21,8 +21,18 @@ define(function () {
 
         this.getAnswers = function () {
             var answers = {};
+            
             for (var i = 0; i < widgets.length; i++) {
-                var answer = widgets[i].getAnswer();
+
+                var answer;
+                if (i == 0)
+                {
+                    answer = document.getElementById('mySelect').value;
+                }
+                else
+                {
+                    answer = widgets[i].getAnswer();
+                }
                 if (answer) {
                     answers[widgets[i].getTerm()] = answer;
                 }
@@ -163,13 +173,13 @@ define(function () {
     */
     function SelectQuestionWidget(questions) {
         AbstractQuestionWidget.call(this, questions);
-
+        
         
 
         this.optionsHTML = function (options) {
             var select = document.createElement('select');
+            select.id = "mySelect";
             select.className = 'form-control';
-
             select.appendChild(document.createElement('option'));
             for (var i = 0; i < options.length; i++) {
                 var option = document.createElement('option');
@@ -179,6 +189,9 @@ define(function () {
             }
             return select;
         };
+
+        
+      
     }
 
     return QuestionView;
