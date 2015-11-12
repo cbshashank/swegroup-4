@@ -139,7 +139,7 @@ public class DatabaseComm
 
 
             //---Determine if an object already exists
-            FloraObj AddObj = findPlant_Id(floraObjList, plant_id);
+            FloraObj AddObj = null;//findPlant_Id(floraObjList, plant_id);
             if (AddObj == null)
             {
                 AddObj = new FloraObj();

@@ -164,6 +164,8 @@ define(function () {
     function SelectQuestionWidget(questions) {
         AbstractQuestionWidget.call(this, questions);
 
+        
+
         this.optionsHTML = function (options) {
             var select = document.createElement('select');
             select.className = 'form-control';

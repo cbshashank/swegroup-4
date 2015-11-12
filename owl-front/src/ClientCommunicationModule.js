@@ -19,9 +19,9 @@ define(['jquery', 'ResultDisplay'], function ($, ResultDisplay) {
             data: JSON.stringify(answers), //Data sent to server //"This is a test",
             dataType: "text",
             success: function (in_data) {//On Successful service call
-                alert("input = " + in_data);
+                //alert("input = " + in_data);
                 var result = JSON.parse(in_data);
-//                alert("result=" + result);
+                //                alert("result=" + result);
                 output_display.updateResultDisplay(result);
             },
             error: (function () {
@@ -32,67 +32,57 @@ define(['jquery', 'ResultDisplay'], function ($, ResultDisplay) {
     };
 
     ClientCommunicationModule.prototype.getQuestions = function (onReceive) {
-        $.ajax({
-            url: serverAddress, 		// Location of the service
-            type: "GET", 		//GET or POST or PUT or DELETE verb
-            dataType: "text",
-            success: function (in_data) {//On Successful service call
-                var result = JSON.parse(in_data);
-                onReceive(result);
+        onReceive([
+            {
+                term: 'USState',
+                text: 'Where is the plant in the US?',
+                options: ["AK", "AL", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "AS", "DC", "FM", "GU", "MH", "MP", "PW", "PR", "VI"
+                ]
             },
-            error: (function () {
-                onReceive([
-                    {
-                        term: 'USState',
-                        text: 'Where is the plant in the US?',
-                        options: ["AK", "AL", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "AS", "DC", "FM", "GU", "MH", "MP", "PW", "PR", "VI"
-                        ]
-                    },
-                    {
-                        term: 'Type',
-                        text: 'What type of plant is it?',
-                        options: ["Forb/herb", "Graminoid", "Lichenous", "Nonvascular", "Shrub", "Subshrub", "Tree", "Vine"
-                        ]
-                    },
-                    {
-                        term: 'ColorFlower',
-                        text: 'What color are the flowers?',
-                        options: ["Blue", "Brown", "Green", "Orange", "Purple", "Red", "White", "Yellow"
-                        ]
-                    },
-                    {
-                        term: 'ColorFoliage',
-                        text: 'What color are the leaves?',
-                        options: ["Dark Green", "Green", "Grey-Green", "Red", "White-Gray", "Yellow-Green"
-                        ]
-                    },
-                    {
-                        term: 'ColorFruitSeed',
-                        text: 'What color are the fruit or seeds?',
-                        options: ["Black", "Blue", "Brown", "Green", "Orange", "Purple", "Red", "White", "Yellow"
-                        ]
-                    },
-                    {
-                        term: 'Shape',
-                        text: 'What shape does the plant have?',
-                        options: ["Climbing", "Columnar", "Conical", "Decumbent", "Erect", "Irregular", "Oval", "Prostrate", "Rounded", "Semi-Erect", "Vase"
-                        ]
-                    },
-                    {
-                        term: 'TextureFoliage',
-                        text: 'What kind of texture do the leaves have?',
-                        options: ["Fine", "Medium", "Coarse"
-                        ]
-                    },
-                    {
-                        term: 'Pattern',
-                        text: 'What kind of pattern does the plant have?',
-                        options: ["Dicot", "Fern", "Green Alga", "Gymnosperm", "Hornwort", "Horsetail", "Lichen", "Liverwort", "Lycopod", "Monocot", "Moss", "Quillwort", "Red Algae", "Whisk-fern"
-                        ]
-                    }]);
-            })
-        });
-    };
+            {
+                term: 'Type',
+                text: 'What type of plant is it?',
+                options: ["Forb/herb", "Graminoid", "Lichenous", "Nonvascular", "Shrub", "Subshrub", "Tree", "Vine"
+                ]
+            },
+            {
+                term: 'ColorFlower',
+                text: 'What color are the flowers?',
+                options: ["Blue", "Brown", "Green", "Orange", "Purple", "Red", "White", "Yellow"
+                ]
+            },
+            {
+                term: 'ColorFoliage',
+                text: 'What color are the leaves?',
+                options: ["Dark Green", "Green", "Grey-Green", "Red", "White-Gray", "Yellow-Green"
+                ]
+            },
+            {
+                term: 'ColorFruitSeed',
+                text: 'What color are the fruit or seeds?',
+                options: ["Black", "Blue", "Brown", "Green", "Orange", "Purple", "Red", "White", "Yellow"
+                ]
+            },
+            {
+                term: 'Shape',
+                text: 'What shape does the plant have?',
+                options: ["Climbing", "Columnar", "Conical", "Decumbent", "Erect", "Irregular", "Oval", "Prostrate", "Rounded", "Semi-Erect", "Vase"
+                ]
+            },
+            {
+                term: 'TextureFoliage',
+                text: 'What kind of texture do the leaves have?',
+                options: ["Fine", "Medium", "Coarse"
+                ]
+            },
+            {
+                term: 'Pattern',
+                text: 'What kind of pattern does the plant have?',
+                options: ["Dicot", "Fern", "Green Alga", "Gymnosperm", "Hornwort", "Horsetail", "Lichen", "Liverwort", "Lycopod", "Monocot", "Moss", "Quillwort", "Red Algae", "Whisk-fern"
+                ]
+            }]);
+    }
+
 
     return ClientCommunicationModule;
 });
