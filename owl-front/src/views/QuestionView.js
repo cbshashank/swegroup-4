@@ -13,9 +13,11 @@ define(function () {
 
         this.setModel = function (questions) {
             for (var i = 0; i < questions.length; i++) {
-                var widget = widgetFactory(questions[i]);
-                questionContainer.appendChild(widget.asHTML());
-                widgets.push(widget);
+                if (questions[i].options > 0) {
+                    var widget = widgetFactory(questions[i]);
+                    questionContainer.appendChild(widget.asHTML());
+                    widgets.push(widget);
+                }
             }
         };
 

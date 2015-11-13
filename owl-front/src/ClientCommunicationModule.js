@@ -2,16 +2,17 @@
  * Created by Scott on 10/7/2015.
  */
 
-define(['jquery', 'ResultDisplay'], function ($, ResultDisplay) {
+define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, ResultDisplay, AdminResultDisplay) {
 
     function ClientCommunicationModule() {
     }
 
     var output_display = new ResultDisplay();
+    var admin_display = new AdminResultDisplay();
     var serverAddress = "https://localhost:32297";
 
     ClientCommunicationModule.prototype.sendAnswers = function (answers) {
-        var questionText = document.getElementById('form');
+        //var questionText = document.getElementById('form');
 
         $.ajax({
             url: serverAddress, 		// Location of the service
@@ -33,6 +34,16 @@ define(['jquery', 'ResultDisplay'], function ($, ResultDisplay) {
 
     ClientCommunicationModule.prototype.getQuestions = function (onReceive) {
         onReceive([
+            {
+                term: 'Name',
+                text: 'What is the plant name?',
+                options: []
+            },
+            {
+                term: 'ImageUrl',
+                text: 'Where is the plant image located?',
+                options: []
+            },
             {
                 term: 'USState',
                 text: 'Where is the plant in the US?',
@@ -83,6 +94,27 @@ define(['jquery', 'ResultDisplay'], function ($, ResultDisplay) {
             }]);
     }
 
+    ClientCommunicationModule.prototype.insertData = function (data) {
+        var out = JSON.stringify(data);
+        var in_data = JSON.parse(out);
+        admin_display.updateResultDisplay(in_data);
+        //$.ajax({
+        //    url: serverAddress, 		// Location of the service
+        //    type: "PUT", 		//GET or POST or PUT or DELETE verb
+        //    data: JSON.stringify(data), //Data sent to server //"This is a test",
+        //    dataType: "text",
+        //    success: function (in_data) {//On Successful service call
+        //        //alert("input = " + in_data);
+        //        var result = JSON.parse(in_data);
+        //        //                alert("result=" + result);
+        //        admin_display.updateResultDisplay(result);
+        //    },
+        //    error: (function () {
+        //        alert("Error");
+        //    })	// When Service call fails
+        //});
+
+    };
 
     return ClientCommunicationModule;
 });

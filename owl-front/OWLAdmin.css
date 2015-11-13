@@ -1,0 +1,37 @@
+#logo {
+    float:left;
+    vertical-align: middle;
+}
+
+#header {
+    background-color: #99E699;
+    color: #008000;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 200px;
+    width: 805px;
+    line-height:150px;
+}
+
+#system_inputs {
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 200px;
+    left: 0px;
+    height: 400px;
+    width: 400px;
+    padding: 12px;
+}
+
+#output_display {
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 200px;
+    left: 400px;
+    height: 400px;
+    width: 400px;
+    margin: 5px;
+    padding: 12px;
+    border: 1px solid black;
+}
