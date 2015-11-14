@@ -90,7 +90,7 @@ define(function () {
             tabpanel.id = this.getTerm();
 
             tabpanel.appendChild(questionLabelHTML());
-            tabpanel.appendChild(this.optionsHTML(question.options));
+            tabpanel.appendChild(this.optionsHTML(question.options, question.urls));
             return tabpanel;
         };
 
@@ -113,12 +113,12 @@ define(function () {
             this.setAnswer(value);
         }
 
-        this.optionsHTML = function (options) {
+        this.optionsHTML = function (options, urls) {
             var container = document.createElement('div');
             container.className = "row";
 
             for (var i = 0; i < options.length; i++) {
-                var radio = optionRadioHTML(options[i], this);
+                var radio = optionRadioHTML(options[i], urls[i], this);
                 container.appendChild(radio);
             }
             return container;
@@ -139,7 +139,7 @@ define(function () {
         </div>
         */
 
-        function optionRadioHTML(option, RadioQuestionWidget) {
+        function optionRadioHTML(option, url, RadioQuestionWidget) {
             var container = document.createElement('div');
             container.className = "col-md-2";
 
@@ -152,7 +152,7 @@ define(function () {
             };
 
             var thumbnailImg = document.createElement('img');
-            thumbnailImg.src = urls[i];
+            thumbnailImg.src = url;
             thumbnailImg.alt = option;
 
             var thumbnailCaption = document.createElement('div');
@@ -179,7 +179,7 @@ define(function () {
         
         
 
-        this.optionsHTML = function (options) {
+        this.optionsHTML = function (options, urls) {
             var select = document.createElement('select');
             select.id = "mySelect";
             select.className = 'form-control';
