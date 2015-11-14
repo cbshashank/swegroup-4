@@ -19,10 +19,10 @@ i {
 	font-style: italic;
 }
 
-a#jumbotron:link    {text-decoration:none}
-a#jumbotron:visited {text-decoration:none}
-a#jumbotron:hover   {text-decoration:none}
-a#jumbotron:active  {text-decoration:none}
+a#jumbotron:link    {color:brown; text-decoration:none}
+a#jumbotron:visited {color:brown; text-decoration:none}
+a#jumbotron:hover   {color:brown; text-decoration:none}
+a#jumbotron:active  {color:brown; text-decoration:none}
 
 #banner {
 	background-image: url("./pictures/landscape-background4.jpg");
