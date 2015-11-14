@@ -9,6 +9,18 @@ define(function () {
         var result = "";
         if (input_id == "Color")
             result = "Color:Red";
+        else if (input_id == "Location")
+            result = "Location:Western_US";
+        else if (input_id == "Setting")
+            result = "Setting:Rural";
+        else if (input_id == "Shape")
+            result = "Shape:Vine";
+        else if (input_id == "Texture")
+            result = "Texture:Rough";
+        else if (input_id == "Smell")
+            result = "Smell:Sweet";
+        else if (input_id == "Pattern")
+            result = "Pattern:Clusters";
         return result;
     };
 

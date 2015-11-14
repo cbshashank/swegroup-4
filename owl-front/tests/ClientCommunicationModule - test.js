@@ -21,7 +21,7 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
             dataType: "text",
             success: function (in_data) {//On Successful service call
                 //alert("input = " + in_data);
-                var result = JSON.parse(in_data);
+                var result = JSON.parse(in_data); 
                 //                alert("result=" + result);
                 output_display.updateResultDisplay(result);
             },
@@ -33,14 +33,7 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
     };
 
     ClientCommunicationModule.prototype.getQuestions = function (onReceive) {
- $.ajax({
-            url: serverAddress, 		// Location of the service
-            type: "GET", 		//GET or POST or PUT or DELETE verb
-            dataType: "text",
-            success: function (in_data) {//On Successful service call
-                var result = JSON.parse(in_data);
-                onReceive(result);
-                error: (function () {
+        alert("GetQuestion");
                     onReceive([
                         {
                             term: 'Name',
@@ -100,7 +93,7 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
                             options: ["Dicot", "Fern", "Green Alga", "Gymnosperm", "Hornwort", "Horsetail", "Lichen", "Liverwort", "Lycopod", "Monocot", "Moss", "Quillwort", "Red Algae", "Whisk-fern"
                             ]
                         }]);
-                }
+                
     }
 
     ClientCommunicationModule.prototype.insertData = function (data) {
