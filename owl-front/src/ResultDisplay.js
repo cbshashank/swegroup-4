@@ -7,16 +7,18 @@ define(['jquery'], function($){
     function ResultDisplay(){}
 
     ResultDisplay.prototype.updateResultDisplay = function(input){
-//        $("#output_img").html("<img src=" + input.ImageUrl + "><//img>");
-//        $("#output_desc").html(input.Description);
         var output = "";
-//        alert("size=" + input.length);
-        for (var i = 0; i < input.length; i++) {
-            output = output + "<p><img src=" + input[i].ImageUrl + "><//img><//p>";
-            output = output + "<p>" + input[i].Name + "<//p>";
-//            output = output + "<p>" + "img url = " + input[i].ImageURL + " description = " + input[i].Description+ "<//p>";
-//            $("#output_img").html("img url = " + input.ImageURL);
-//            $("#output_desc").html("description = " + input.Description);
+        var length = input.length;
+        if (length == 0)
+        {   
+            output = "<p><font size=15>No matching plants found.</font></p>";   
+        }
+        else
+        {
+            for (var i = 0; i < input.length; i++) {
+                output = output + "<p><img src=" + input[i].ImageURL + " height=200 width=200></img></p>";
+                output = output + "<p>" + input[i].Name + "</p>";
+            }
         }
         $("#output_desc").html(output);
     };
