@@ -41,7 +41,7 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
                 alert(in_data);
                 var result = JSON.parse(in_data);
                 onReceive(result);
-
+            },
                 error: (function () {
                     onReceive([
                         {
@@ -102,9 +102,7 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
                             options: ["Dicot", "Fern", "Green Alga", "Gymnosperm", "Hornwort", "Horsetail", "Lichen", "Liverwort", "Lycopod", "Monocot", "Moss", "Quillwort", "Red Algae", "Whisk-fern"
                             ]
                         }]);
-                }
-                )
-            }
+                })
         })
     }
 
