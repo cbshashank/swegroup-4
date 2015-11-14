@@ -152,7 +152,7 @@ define(function () {
             };
 
             var thumbnailImg = document.createElement('img');
-            thumbnailImg.src = "...";
+            thumbnailImg.src = urls[i];
             thumbnailImg.alt = option;
 
             var thumbnailCaption = document.createElement('div');
