@@ -1,8 +1,8 @@
 define(function () {
+    var answerButton = document.createElement('button');
 
     function AdminQuestionView() {
         var questionContainer = document.getElementById('system_inputs');
-        var answerButton;
         var widgets = [];
 
         this.setModel = function (questions) {
@@ -18,7 +18,6 @@ define(function () {
                 }
             }
 
-            answerButton = document.createElement('button');
             answerButton.setAttribute('class', "btn btn-default");
             answerButton.innerHTML = "Submit Data";
             //var buttonContainer = document.createElement('p');
@@ -31,9 +30,12 @@ define(function () {
             var answers = {};
             for(var i = 0; i < widgets.length; i++){
                 var answer = widgets[i].getAnswer();
-                if(answer)
+                if(answer) {
                     answers[widgets[i].getTerm()] = answer;
+                }
             }
+            answers["UserName"] = "Admin";
+            answers["Password"] = "Admin";
             return answers;
         };
 
@@ -49,10 +51,10 @@ define(function () {
      */
     function AdminSelectionQuestionWidget(question) {
 
-        var cbox;
+        var questionOptions;
 
         this.getAnswer = function () {
-            return cbox.value;
+            return questionOptions.value;
         };
 
         this.getTerm = function(){
@@ -62,14 +64,14 @@ define(function () {
         this.asHTML = function () {
             var container = document.createElement('p');
             container.innerHTML = questionLabelHTML();
-            cbox = document.createElement('select');
+            questionOptions = document.createElement('select');
             var init_option = optionHTML("");
-            cbox.appendChild(init_option);
+            questionOptions.appendChild(init_option);
             for (var i = 0; i < question.options.length; i++) {
                 var option = optionHTML(question.options[i]);
-                cbox.appendChild(option);
+                questionOptions.appendChild(option);
             }
-            container.appendChild(cbox);
+            container.appendChild(questionOptions);
             return container;
         };
 
@@ -107,12 +109,21 @@ define(function () {
             input = document.createElement('input');
             input.setAttribute('type', 'text');
             input.setAttribute('name', term);
+            input.setAttribute('maxlength','100');
+            input.onkeyup = limitText(input,100);
+            input.onkeydown = limitText(input,100);
             container.appendChild(input);
             return container;
         };
 
         function questionLabelHTML() {
             return term + ": &nbsp";
+        }
+
+        function limitText(limitField, limitNum) {
+            if (limitField.value.length > limitNum) {
+                limitField.value = limitField.value.substring(0, limitNum);
+            }
         }
     }
 
