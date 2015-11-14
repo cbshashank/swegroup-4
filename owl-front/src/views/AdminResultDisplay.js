@@ -11,8 +11,9 @@ define(['jquery'], function($){
 //        alert("size=" + input.length);
 //        for (var i = 0; i < input.length; i++) {
         output = output + "<p><b>Added element: </b><br//>";
+        output = output + "PlantId: " + input.PlantId + "<br//>";
         output = output + "Name: " + input.Name + "<br//>";
-        output = output + "ImageURL: " + input.ImageUrl + "<br//>";
+        output = output + "ImageURL: " + input.ImageURL + "<br//>";
         output = output + "USState: " + input.USState + "<br//>";
         output = output + "Type: " + input.Type + "<br//>";
         output = output + "ColorFlower: " + input.ColorFlower + "<br//>";

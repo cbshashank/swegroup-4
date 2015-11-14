@@ -9,7 +9,8 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
 
     var output_display = new ResultDisplay();
     var admin_display = new AdminResultDisplay();
-    var serverAddress = "https://localhost:32297";
+//    var serverAddress = "https://localhost:32297";
+    var serverAddress = "http://localhost:32296";
 
     ClientCommunicationModule.prototype.sendAnswers = function (answers) {
         //var questionText = document.getElementById('form');
@@ -44,21 +45,21 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
             },
                 error: (function () {
                     onReceive([
-                        {
-                            term: 'PlantId',
-                            text: 'What is the plant ID?',
-                            options: []
-                        },
-                        {
-                            term: 'Name',
-                            text: 'What is the plant name?',
-                            options: []
-                        },
-                        {
-                            term: 'ImageUrl',
-                            text: 'Where is the plant image located?',
-                            options: []
-                        },
+                        //{
+                        //    term: 'PlantId',
+                        //    text: 'What is the plant ID?',
+                        //    options: []
+                        //},
+                        //{
+                        //    term: 'Name',
+                        //    text: 'What is the plant name?',
+                        //    options: []
+                        //},
+                        //{
+                        //    term: 'ImageUrl',
+                        //    text: 'Where is the plant image located?',
+                        //    options: []
+                        //},
                         {
                             term: 'USState',
                             text: 'Where is the plant in the US?',
@@ -112,24 +113,24 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
     }
 
     ClientCommunicationModule.prototype.insertData = function (data) {
-        var out = JSON.stringify(data);
-        var in_data = JSON.parse(out);
-        admin_display.updateResultDisplay(in_data);
-        //$.ajax({
-        //    url: serverAddress, 		// Location of the service
-        //    type: "PUT", 		//GET or POST or PUT or DELETE verb
-        //    data: JSON.stringify(data), //Data sent to server //"This is a test",
-        //    dataType: "text",
-        //    success: function (in_data) {//On Successful service call
-        //        //alert("input = " + in_data);
-        //        var result = JSON.parse(in_data);
-        //        //                alert("result=" + result);
-        //        admin_display.updateResultDisplay(result);
-        //    },
-        //    error: (function () {
-        //        alert("Error");
-        //    })	// When Service call fails
-        //});
+        //var out = JSON.stringify(data);
+        //var in_data = JSON.parse(out);
+        //admin_display.updateResultDisplay(in_data);
+        $.ajax({
+            url: serverAddress, 		// Location of the service
+            type: "PUT", 		//GET or POST or PUT or DELETE verb
+            data: JSON.stringify(data), //Data sent to server //"This is a test",
+            dataType: "text",
+            success: function (in_data) {//On Successful service call
+                //alert("input = " + in_data);
+                var result = JSON.parse(in_data);
+                //                alert("result=" + result);
+                admin_display.updateResultDisplay(result);
+            },
+            error: (function () {
+                alert("Error");
+            })	// When Service call fails
+        });
 
     };
 

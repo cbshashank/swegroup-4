@@ -1,29 +1,34 @@
 define(function () {
-    var answerButton = document.createElement('button');
+    var submissionButton = document.createElement('button');
 
     function AdminQuestionView() {
         var questionContainer = document.getElementById('system_inputs');
         var widgets = [];
 
         this.setModel = function (questions) {
+            this.setTextWidget("PlantId");
+            this.setTextWidget("Name");
+            this.setTextWidget("ImageURL");
             for (var i = 0; i < questions.length; i++) {
-                if (questions[i].options.length > 0) {
+                if (questions[i].options.length > 1) {
                     var widget = new AdminSelectionQuestionWidget(questions[i]);
-                    questionContainer.appendChild(widget.asHTML());
-                    widgets.push(widget);
-                } else {
-                    var textWidget = new AdminTextQuestionWidget(questions[i].term);
-                    questionContainer.appendChild(textWidget.asHTML());
-                    widgets.push(textWidget);
+                    this.appendWidget(widget);
                 }
             }
 
-            answerButton.setAttribute('class', "btn btn-default");
-            answerButton.innerHTML = "Submit Data";
-            //var buttonContainer = document.createElement('p');
-            //buttonContainer.appendChild(answerButton);
-            //questionContainer.appendChild(buttonContainer);
-            questionContainer.appendChild(answerButton);
+            submissionButton.setAttribute('class', "btn btn-default");
+            submissionButton.innerHTML = "Submit Data";
+            questionContainer.appendChild(submissionButton);
+        };
+
+        this.setTextWidget = function(name) {
+            var textWidget = new AdminTextQuestionWidget(name);
+            this.appendWidget(textWidget);
+        };
+
+        this.appendWidget = function(widget) {
+            questionContainer.appendChild(widget.asHTML());
+            widgets.push(widget);
         };
 
         this.getAnswers = function () {
@@ -40,7 +45,7 @@ define(function () {
         };
 
         this.insertData = function (action) {
-            answerButton.addEventListener('click', action);
+            submissionButton.addEventListener('click', action);
         };
     }
 
@@ -105,22 +110,22 @@ define(function () {
 
         this.asHTML = function () {
             var container = document.createElement('p');
-            container.innerHTML = questionLabelHTML();
+            container.innerHTML = term + ": &nbsp";
             input = document.createElement('input');
             input.setAttribute('type', 'text');
             input.setAttribute('name', term);
             input.setAttribute('maxlength','100');
-            input.onkeyup = limitText(input,100);
-            input.onkeydown = limitText(input,100);
+            input.onkeyup = this.limitText(input,100);
+            input.onkeydown = this.limitText(input,100);
             container.appendChild(input);
             return container;
         };
 
-        function questionLabelHTML() {
-            return term + ": &nbsp";
-        }
+        //this.questionLabelHTML = function() {
+        //    return term + ": &nbsp";
+        //};
 
-        function limitText(limitField, limitNum) {
+        this.limitText = function(limitField, limitNum) {
             if (limitField.value.length > limitNum) {
                 limitField.value = limitField.value.substring(0, limitNum);
             }

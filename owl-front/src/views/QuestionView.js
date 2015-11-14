@@ -14,7 +14,7 @@ define(function () {
         this.setModel = function (questions) {
             for (var i = 0; i < questions.length; i++) {
                 
-                if (questions[i].options.length > 0) {
+                if (questions[i].options.length > 1) {
                     var widget = widgetFactory(questions[i]);
                     questionContainer.appendChild(widget.asHTML());
                     widgets.push(widget);
