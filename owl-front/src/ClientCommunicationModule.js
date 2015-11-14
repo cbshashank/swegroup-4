@@ -33,13 +33,15 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
     };
 
     ClientCommunicationModule.prototype.getQuestions = function (onReceive) {
- $.ajax({
+        $.ajax({
             url: serverAddress, 		// Location of the service
             type: "GET", 		//GET or POST or PUT or DELETE verb
             dataType: "text",
             success: function (in_data) {//On Successful service call
+                alert(in_data);
                 var result = JSON.parse(in_data);
                 onReceive(result);
+
                 error: (function () {
                     onReceive([
                         {
@@ -101,6 +103,9 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
                             ]
                         }]);
                 }
+                )
+            }
+        })
     }
 
     ClientCommunicationModule.prototype.insertData = function (data) {

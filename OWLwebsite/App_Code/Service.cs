@@ -58,12 +58,37 @@ public class Service :  IHttpHandler
                 break;
         }
     }
-
-
     
+
+    private List<DisplayTestObj> FillDispList()
+    {
+        List<DisplayTestObj> DispList = new List<DisplayTestObj>();
+
+        DispList.Add(new DisplayTestObj("Name", "What is the plant Name?", new string[] { "" }));
+        DispList.Add(new DisplayTestObj("ImageURL", "Image URL", new string[] { "" }));
+        DispList.Add(new DisplayTestObj("USState", "Where is the plant in the US",
+            new string[] { "AK", "AL", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY",
+                "LA", "ME", "MD","MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK",
+                "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA",
+                "WA", "WV", "WI", "WY", "AS", "DC", "FM", "GU", "MH", "MP", "PW", "PR", "VI" }));
+        DispList.Add(new DisplayTestObj("Type", "What type of plant is it?", new string[] { "Forb/herb", "Graminoid", "Lichenous", "Nonvascular", "Shrub", "Subshrub", "Tree", "Vine" }));
+        DispList.Add(new DisplayTestObj("ColorFlower", "What color are the flowers?", new string[] { "Blue", "Brown", "Green", "Orange", "Purple", "Red", "White", "Yellow" }));
+        DispList.Add(new DisplayTestObj("ColorFoliage", "What color are the leaves?", new string[] { "Dark Green", "Green", "Grey-Green", "Red", "White-Gray", "Yellow-Green" }));
+        DispList.Add(new DisplayTestObj("ColorFruitSeed", "What color are the fruit or seeds?", new string[] { "Black", "Blue", "Brown", "Green", "Orange", "Purple", "Red", "White", "Yellow" }));
+        DispList.Add(new DisplayTestObj("Shape", "What shape does the plant have?", new string[] { "Climbing", "Columnar", "Conical", "Decumbent", "Erect", "Irregular", "Oval", "Prostrate", "Rounded", "Semi-Erect", "Vase" }));
+        DispList.Add(new DisplayTestObj("TextureFoliage", "What kind of texture do the leaves have?", new string[] { "Fine", "Medium", "Coarse" }));
+        DispList.Add(new DisplayTestObj("Pattern", "What kind of pattern does the plant have?", new string[] { "Dicot", "Fern", "Green Alga", "Gymnosperm", "Hornwort", "Horsetail", "Lichen", "Liverwort", "Lycopod", "Monocot", "Moss", "Quillwort", "Red Algae", "Whisk-fern" }));
+        return DispList;
+    }
+
+
     public void READ(HttpContext context)
     {
-   
+        List<DisplayTestObj> DispList = FillDispList();
+        context.Response.Write(JsonConvert.SerializeObject(DispList));
+
+
+
     }
 
     public void DELETE(HttpContext context)
