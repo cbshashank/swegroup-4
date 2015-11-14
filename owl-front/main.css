@@ -36,6 +36,11 @@ a#jumbotron:active  {text-decoration:none}
 	width:100%;
 }
 
+/*a#thumbnail:link    {text-decoration:none}
+a#thumbnail:visited {text-decoration:none}
+a#thumbnail:hover   {text-decoration:none}
+a#thumbnail:active  {text-decoration:none}*/
+
 #footer {
 	color:white;
 }
