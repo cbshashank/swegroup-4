@@ -45,6 +45,11 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
                 error: (function () {
                     onReceive([
                         {
+                            term: 'PlantId',
+                            text: 'What is the plant ID?',
+                            options: []
+                        },
+                        {
                             term: 'Name',
                             text: 'What is the plant name?',
                             options: []
