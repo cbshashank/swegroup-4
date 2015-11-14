@@ -491,4 +491,83 @@ public class DatabaseComm
 
     }
 
+    public List<Question> TransferQuestionAns()
+    {
+        List<Question> questions = new List<Question>();
+
+        //---set up the database connection
+        SqlConnection conn = new SqlConnection(conn_string);
+        conn.Open();
+
+        // build sql command (do a sort in the question and answers)
+        SqlCommand command = new SqlCommand("SELECT question, question_text, answer, url from questionans order by question, answer");
+
+        // execute sql command -> return object
+        SqlDataReader reader = command.ExecuteReader();
+
+        // check if object has rows
+        if (reader.HasRows)
+        {
+            // keep track of the previous and current question
+            string prev_question = "";
+            string curr_question = "";
+
+            // initialize
+            Question q = new Question("", "", new List<string>(), new List<string>());
+
+            // if so, while reading row after row of SQL table
+            while (reader.Read())
+            {
+                // question column in as curr_question
+                curr_question = reader.GetString(reader.GetOrdinal("question"));
+
+                // if the curr_question is different from the prev_question
+                // when you are seeing a new question
+                if (curr_question != prev_question)
+                {
+                    if (prev_question == "") // at start of SQL table
+                    {
+                        // create a new question object
+                        q = new Question(curr_question, reader.GetString(reader.GetOrdinal("question_text")), new List<string>(), new List<string>());
+                        // put in question (= term)
+                        q.options.Add(reader.GetString(reader.GetOrdinal("answer")));
+                        q.urls.Add(reader.GetString(reader.GetOrdinal("url")));
+
+                        // then make prev_question = curr_question
+                        prev_question = curr_question;
+                    }
+                    else // in middle of SQL table
+                    {
+                        // add the last question
+                        questions.Add(q);
+
+                        // create a new question object
+                        q = new Question(curr_question, reader.GetString(reader.GetOrdinal("question_text")), new List<string>(), new List<string>());
+                        q.options.Add(reader.GetString(reader.GetOrdinal("answer")));
+                        q.urls.Add(reader.GetString(reader.GetOrdinal("url")));
+
+                        // then make prev_question = curr_question
+                        prev_question = curr_question;
+                    }
+
+                }
+                else
+                {
+                    // curr_question == prev_question
+
+                    // if not, continue adding to the curr_question's set of
+                    // options and those options' urls
+                    q.options.Add(reader.GetString(reader.GetOrdinal("answer")));
+                    q.urls.Add(reader.GetString(reader.GetOrdinal("url")));
+                }
+            }
+
+            // add the last question object to the list of questions
+            questions.Add(q);
+        }
+
+        command.Connection.Close();
+
+        return questions;
+    }
 }

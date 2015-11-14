@@ -84,11 +84,19 @@ public class Service :  IHttpHandler
 
     public void READ(HttpContext context)
     {
-        List<DisplayTestObj> DispList = FillDispList();
-        context.Response.Write(JsonConvert.SerializeObject(DispList));
+        List<Question> QuestionAnsList = new List<Question>();
 
+        try
+        {
 
-
+            QuestionAnsList = DAO.TransferQuestionAns();
+            context.Response.Write(JsonConvert.SerializeObject(QuestionAnsList));
+        }
+        catch (Exception e)
+        {
+            //---Do logging here about message - could be a post message for the server, could be a badly formed JSON
+            context.Response.Write("Invalid Message!");
+        }
     }
 
     public void DELETE(HttpContext context)
