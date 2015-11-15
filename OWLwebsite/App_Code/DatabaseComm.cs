@@ -36,9 +36,9 @@ public class DatabaseComm
         command.Connection = conn;
 
 
-        if (string.IsNullOrEmpty(admLog.UserName) && string.IsNullOrEmpty(admLog.Password))
+        if (!(string.IsNullOrEmpty(admLog.UserName) && string.IsNullOrEmpty(admLog.Password)))
         {
-            sqlQueryString = "SELECT *  from AdminTb";
+            sqlQueryString = "SELECT username,password  from AdminTb";
 
 
 
@@ -52,8 +52,9 @@ public class DatabaseComm
             if (ReturnResult.HasRows)
             {
                 ReturnResult.Read();
-                if
-                  (ReturnResult["username"].ToString() == admLog.UserName && ReturnResult["password"].ToString() == admLog.Password)
+                string username = ReturnResult["username"].ToString().Trim();
+                string password = ReturnResult["password"].ToString().Trim();
+                if(username == admLog.UserName && password == admLog.Password)
                     result = "Authenticated";
                 return (result);
             }
@@ -437,20 +438,22 @@ public class DatabaseComm
             // check user name & password here ok or not
             //using parametirized query
             string sqlInserString =
-               "INSERT INTO plant (plant_id,Name, Color_flower,color_foliage,color_fruit_seed,texture_foliage, shape, pattern,image) VALUES (@plant_id,@Name, @Color_flower,@color_foliage,@color_fruit_seed,@texture_foliage,@foliage,@shape,@pattern,@image)";
+               "INSERT INTO plant (plant_id,Name, Color_flower,color_foliage,color_fruit_seed,texture_foliage, shape, pattern,image) VALUES (@plant_id,@Name, @Color_flower,@color_foliage,@color_fruit_seed,@texture_foliage,@shape,@pattern,@image)";
 
             SqlConnection conn = new SqlConnection(conn_string);
             SqlCommand command = new SqlCommand();
             command.Connection = conn;
             command.Connection.Open();
             command.CommandText = sqlInserString;
+            if (FLO.ColorFoliage == null)
+                FLO.ColorFoliage = "";
 
             SqlParameter plant_id = new SqlParameter("@plant_id", getplantid(FLO)); 
             SqlParameter Name = new SqlParameter("@Name", FLO.Name);
             SqlParameter Color_flower = new SqlParameter("@Color_flower", FLO.ColorFlower);
             SqlParameter Color_foliage = new SqlParameter("@Color_foliage", FLO.ColorFoliage);
             SqlParameter Color_fruit_seed = new SqlParameter("@color_fruit_seed", FLO.ColorFruitSeed);
-            SqlParameter texture = new SqlParameter("@texture", FLO.TextureFoliage);
+            SqlParameter texture = new SqlParameter("@texture_foliage", FLO.TextureFoliage);
             SqlParameter shape = new SqlParameter("@shape", FLO.Shape);
             SqlParameter pattern = new SqlParameter("@pattern", FLO.Pattern);
             SqlParameter image = new SqlParameter("@image", FLO.ImageURL);
