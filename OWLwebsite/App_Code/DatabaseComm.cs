@@ -501,6 +501,7 @@ public class DatabaseComm
 
         // build sql command (do a sort in the question and answers)
         SqlCommand command = new SqlCommand("SELECT question, question_text, answer, url from questionans order by question, answer");
+        command.Connection = conn;
 
         // execute sql command -> return object
         SqlDataReader reader = command.ExecuteReader();
