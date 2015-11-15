@@ -1,8 +1,8 @@
 define(function () {
 
-    function ResultView() {
-        this.imageContainer = document.getElementById("imageContainer");
-        this.descriptionContainer = document.getElementById("descriptionContainer");
+    function ResultView(imageContainer, descriptionContainer) {
+        this.imageContainer = document.getElementById("imageContainer") || imageContainer;
+        this.descriptionContainer = document.getElementById("descriptionContainer") || descriptionContainer;
     }
 
     ResultView.prototype.setModel = function(model){
