@@ -18,8 +18,8 @@ require.config({
 //Add the path to your specs bellow
 require(['jasmine-boot'], function () {
     var specs = [
-        '../tests/specs/OWL-front-spec'
-//        'specs/my-library-specs'
+        '../tests/specs/OWL-front-spec',
+        '../tests/specs/Result-spec'
     ];
     require(specs, function(){
         window.onload();
