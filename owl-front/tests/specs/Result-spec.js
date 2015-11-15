@@ -13,14 +13,12 @@ define(['controllers/ResultController', 'views/ResultView'], function (ResultCon
                 new ResultController(view, COMM);
                 expect(COMM.onResultReceive).not.toBeNull();
             });
-
             it('onResultReceive should set results to view', function(){
                 var view = new ResultView();
                 var controller = new ResultController(view, COMM);
                 COMM.onResultReceive(RESULTS);
                 expect(view.model).not.toBeNull();
             });
-
         });
     });
 });

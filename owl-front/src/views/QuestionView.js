@@ -1,39 +1,35 @@
 define(function () {
 
     /**
-    * View for a  group of questions. Constructs the answer object from all the user answers
-    * @constructor
-    */
+     * View for a  group of questions. Constructs the answer object from all the user answers
+     * @constructor
+     */
     function QuestionView() {
         var questionContainer = document.getElementById('system_inputs');
         questionContainer.className = 'tab-content';
 
         var answerButton = document.getElementById('answerButton');
+        var resetButton = document.getElementById('resetButton');
         var widgets = [];
 
         this.setModel = function (questions) {
             for (var i = 0; i < questions.length; i++) {
-                
-                if (questions[i].options.length > 1) {
-                    var widget = widgetFactory(questions[i]);
-                    questionContainer.appendChild(widget.asHTML());
-                    widgets.push(widget);
-                }
+                var widget = widgetFactory(questions[i]);
+                questionContainer.appendChild(widget.asHTML());
+                widgets.push(widget);
             }
         };
 
         this.getAnswers = function () {
             var answers = {};
-            
+
             for (var i = 0; i < widgets.length; i++) {
 
                 var answer;
-                if (widgets[i].getTerm() == "USState")
-                {
+                if (widgets[i].getTerm() == "USState") {
                     answer = document.getElementById('mySelect').value;
                 }
-                else
-                {
+                else {
                     answer = widgets[i].getAnswer();
                 }
                 if (answer) {
@@ -46,13 +42,18 @@ define(function () {
         this.onAnswer = function (action) {
             answerButton.addEventListener('click', action);
         };
+
+        resetButton.addEventListener('click', function () {
+            for (var i = 0; i < widgets.length; i++)
+                widgets[i].setAnswer(null);
+        });
     }
 
     /**
-    * This function selects the proper OptionWidget for a question
-    * (ex: radioButtons, listSelects, imageButtons, ...)
-    * @param question
-    */
+     * This function selects the proper OptionWidget for a question
+     * (ex: radioButtons, listSelects, imageButtons, ...)
+     * @param question
+     */
     function widgetFactory(question) {
         switch (question.term) {
             case 'USState':
@@ -63,10 +64,10 @@ define(function () {
     }
 
     /***
-    * Widget for a single question. Should be extended for supporting different option widgets.
-    * @param question
-    * @constructor
-    */
+     * Widget for a single question. Should be extended for supporting different option widgets.
+     * @param question
+     * @constructor
+     */
     function AbstractQuestionWidget(question) {
 
         var answer;
@@ -77,7 +78,7 @@ define(function () {
 
         this.setAnswer = function (value) {
             answer = value;
-        }
+        };
 
         this.getTerm = function () {
             return question.term;
@@ -102,16 +103,16 @@ define(function () {
     }
 
     /**
-    * Display options as a group of radio buttons
-    * @constructor
-    */
+     * Display options as a group of radio buttons
+     * @constructor
+     */
     function RadioQuestionWidget(questions) {
         AbstractQuestionWidget.call(this, questions);
 
 
         this.setMyAnswer = function (value) {
             this.setAnswer(value);
-        }
+        };
 
         this.optionsHTML = function (options, urls) {
             var container = document.createElement('div');
@@ -125,19 +126,19 @@ define(function () {
         };
 
         /* Create options as
-        // CODE for enclosing thumbnails in ROW in function RadioQuestionWidget(questions)
-        <div class="row">
-        // Code for creating THUMBNAILS is in function optionRadioHTML(option)
-        <div class="col-sm-6 col-sm-1">
-        <div class="thumbnail">
-        <img src="..." alt="...">
-        <div class="caption">
-        <p>...</p>
-        </div>
-        </div>
-        </div>
-        </div>
-        */
+         // CODE for enclosing thumbnails in ROW in function RadioQuestionWidget(questions)
+         <div class="row">
+         // Code for creating THUMBNAILS is in function optionRadioHTML(option)
+         <div class="col-sm-6 col-sm-1">
+         <div class="thumbnail">
+         <img src="..." alt="...">
+         <div class="caption">
+         <p>...</p>
+         </div>
+         </div>
+         </div>
+         </div>
+         */
 
         function optionRadioHTML(option, url, RadioQuestionWidget) {
             var container = document.createElement('div');
@@ -171,13 +172,12 @@ define(function () {
     }
 
     /**
-    * Displays options as a select list
-    * @constructor
-    */
+     * Displays options as a select list
+     * @constructor
+     */
     function SelectQuestionWidget(questions) {
         AbstractQuestionWidget.call(this, questions);
-        
-        
+
 
         this.optionsHTML = function (options, urls) {
             var select = document.createElement('select');
@@ -193,8 +193,7 @@ define(function () {
             return select;
         };
 
-        
-      
+
     }
 
     return QuestionView;
