@@ -28,7 +28,7 @@ define(function () {
             for (var i = 0; i < widgets.length; i++) {
 
                 var answer;
-                if (i == 0)
+                if (widgets[i].getTerm() == "USState")
                 {
                     answer = document.getElementById('mySelect').value;
                 }
