@@ -11,12 +11,12 @@ define(['controllers/ResultController', 'views/ResultView'], function (ResultCon
             it('Should set onResultReceive callback at ClientCommunicationModule', function(){
                 var view = new ResultView();
                 new ResultController(view, COMM);
-                expect(COMM.onResultReceive).not.toBeNull();
+                expect(COMM.onResultReceived).not.toBeNull();
             });
             it('onResultReceive should set results to view', function(){
                 var view = new ResultView();
                 var controller = new ResultController(view, COMM);
-                COMM.onResultReceive(RESULTS);
+                COMM.onResultReceived(RESULTS);
                 expect(view.model).not.toBeNull();
             });
         });

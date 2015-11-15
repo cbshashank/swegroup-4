@@ -10,20 +10,14 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
     var admin_display = new AdminResultDisplay();
     var serverAddress = "https://localhost:32297";
 
+    ClientCommunicationModule.prototype.onResultReceived = function(result){};
+
     ClientCommunicationModule.prototype.sendAnswers = function (answers) {
-        $.ajax({
-            url: serverAddress,            // Location of the service
-            type: "POST",                  //GET or POST or PUT or DELETE verb
-            data: JSON.stringify(answers), //Data sent to server
-            dataType: "text",
-            success: function (in_data) {  //On Successful service call
-                var result = JSON.parse(in_data);
-                output_display.updateResultDisplay(result);
-            },
-            error: (function () {          //When Service call fails
-                alert("Error");
-            })
-        });
+        var result = {
+            ImageURL: "http://companionplants.com/images/small-plant2.jpg",
+            Description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor, nibh eget fermentum elementum, orci magna vulputate neque, nec bibendum eros diam eget erat. Suspendisse facilisis libero ante, vel feugiat urna malesuada volutpat. Sed eu leo nisl. Nulla id blandit nisi. Curabitur ut mollis dolor, vitae posuere metus. Cras sed tristique magna. Vivamus suscipit, nulla et sagittis efficitur, diam nisl aliquet tortor, non placerat nulla libero eget leo. Donec feugiat nisl sed neque semper fermentum. Aliquam erat volutpat."
+        };
+        this.onResultReceived(result);
     };
 
     ClientCommunicationModule.prototype.getQuestions = function (onReceive) {

@@ -1,7 +1,7 @@
 define(function () {
 
     function ResultController(view, communication) {
-        communication.onResultReceive = view.setModel.bind(view);
+        communication.onResultReceived = view.setModel.bind(view);
     }
 
     return ResultController;
