@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f76047b-5fa0-4860-89b2-e6505ba05364" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OWL.html" afterPath="$PROJECT_DIR$/OWL.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/QuestionView.js" afterPath="$PROJECT_DIR$/src/views/QuestionView.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/specs/Result-spec.js" afterPath="$PROJECT_DIR$/tests/specs/Result-spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="owl-front.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,8 +26,8 @@
       <file leaf-file-name="QuestionView.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/QuestionView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.142623">
-              <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+            <state vertical-scroll-proportion="-3.957377">
+              <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -723,8 +720,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/QuestionView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.142623">
-          <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+        <state vertical-scroll-proportion="-3.957377">
+          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
           <folding />
         </state>
       </provider>

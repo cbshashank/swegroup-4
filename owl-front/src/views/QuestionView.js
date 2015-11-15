@@ -24,17 +24,9 @@ define(function () {
             var answers = {};
 
             for (var i = 0; i < widgets.length; i++) {
-
-                var answer;
-                if (widgets[i].getTerm() == "USState") {
-                    answer = document.getElementById('mySelect').value;
-                }
-                else {
-                    answer = widgets[i].getAnswer();
-                }
-                if (answer) {
+                var answer = widgets[i].getAnswer();
+                if (answer)
                     answers[widgets[i].getTerm()] = answer;
-                }
             }
             return answers;
         };
@@ -176,8 +168,8 @@ define(function () {
      * @constructor
      */
     function SelectQuestionWidget(questions) {
-        AbstractQuestionWidget.call(this, questions);
 
+        AbstractQuestionWidget.call(this, questions);
 
         this.optionsHTML = function (options, urls) {
             var select = document.createElement('select');
@@ -190,10 +182,15 @@ define(function () {
                 option.innerHTML = options[i];
                 select.appendChild(option);
             }
+
+            var that = this;
+            select.onchange = function(){
+                var selectedOption = select.options[select.selectedIndex].value;
+                that.setAnswer(selectedOption);
+            };
+
             return select;
         };
-
-
     }
 
     return QuestionView;
