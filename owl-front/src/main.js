@@ -1,5 +1,5 @@
 require([
-        'ClientCommunicationModule',//'MockClientCommunicationModule',
+        'ClientCommunicationModule',//'MockClientCommunicationModule',//
         'controllers/QuestionController', 'views/QuestionView',
         'controllers/ResultController', 'views/ResultView'
     ],

@@ -13,11 +13,11 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
     ClientCommunicationModule.prototype.onResultReceived = function(result){};
 
     ClientCommunicationModule.prototype.sendAnswers = function (answers) {
-        var result = {
+        this.onResultReceived({
             ImageURL: "http://companionplants.com/images/small-plant2.jpg",
-            Description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor, nibh eget fermentum elementum, orci magna vulputate neque, nec bibendum eros diam eget erat. Suspendisse facilisis libero ante, vel feugiat urna malesuada volutpat. Sed eu leo nisl. Nulla id blandit nisi. Curabitur ut mollis dolor, vitae posuere metus. Cras sed tristique magna. Vivamus suscipit, nulla et sagittis efficitur, diam nisl aliquet tortor, non placerat nulla libero eget leo. Donec feugiat nisl sed neque semper fermentum. Aliquam erat volutpat."
-        };
-        this.onResultReceived(result);
+            GoogleURL: "https://en.wikipedia.org/wiki/Carnivorous_plant",
+            GoogleImagesURL:"https://en.wikipedia.org/wiki/Carnivorous_plant"
+        });
     };
 
     ClientCommunicationModule.prototype.getQuestions = function (onReceive) {
@@ -41,7 +41,6 @@ define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, Res
                 term: 'USState',
                 text: 'Where is the plant in the US?',
                 options: ["AK", "AL", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "AS", "DC", "FM", "GU", "MH", "MP", "PW", "PR", "VI"]
-
             },
             {
                 term: 'Type',
