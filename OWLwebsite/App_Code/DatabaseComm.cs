@@ -499,7 +499,7 @@ public class DatabaseComm
             if (FLO.Type.Length > 20)
                 FLO.Type = FLO.Type.Substring(0, 20);
             if (FLO.Location.Length > 20)
-                FLO.Location = FLO.Location.Substring(0, 20);
+                FLO.Location = FLO.Location.Substring(0, 20); 
 
             plantid = getplantid(FLO);
             SqlParameter plant_id = new SqlParameter("@plant_id",plantid ); 
@@ -561,7 +561,7 @@ public class DatabaseComm
         command.CommandText = sqlInserString;
 
         SqlParameter plant_id = new SqlParameter("@plant_id", plantid);
-        SqlParameter Type = new SqlParameter("@location", type);
+        SqlParameter Type = new SqlParameter("@type", type);
 
         command.Parameters.AddRange(new SqlParameter[] { plant_id, Type });
         command.ExecuteNonQuery();
@@ -587,10 +587,14 @@ public class DatabaseComm
                 plant_id});
         command.ExecuteNonQuery();
         command.Connection.Close();
+        Deletetype(FLO.PlantId);
+        Deletelocation(FLO.PlantId);
+
+
 
     }
 
-    public void Deletetype(FloraObj FLO) // delete for plant table.
+    public void Deletetype(string plantid) // delete for plant table.
     {
         //using parametirized query
         string sqlInserString = "DELETE  FROM type WHERE plant_id=@plant_id ";
@@ -611,7 +615,7 @@ public class DatabaseComm
 
     }
 
-    public void Deletelocation(FloraObj FLO) // delete for plant table.
+    public void Deletelocation(string plantid) // delete for plant table.
     {
         //using parametirized query
         string sqlInserString = "DELETE  FROM location WHERE plant_id=@plant_id ";

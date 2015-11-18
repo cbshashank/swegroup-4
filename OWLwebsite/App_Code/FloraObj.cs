@@ -18,6 +18,7 @@ public class FloraObj
     private string imageURL;
     private string description;
     private string us_state;
+    private string location;
     private string type;
     private string googleURL;
     private string googleImageURL;
@@ -54,7 +55,17 @@ public class FloraObj
         set
         { password = value; }
     }
-
+    public string Location
+    {
+        get
+        {
+            return location;
+        }
+        set
+        {
+           location = value;
+        }
+    }
 
     /// <summary>
     /// The primary key and plant id, typically a three character string
