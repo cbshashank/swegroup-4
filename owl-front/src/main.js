@@ -1,3 +1,12 @@
-require(['controllers/QuestionController', 'views/QuestionView', 'ClientCommunicationModule'], function (Controller, View, ClientCommunicationModule) {
-    new Controller(new View(), new ClientCommunicationModule());
-});
+require([
+        'ClientCommunicationModule',//'MockClientCommunicationModule',//
+        'controllers/QuestionController', 'views/QuestionView',
+        'controllers/ResultController', 'views/ResultView'
+    ],
+    function (ClientCommunicationModule,
+              QuestionController, QuestionView,
+              ResultController, ResultView) {
+        var comm = new ClientCommunicationModule();
+        new QuestionController(new QuestionView(), comm);
+        new ResultController(new ResultView(), comm);
+    });

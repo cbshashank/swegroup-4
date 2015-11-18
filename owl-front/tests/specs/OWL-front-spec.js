@@ -48,7 +48,6 @@ define( ['SystemInputs','ClientCommunicationModule','ResultDisplay'], function(S
         it('outputs a selected color', function() {
             expect(input.getInput("Color")).toEqual("Color:Red");
         });
-
     });
 
 });
