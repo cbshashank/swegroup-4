@@ -1,6 +1,6 @@
 /* This is the CSS file for styling all of the websites */
 body{
-	background-color: #99E699;
+	background-color:#99E699;
 	/*background-image: url("./pictures/landscape-background4.jpg");
 	background-repeat: no-repeat;
     background-attachment: fixed;
@@ -8,7 +8,11 @@ body{
 }
 
 h1 {
-	color: brown;
+	color:brown;
+}
+h2 {
+	color:brown;
+	text-align:center;
 }
 
 h3 {
@@ -23,13 +27,31 @@ i {
 	font-style: italic;
 }
 
+/*.navbar-header {
+    float: left;
+    padding-right: 40px;
+    padding-bottom: 6px;
+}*/
+
+.navbar-header {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 40px;
+  padding-bottom: 7px;
+}
+
+#page-header {
+	background-color:#046405;
+}
+
 a#jumbotron:link    {color:brown; text-decoration:none}
 a#jumbotron:visited {color:brown; text-decoration:none}
 a#jumbotron:hover   {color:brown; text-decoration:none}
 a#jumbotron:active  {color:brown; text-decoration:none}
 
 #banner {
-	background-image: url("./pictures/landscape-background4.jpg");
+	background-image: url("./pictures/landscape-background6.jpg");
 	background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
@@ -40,13 +62,24 @@ a#jumbotron:active  {color:brown; text-decoration:none}
 	width:100%;
 }
 
-/*a#thumbnail:link    {text-decoration:none}
+a#thumbnail:link    {text-decoration:none}
 a#thumbnail:visited {text-decoration:none}
 a#thumbnail:hover   {text-decoration:none}
-a#thumbnail:active  {text-decoration:none}*/
+a#thumbnail:active  {text-decoration:none}
+
+.section {
+    outline: 1px solid gray;
+    border-style: outset;
+}
+
+/*#results_display {
+	outline: 1px solid gray;
+    border-style: outset;
+}*/
 
 #footer {
 	color:white;
+	background-color:#046405;
 }
 
 #buttons {

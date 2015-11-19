@@ -13,12 +13,15 @@
 <body>
     <!-- OWL ICON -->
     <div id="page-header">
-        <div>
+        <div id="navigation-bar">
             <nav class="navbar navbar-inverse">
               <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">OWL</a>
+                    <a class="navbar-brand" href="#">
+                        <img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:33px;height:42px;position:absolute;top: 10px;left:22px;"
+                        class="img-rounded">
+                    </a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -50,7 +53,8 @@
         <div id="banner" class="jumbotron">
             <a href="./OWL.html" id="jumbotron"><h1>Online Wildlife Library</h1></a>
 
-            <h3>Try Our Interactive Identifier to Discover and Learn about Plants</h3>
+            <h2>Try Our Interactive Identifier</h2>
+            <h2>to Discover and Learn about Plants</h2>
         </div>
     </div>
 </div>
@@ -64,16 +68,16 @@
 <div class="container-fluid">
 <div class="row">
     <div class="col-xs-1 col-sm-1"></div>
-    <div class="col-xs-5 col-sm-5">
+    <div class="col-xs-6 col-sm-6">
         <h3>Use our interactive plant identifier to quickly and easily work out what plant you saw.</h3>
     </div>
 </div>
     <div class="container">
-        <div id="search">
+        <div id="search" class="section">
             <h1>Your Search</h1>
 
             <!-- big navigation bar for each search question -->
-            <div>
+            
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation"><a href="#USState" aria-controls="USState" role="tab" data-toggle="tab">Location</a>
@@ -94,9 +98,16 @@
                                      </li>
                                  </ul>
 
+
                                  <!-- Tab panes -->
                                  <!-- Name and picture for each question-value -->
                                  <div id="system_inputs"></div>
+                                 <br/>
+                                 <br/>
+                                 <br/>
+                                 <br/>
+                                 <br/>
+                                 <br/>
                                  <br/>
 
                                  <div id="buttons">
@@ -105,14 +116,24 @@
                                     <!-- submit button -->
                                     <input class="btn btn-default" type="submit" value="Submit" id="answerButton">
                                 </div>
+                                <br/>
                             </div>
 
-                            <div id="results_display">
+                            <div id="results_display" class="section">
                                 <h1>Your Results</h1>
                                 <!--  Value picture + Name -->
                                 <div id="imageContainer"></div>
                                 <div id="googleResults"></div>
                                 <div id="googleImages"></div>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
                             </div>
                         </div>
 
@@ -124,12 +145,13 @@
                             <!-- Right half - Google image safe search -->
 
                         </div>
-
+                        <br/>
 
                         <div id="footer" class="row">
-
-                            <div id="footer1" class="col-sm-3">
-                                <img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:90px;height:114px"
+                            <div class="col-xs-1">
+                            </div>
+                            <div id="footer1" class="col-xs-2">
+                                <img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:90px;height:114px;"
                                 class="img-rounded">
                             </div>
 
@@ -151,7 +173,7 @@
                                 <p><a href="./ReportBug.html">Report a Bug</a></p>
                             </div>
 
-                            <div id="footer4" class="col-xs-3">
+                            <div id="footer4" class="col-sm-3">
                                 <p>Follow</p>
                                 <a href="https://www.facebook.com/USDA/?fref=ts"><img
                                     src="./pictures/LOGOS/Facebook/logos-and-badges_f-logo_online/png/FB-f-Logo__blue_50.png"
@@ -165,7 +187,7 @@
 
                                         </div>
 
-                                        <div id="admin" class="col-sm-1">
+                                        <div id="admin" class="col-xs-1">
                                             <div class="btn-group" role="group" aria-label="...">
                                                 <button type="button" class="btn btn-default">Admin Login</button>
                                             </div>
