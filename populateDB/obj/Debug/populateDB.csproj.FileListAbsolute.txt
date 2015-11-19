@@ -10,3 +10,12 @@ C:\Users\Shashank Chitti\Documents\GitHub\swegroup-4\populateDB\obj\Debug\popula
 C:\Users\Shashank Chitti\Documents\GitHub\swegroup-4\populateDB\obj\Debug\populateDB.csprojResolveAssemblyReference.cache
 C:\Users\Shashank Chitti\Documents\GitHub\swegroup-4\populateDB\bin\Debug\populateDB.exe
 C:\Users\Shashank Chitti\Documents\GitHub\swegroup-4\populateDB\bin\Debug\populateDB.pdb
+F:\populateDB\bin\Debug\populateDB.exe.config
+F:\populateDB\obj\Debug\populateDB.exe
+F:\populateDB\obj\Debug\populateDB.pdb
+C:\swe-group4\populateDB\bin\Debug\populateDB.exe.config
+C:\swe-group4\populateDB\obj\Debug\populateDB.exe
+C:\swe-group4\populateDB\obj\Debug\populateDB.pdb
+C:\swe-group4\populateDB\bin\Debug\populateDB.exe
+C:\swe-group4\populateDB\bin\Debug\populateDB.pdb
+C:\swe-group4\populateDB\obj\Debug\populateDB.csprojResolveAssemblyReference.cache

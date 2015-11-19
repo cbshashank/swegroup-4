@@ -1,118 +1,1 @@
-question,question_text,answer,url
-USState,Where is the plant in the US?,AK,
-USState,Where is the plant in the US?,AL,
-USState,Where is the plant in the US?,AZ,
-USState,Where is the plant in the US?,AR,
-USState,Where is the plant in the US?,CA,
-USState,Where is the plant in the US?,CO,
-USState,Where is the plant in the US?,CT,
-USState,Where is the plant in the US?,DE,
-USState,Where is the plant in the US?,FL,
-USState,Where is the plant in the US?,GA,
-USState,Where is the plant in the US?,HI,
-USState,Where is the plant in the US?,ID,
-USState,Where is the plant in the US?,IL,
-USState,Where is the plant in the US?,IN,
-USState,Where is the plant in the US?,IA,
-USState,Where is the plant in the US?,KS,
-USState,Where is the plant in the US?,KY,
-USState,Where is the plant in the US?,LA,
-USState,Where is the plant in the US?,ME,
-USState,Where is the plant in the US?,MD,
-USState,Where is the plant in the US?,MA,
-USState,Where is the plant in the US?,MI,
-USState,Where is the plant in the US?,MN,
-USState,Where is the plant in the US?,MS,
-USState,Where is the plant in the US?,MO,
-USState,Where is the plant in the US?,MT,
-USState,Where is the plant in the US?,NE,
-USState,Where is the plant in the US?,NV,
-USState,Where is the plant in the US?,NH,
-USState,Where is the plant in the US?,NJ,
-USState,Where is the plant in the US?,NM,
-USState,Where is the plant in the US?,NY,
-USState,Where is the plant in the US?,NC,
-USState,Where is the plant in the US?,ND,
-USState,Where is the plant in the US?,OH,
-USState,Where is the plant in the US?,OK,
-USState,Where is the plant in the US?,OR,
-USState,Where is the plant in the US?,PA,
-USState,Where is the plant in the US?,RI,
-USState,Where is the plant in the US?,SC,
-USState,Where is the plant in the US?,SD,
-USState,Where is the plant in the US?,TN,
-USState,Where is the plant in the US?,TX,
-USState,Where is the plant in the US?,UT,
-USState,Where is the plant in the US?,VT,
-USState,Where is the plant in the US?,VA,
-USState,Where is the plant in the US?,WA,
-USState,Where is the plant in the US?,WV,
-USState,Where is the plant in the US?,WI,
-USState,Where is the plant in the US?,WY,
-USState,Where is the plant in the US?,AS,
-USState,Where is the plant in the US?,DC,
-USState,Where is the plant in the US?,FM,
-USState,Where is the plant in the US?,GU,
-USState,Where is the plant in the US?,MH,
-USState,Where is the plant in the US?,MP,
-USState,Where is the plant in the US?,PW,
-USState,Where is the plant in the US?,PR,
-USState,Where is the plant in the US?,VI,
-Type,What type of plant is it?,Shrub,./pictures/type/shrub.jpg
-Type,What type of plant is it?,Weed/Herb,./pictures/type/forb_herb.jpg
-Type,What type of plant is it?,Vine,./pictures/type/vine.jpg
-Type,What type of plant is it?,Grass,./pictures/type/graminoid.jpg
-Type,What type of plant is it?,Tree,./pictures/type/tree.jpg
-Type,What type of plant is it?,Lichenous,./pictures/type/lichenous.jpg
-Type,What type of plant is it?,Nonvascular,./pictures/nonvascular.jpg
-Type,What type of plant is it?,Subshrub,./pictures/subshrub.jpg
-Pattern,What kind of pattern does the plant have?,Dicot,./pictures/pattern/dicot.jpg
-Pattern,What kind of pattern does the plant have?,Gymnosperm,./pictures/pattern/gymnosperm.jpg
-Pattern,What kind of pattern does the plant have?,Moss,./pictures/pattern/moss.jpg
-Pattern,What kind of pattern does the plant have?,Monocot,./pictures/pattern/monocot1.jpg
-Pattern,What kind of pattern does the plant have?,Lichen,./pictures/pattern/lichen.jpg
-Pattern,What kind of pattern does the plant have?,Fern,./pictures/pattern/fern.jpg
-Pattern,What kind of pattern does the plant have?,Liverwort,./pictures/pattern/liverwort.jpg
-Pattern,What kind of pattern does the plant have?,Green Alga,./pictures/pattern/green_alga.jpg
-Pattern,What kind of pattern does the plant have?,Horsetail,./pictures/pattern/horsetail.jpg
-Pattern,What kind of pattern does the plant have?,Red Algae,./pictures/pattern/red_algae.jpg
-Pattern,What kind of pattern does the plant have?,Lycopod,./pictures/pattern/lycopod.jpg
-Pattern,What kind of pattern does the plant have?,Quillwort,./pictures/pattern/quillwort.jpg
-Pattern,What kind of pattern does the plant have?,Whisk-fern,./pictures/pattern/whisk-fern.jpg
-ColorFlower,What color are the flowers?,Purple,./pictures/colorflower/purple.jpg
-ColorFlower,What color are the flowers?,Yellow,./pictures/colorflower/yellow.jpg
-ColorFlower,What color are the flowers?,Red,./pictures/colorflower/red.jpg
-ColorFlower,What color are the flowers?,Brown,./pictures/colorflower/brown.jpg
-ColorFlower,What color are the flowers?,White,./pictures/colorflower/white.jpg
-ColorFlower,What color are the flowers?,Green,./pictures/colorflower/green.jpg
-ColorFlower,What color are the flowers?,Blue,./pictures/colorflower/blue.jpg
-ColorFlower,What color are the flowers?,Orange,./pictures/colorflower/orange.jpg
-TextureFoliage,What kind of texture do the leaves have?,Medium,./pictures/texture/medium.jpg
-TextureFoliage,What kind of texture do the leaves have?,Fine,./pictures/texture/fine.jpg
-TextureFoliage,What kind of texture do the leaves have?,Coarse,./pictures/texture/coarse.jpg
-ColorFruitSeed,What color are the fruit or seeds?,Brown,./pictures/colorfruitseed/brown.jpg
-ColorFruitSeed,What color are the fruit or seeds?,Purple,./pictures/colorfruitseed/purple.pjg
-ColorFruitSeed,What color are the fruit or seeds?,Black,./pictures/colorfruitseed/black.pjg
-ColorFruitSeed,What color are the fruit or seeds?,Yellow,./pictures/colorfruitseed/yellow.pjg
-ColorFruitSeed,What color are the fruit or seeds?,Red,./pictures/colorfruitseed/red.pjg
-ColorFruitSeed,What color are the fruit or seeds?,Green,./pictures/colorfruitseed/green.pjg
-ColorFruitSeed,What color are the fruit or seeds?,Blue,./pictures/colorfruitseed/blue.pjg
-ColorFruitSeed,What color are the fruit or seeds?,Orange,./pictures/colorfruitseed/orange.pjg
-ColorFruitSeed,What color are the fruit or seeds?,White,./pictures/colorfruitseed/white.pjg
-Shape,What shape does the plant have?,Semi-Erect,./pictures/shape/semi-errect.jpg
-Shape,What shape does the plant have?,Standing,./pictures/shape/erect.jpg
-Shape,What shape does the plant have?,Conical,./pictures/shape/conical.jpg
-Shape,What shape does the plant have?,Rounded,./pictures/shape/rounded3.jpg
-Shape,What shape does the plant have?,Prostrate,./pictures/shape/prostrate.jpg
-Shape,What shape does the plant have?,Decumbent,./pictures/shape/decumbent1.jpg
-Shape,What shape does the plant have?,Climbing,./pictures/shape/climbing.jpg
-Shape,What shape does the plant have?,Vase,./pictures/shape/vase1.jpg
-Shape,What shape does the plant have?,Irregular,./pictures/shape/irregular3.jpg
-Shape,What shape does the plant have?,Oval,./pictures/shape/oval.jpg
-Shape,What shape does the plant have?,Columnar,./pictures/shape/columnar.jpg
-ColorFoliage,What color are the leaves?,Dark Green,./pictures/colorfoliage/dark_green.jpg
-ColorFoliage,What color are the leaves?,Green,./pictures/colorfoliage/green.jpg
-ColorFoliage,What color are the leaves?,Grey-Green,./pictures/colorfoliage/grey_green.jpg
-ColorFoliage,What color are the leaves?,Red,./pictures/colorfoliage/red.jpg
-ColorFoliage,What color are the leaves?,White-Gray,./pictures/colorfoliage/white_gray.jpg
-ColorFoliage,What color are the leaves?,Yellow-Green,./pictures/colorfoliage/yellow_green.jpg
+question,question_text,answer,urlUSState,Where is the plant in the US?,AK,dummyurlUSState,Where is the plant in the US?,AL,dummyurlUSState,Where is the plant in the US?,AZ,dummyurlUSState,Where is the plant in the US?,AR,dummyurlUSState,Where is the plant in the US?,CA,dummyurlUSState,Where is the plant in the US?,CO,dummyurlUSState,Where is the plant in the US?,CT,dummyurlUSState,Where is the plant in the US?,DE,dummyurlUSState,Where is the plant in the US?,FL,dummyurlUSState,Where is the plant in the US?,GA,dummyurlUSState,Where is the plant in the US?,HI,dummyurlUSState,Where is the plant in the US?,ID,dummyurlUSState,Where is the plant in the US?,IL,dummyurlUSState,Where is the plant in the US?,IN,dummyurlUSState,Where is the plant in the US?,IA,dummyurlUSState,Where is the plant in the US?,KS,dummyurlUSState,Where is the plant in the US?,KY,dummyurlUSState,Where is the plant in the US?,LA,dummyurlUSState,Where is the plant in the US?,ME,dummyurlUSState,Where is the plant in the US?,MD,dummyurlUSState,Where is the plant in the US?,MA,dummyurlUSState,Where is the plant in the US?,MI,dummyurlUSState,Where is the plant in the US?,MN,dummyurlUSState,Where is the plant in the US?,MS,dummyurlUSState,Where is the plant in the US?,MO,dummyurlUSState,Where is the plant in the US?,MT,dummyurlUSState,Where is the plant in the US?,NE,dummyurlUSState,Where is the plant in the US?,NV,dummyurlUSState,Where is the plant in the US?,NH,dummyurlUSState,Where is the plant in the US?,NJ,dummyurlUSState,Where is the plant in the US?,NM,dummyurlUSState,Where is the plant in the US?,NY,dummyurlUSState,Where is the plant in the US?,NC,dummyurlUSState,Where is the plant in the US?,ND,dummyurlUSState,Where is the plant in the US?,OH,dummyurlUSState,Where is the plant in the US?,OK,dummyurlUSState,Where is the plant in the US?,OR,dummyurlUSState,Where is the plant in the US?,PA,dummyurlUSState,Where is the plant in the US?,RI,dummyurlUSState,Where is the plant in the US?,SC,dummyurlUSState,Where is the plant in the US?,SD,dummyurlUSState,Where is the plant in the US?,TN,dummyurlUSState,Where is the plant in the US?,TX,dummyurlUSState,Where is the plant in the US?,UT,dummyurlUSState,Where is the plant in the US?,VT,dummyurlUSState,Where is the plant in the US?,VA,dummyurlUSState,Where is the plant in the US?,WA,dummyurlUSState,Where is the plant in the US?,WV,dummyurlUSState,Where is the plant in the US?,WI,dummyurlUSState,Where is the plant in the US?,WY,dummyurlUSState,Where is the plant in the US?,AS,dummyurlUSState,Where is the plant in the US?,DC,dummyurlUSState,Where is the plant in the US?,FM,dummyurlUSState,Where is the plant in the US?,GU,dummyurlUSState,Where is the plant in the US?,MH,dummyurlUSState,Where is the plant in the US?,MP,dummyurlUSState,Where is the plant in the US?,PW,dummyurlUSState,Where is the plant in the US?,PR,dummyurlUSState,Where is the plant in the US?,VI,dummyurlType,What type of plant is it?,Shrub,./pictures/type/shrub.jpgType,What type of plant is it?,Weed/Herb,./pictures/type/forb_herb.jpgType,What type of plant is it?,Vine,./pictures/type/vine.jpgType,What type of plant is it?,Grass,./pictures/type/graminoid.jpgType,What type of plant is it?,Tree,./pictures/type/tree.jpgType,What type of plant is it?,Lichenous,./pictures/type/lichenous.jpgType,What type of plant is it?,Nonvascular,./pictures/type/nonvascular.jpgType,What type of plant is it?,Subshrub,./pictures/type/subshrub.jpgPattern,What kind of pattern does the plant have?,Dicot,./pictures/pattern/dicot.jpgPattern,What kind of pattern does the plant have?,Gymnosperm,./pictures/pattern/gymnosperm.jpgPattern,What kind of pattern does the plant have?,Moss,./pictures/pattern/moss.jpgPattern,What kind of pattern does the plant have?,Monocot,./pictures/pattern/monocot1.jpgPattern,What kind of pattern does the plant have?,Lichen,./pictures/pattern/lichen.jpgPattern,What kind of pattern does the plant have?,Fern,./pictures/pattern/fern.jpgPattern,What kind of pattern does the plant have?,Liverwort,./pictures/pattern/liverwort.jpgPattern,What kind of pattern does the plant have?,Green Alga,./pictures/pattern/green_alga.jpgPattern,What kind of pattern does the plant have?,Horsetail,./pictures/pattern/horsetail.jpgPattern,What kind of pattern does the plant have?,Red Algae,./pictures/pattern/red_algae.jpgPattern,What kind of pattern does the plant have?,Lycopod,./pictures/pattern/lycopod.jpgPattern,What kind of pattern does the plant have?,Quillwort,./pictures/pattern/quillwort.jpgPattern,What kind of pattern does the plant have?,Whisk-fern,./pictures/pattern/whisk-fern.jpgColorFlower,What color are the flowers?,Purple,./pictures/colorflower/purple.jpgColorFlower,What color are the flowers?,Yellow,./pictures/colorflower/yellow.jpgColorFlower,What color are the flowers?,Red,./pictures/colorflower/red.jpgColorFlower,What color are the flowers?,Brown,./pictures/colorflower/brown.jpgColorFlower,What color are the flowers?,White,./pictures/colorflower/white.jpgColorFlower,What color are the flowers?,Green,./pictures/colorflower/green.jpgColorFlower,What color are the flowers?,Blue,./pictures/colorflower/blue.jpgColorFlower,What color are the flowers?,Orange,./pictures/colorflower/orange.jpgTextureFoliage,What kind of texture do the leaves have?,Medium,./pictures/texture/medium.jpgTextureFoliage,What kind of texture do the leaves have?,Fine,./pictures/texture/fine.jpgTextureFoliage,What kind of texture do the leaves have?,Coarse,./pictures/texture/coarse.jpgColorFruitSeed,What color are the fruit or seeds?,Brown,./pictures/colorfruitseed/brown.jpgColorFruitSeed,What color are the fruit or seeds?,Purple,./pictures/colorfruitseed/purple.jpgColorFruitSeed,What color are the fruit or seeds?,Black,./pictures/colorfruitseed/black.jpgColorFruitSeed,What color are the fruit or seeds?,Yellow,./pictures/colorfruitseed/yellow.jpgColorFruitSeed,What color are the fruit or seeds?,Red,./pictures/colorfruitseed/red.jpgColorFruitSeed,What color are the fruit or seeds?,Green,./pictures/colorfruitseed/green.jpgColorFruitSeed,What color are the fruit or seeds?,Blue,./pictures/colorfruitseed/blue.jpgColorFruitSeed,What color are the fruit or seeds?,Orange,./pictures/colorfruitseed/orange.jpgColorFruitSeed,What color are the fruit or seeds?,White,./pictures/colorfruitseed/white.jpgShape,What shape does the plant have?,Semi-Erect,./pictures/shape/semi-erect.jpgShape,What shape does the plant have?,Standing,./pictures/shape/erect.jpgShape,What shape does the plant have?,Conical,./pictures/shape/conical.jpgShape,What shape does the plant have?,Rounded,./pictures/shape/rounded3.jpgShape,What shape does the plant have?,Prostrate,./pictures/shape/prostrate.jpgShape,What shape does the plant have?,Decumbent,./pictures/shape/decumbent1.jpgShape,What shape does the plant have?,Climbing,./pictures/shape/climbing.jpgShape,What shape does the plant have?,Vase,./pictures/shape/vase1.jpgShape,What shape does the plant have?,Irregular,./pictures/shape/irregular3.jpgShape,What shape does the plant have?,Oval,./pictures/shape/oval.jpgShape,What shape does the plant have?,Columnar,./pictures/shape/columnar.jpgColorFoliage,What color are the leaves?,Dark Green,./pictures/colorfoliage/dark_green.jpgColorFoliage,What color are the leaves?,Green,./pictures/colorfoliage/green.jpgColorFoliage,What color are the leaves?,Grey-Green,./pictures/colorfoliage/grey_green.jpgColorFoliage,What color are the leaves?,Red,./pictures/colorfoliage/red.jpgColorFoliage,What color are the leaves?,White-Gray,./pictures/colorfoliage/white_gray.jpgColorFoliage,What color are the leaves?,Yellow-Green,./pictures/colorfoliage/yellow_green.jpg
