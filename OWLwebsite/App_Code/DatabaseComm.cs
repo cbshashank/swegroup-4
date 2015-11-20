@@ -200,12 +200,6 @@ public class DatabaseComm
 
     }
 
-    //These are the URLs for the plant jpgs from USDA
-    public static string imageURL(string plant_id)
-    {
-        return "http://plants.usda.gov/gallery/pubs/" + plant_id + "_001_pvp.jpg";
-    }
-
     FloraObj findPlant_Id(IList<FloraObj> FLO, string plant_id)
     {
         FloraObj FO = null;
@@ -370,21 +364,25 @@ public class DatabaseComm
     /// <param name="FLO"></param>
     // method for creating a unique plant id
 
-    public string getplantid(FloraObj FLO) // infinite loop for checking
+    public string getplantid(string plantid) // infinite loop for checking
     {
+        //---max number of times we can attempt to add this plant
+        int maxadds = 10;
         int i=1;
-        string plantid = "";
-        if (FLO.Name.Length > 4)
+        string baseplant;
+        if (plantid.Length > 4)
         {
-
-            plantid = FLO.Name.Substring(0, 4);
+            baseplant = plantid.Substring(0, 4);
         }
         else
-            plantid = FLO.Name;
-            plantid = plantid + i;
-        for (i=1;i<10; i++) //added the condition i <10 for preventing the crash
         {
-            plantid = plantid + i;
+            baseplant = plantid;
+        }
+       
+            
+        for (i=1;i< maxadds; i++) //added the condition i <10 for preventing the crash
+        {
+            plantid = baseplant + i;
             if (checkplantid(plantid) == false)
                 return plantid;
         }
@@ -401,33 +399,39 @@ public class DatabaseComm
         command.Connection = conn;
 
 
-        if (string.IsNullOrEmpty(plantid))
+        if (!string.IsNullOrEmpty(plantid))
         {
 
-            sqlQueryString = "SELECT *  from plant";
+            sqlQueryString = "SELECT plant_id  from plant WHERE plant_id = @plant_id";
 
             command.Connection.Open();
 
             //---Run the Query
             command.CommandText = sqlQueryString;
+            SqlParameter plant_id = new SqlParameter("@plant_id", plantid);
+            command.Parameters.Add(plant_id);
             SqlDataReader ReturnResult = command.ExecuteReader();
-
+            
             //---cycle through the return values and build a list of the floraobjs which match
             if (ReturnResult.HasRows)
             {
                 ReturnResult.Read();
                 if
-                  (ReturnResult["plantid"].ToString() == plantid)
+                  (ReturnResult["plant_id"].ToString() == plantid)
                 {
                     found = true;
-                    
+                    conn.Close();
                     return found;
 
                 }
 
             }
             else
+            {
+                conn.Close();
                 return found;
+            }
+                
         }  //end login check
         return found;
     }
@@ -437,14 +441,20 @@ public class DatabaseComm
     public void Insert(FloraObj FLO)
     {
         string plantid;
-        FLO.UserName = "Admin";
-        FLO.Password = "Admin";
+        List < FloraObj> returnList = new List<FloraObj>();
 
-        if (checkAdminLogin(FLO) == "Authenticated")
+        // check user name & password here ok or not
+        if ((FLO.Result = checkAdminLogin(FLO)) == "Authenticated")
         {
+            returnList.Add(FLO);
+            //---If we are just a login object, then exit
+            if (FLO.IsLogin())
+            {
+                //---Add this object back on the list with the result and return
+                
+                return;
+            }
 
-            
-            // check user name & password here ok or not
             //using parametirized query
             string sqlInserString =
                "INSERT INTO plant (plant_id,Name, Color_flower,color_foliage,color_fruit_seed,texture_foliage, shape, pattern,image) VALUES (@plant_id,@Name, @Color_flower,@color_foliage,@color_fruit_seed,@texture_foliage,@shape,@pattern,@image)";
@@ -456,8 +466,8 @@ public class DatabaseComm
             command.CommandText = sqlInserString;
             if (FLO.Type == null)
                 FLO.Type = "";
-            if (FLO.Location == null)
-                FLO.Location = "";
+            if (FLO.USState == null)
+                FLO.USState = "";
 
             if (FLO.ColorFoliage == null)
                 FLO.ColorFoliage = "";
@@ -478,30 +488,15 @@ public class DatabaseComm
             if (FLO.Name == null)
                 FLO.Name = "";
 
-            if (FLO.Name.Length > 20)
-                FLO.Name = FLO.Name.Substring(0, 20);
-            if (FLO.Name.Length > 20)
-                FLO.PlantId = FLO.PlantId.Substring(0, 20);
-            if (FLO.Pattern.Length > 20)
-                FLO.Pattern = FLO.Pattern.Substring(0, 20);
-            if (FLO.Shape.Length > 20)
-                FLO.Shape = FLO.Shape.Substring(0, 20);
-            if (FLO.ImageURL.Length > 20)
-                FLO.ImageURL = FLO.ImageURL.Substring(0, 20);
-            if (FLO.ColorFlower.Length > 20)
-                FLO.ColorFlower=FLO.ColorFlower.Substring(0, 20);
-            if (FLO.ColorFoliage.Length > 20)
-                FLO.ColorFoliage = FLO.ColorFoliage.Substring(0, 20);
-            if (FLO.ColorFruitSeed.Length > 20)
-                FLO.ColorFruitSeed = FLO.ColorFruitSeed.Substring(0, 20);
-            if (FLO.TextureFoliage.Length > 20)
-                FLO.TextureFoliage = FLO.TextureFoliage.Substring(0, 20);
-            if (FLO.Type.Length > 20)
-                FLO.Type = FLO.Type.Substring(0, 20);
-            if (FLO.Location.Length > 20)
-                FLO.Location = FLO.Location.Substring(0, 20); 
+            if (FLO.PlantId == null || FLO.PlantId == "")
+            {
+                plantid = getplantid(FLO.Name);
+            }
+            else
+            {
+                plantid = getplantid(FLO.PlantId);
+            }
 
-            plantid = getplantid(FLO);
             SqlParameter plant_id = new SqlParameter("@plant_id",plantid ); 
             SqlParameter Name = new SqlParameter("@Name", FLO.Name);
             SqlParameter Color_flower = new SqlParameter("@Color_flower", FLO.ColorFlower);
@@ -512,26 +507,31 @@ public class DatabaseComm
             SqlParameter pattern = new SqlParameter("@pattern", FLO.Pattern);
             SqlParameter image = new SqlParameter("@image", FLO.ImageURL);
        
-           
-             
-
 
             command.Parameters.AddRange(new SqlParameter[]{
                 plant_id,Name, Color_flower,Color_foliage,Color_fruit_seed,texture, shape, pattern,image});
             command.ExecuteNonQuery();
             command.Connection.Close();
-            insertlocation(plantid, FLO.Location);
+            insertlocation(plantid, FLO.USState);
             insertplanttype(plantid, FLO.Type);
+            FLO.PlantId = plantid;
+            FLO.Result = "Inserted Entry";
+
 
         }
         // Check Admin USer & pass. 
     }
 
+    /// <summary>
+    /// Insert a plantid and location into the table
+    /// </summary>
+    /// <param name="plantid"></param>
+    /// <param name="location"></param>
     public void insertlocation(string plantid, string location)
 
     {
        
-        string sqlInserString ="INSERT INTO location (plant_id,location) VALUES (@plant_id,@location)";
+        string sqlInserString ="INSERT INTO location (plant_id,us_state) VALUES (@plant_id,@location)";
 
             SqlConnection conn = new SqlConnection(conn_string);
             SqlCommand command = new SqlCommand();
@@ -548,11 +548,16 @@ public class DatabaseComm
 
         }
 
+    /// <summary>
+    /// insert a type and plant id into the plant type
+    /// </summary>
+    /// <param name="plantid"></param>
+    /// <param name="type"></param>
     public void insertplanttype(string plantid, string type)
 
     {
 
-        string sqlInserString = "INSERT INTO location (plant_id,type) VALUES (@plant_id,@type)";
+        string sqlInserString = "INSERT INTO planttype (plant_id, type) VALUES (@plant_id,@type)";
 
         SqlConnection conn = new SqlConnection(conn_string);
         SqlCommand command = new SqlCommand();
@@ -569,26 +574,47 @@ public class DatabaseComm
 
     }
 
+    /// <summary>
+    /// Delete the passed in floraobj
+    /// </summary>
+    /// <param name="FLO"></param>
     public void Delete(FloraObj FLO) // delete for plant table.
     {
-        //using parametirized query
-        string sqlInserString = "DELETE  FROM plant WHERE plant_id=@plant_id ";
+        List<FloraObj> returnList = new List<FloraObj>();
+        if ((FLO.Result = checkAdminLogin(FLO)) == "Authenticated")
+        {
+            returnList.Add(FLO);
+            //---If we are just a login object, then exit
+            if (FLO.IsLogin())
+            {
+                //---Add this object back on the list with the result and return     
+                return;
+            }
+            //using parametirized query
+            string sqlInserString = "DELETE  FROM plant WHERE plant_id=@plant_id ";
 
-        SqlConnection conn = new SqlConnection(conn_string);
-        SqlCommand command = new SqlCommand();
-        command.Connection = conn;
-        command.Connection.Open();
-        command.CommandText = sqlInserString;
+            SqlConnection conn = new SqlConnection(conn_string);
+            SqlCommand command = new SqlCommand();
+            command.Connection = conn;
+            command.Connection.Open();
+            command.CommandText = sqlInserString;
 
-        SqlParameter plant_id = new SqlParameter("@plant_id", FLO.PlantId);
+            SqlParameter plant_id = new SqlParameter("@plant_id", FLO.PlantId);
 
 
-        command.Parameters.AddRange(new SqlParameter[]{
+            command.Parameters.AddRange(new SqlParameter[]{
                 plant_id});
-        command.ExecuteNonQuery();
-        command.Connection.Close();
-        Deletetype(FLO.PlantId);
-        Deletelocation(FLO.PlantId);
+            command.ExecuteNonQuery();
+            command.Connection.Close();
+            Deletetype(FLO.PlantId);
+            Deletelocation(FLO.PlantId);
+            FLO.Result = "Deleted Entry";
+        }
+        else
+        {
+            //---Add this object back on the list with the result and return
+            returnList.Add(FLO);
+        }
 
 
 
@@ -605,7 +631,7 @@ public class DatabaseComm
         command.Connection.Open();
         command.CommandText = sqlInserString;
 
-        SqlParameter plant_id = new SqlParameter("@plant_id", FLO.PlantId);
+        SqlParameter plant_id = new SqlParameter("@plant_id", plantid);
 
 
         command.Parameters.AddRange(new SqlParameter[]{
@@ -626,7 +652,7 @@ public class DatabaseComm
         command.Connection.Open();
         command.CommandText = sqlInserString;
 
-        SqlParameter plant_id = new SqlParameter("@plant_id", FLO.PlantId);
+        SqlParameter plant_id = new SqlParameter("@plant_id", plantid);
 
 
         command.Parameters.AddRange(new SqlParameter[]{

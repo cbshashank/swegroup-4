@@ -60,6 +60,10 @@ public class Service :  IHttpHandler
     }
     
 
+    /// <summary>
+    /// Test data for testing the front end category information
+    /// </summary>
+    /// <returns></returns>
     private List<DisplayTestObj> FillDispList()
     {
         List<DisplayTestObj> DispList = new List<DisplayTestObj>();
@@ -101,7 +105,28 @@ public class Service :  IHttpHandler
 
     public void DELETE(HttpContext context)
     {
-        
+        string json = new StreamReader(context.Request.InputStream).ReadToEnd();
+        try
+        {
+
+            FloraObj newObj = JsonConvert.DeserializeObject<FloraObj>(json);
+
+            if (!newObj.CheckStringSize())
+            {
+                context.Response.Write("Message has improper string size!");
+            }
+            else
+            {
+                DAO.Delete(newObj);
+                context.Response.Write(JsonConvert.SerializeObject(newObj));
+            }
+        }
+        catch (Exception e)
+        {
+            //---Do logging here about message - could be a post message for the server, could be a badly formed JSON
+            context.Response.Write("Invalid Message!");
+        }
+
     }
 
 
@@ -112,8 +137,16 @@ public class Service :  IHttpHandler
         {
 
             FloraObj newObj = JsonConvert.DeserializeObject<FloraObj>(json);
-            IList<FloraObj> FloraObjList = DAO.Query(newObj);
-            context.Response.Write(JsonConvert.SerializeObject(FloraObjList));
+
+            if (!newObj.CheckStringSize())
+            {
+                context.Response.Write("Message has improper string size!");
+            }
+            else
+            {
+                IList<FloraObj> FloraObjList = DAO.Query(newObj);
+                context.Response.Write(JsonConvert.SerializeObject(FloraObjList));
+            }
         }
         catch (Exception e)
         {
@@ -133,8 +166,16 @@ public class Service :  IHttpHandler
         { 
             
             FloraObj newObj = JsonConvert.DeserializeObject<FloraObj>(json);
-            DAO.Insert(newObj);
-            context.Response.Write(JsonConvert.SerializeObject(newObj));
+
+            if(!newObj.CheckStringSize())
+            {
+                context.Response.Write("Message has improper string size!");
+            }
+            else
+            {
+                DAO.Insert(newObj);
+                context.Response.Write(JsonConvert.SerializeObject(newObj));
+            }
         }
         catch(Exception e)
         {
