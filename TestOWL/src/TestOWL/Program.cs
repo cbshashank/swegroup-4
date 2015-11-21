@@ -17,6 +17,9 @@ namespace TestOWL
         private int success;
         private int total;
 
+
+        
+
         void TestGarbage()
         {
             try
@@ -140,6 +143,59 @@ namespace TestOWL
             total++;
         }
         
+        private FloraObj Query(string plantid)
+        {
+            FloraObj r;
+            try
+            {
+                HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
+                GETRequest.Method = "POST";
+
+                string json = "{\"PlantId\":\"" + plantid + "\"," + "}";
+
+                using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
+                {
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+
+                HttpWebResponse GETResponse = (HttpWebResponse)GETRequest.GetResponse();
+
+                Stream GETResponseStream = GETResponse.GetResponseStream();
+                StreamReader sr = new StreamReader(GETResponseStream);
+
+                string resultjson = sr.ReadToEnd();
+                IList<FloraObj> FLO = JsonConvert.DeserializeObject<List<FloraObj>>(resultjson);
+
+                if (FLO == null || FLO.Count < 0)
+                {
+                    Console.WriteLine("PlantId: FAILED");
+                    return null;
+                }
+                else if (FLO[0] != null)
+                {
+                    Console.WriteLine("PlantId:  SUCCESS");
+                    return FLO[0];
+                }
+                else
+                {
+                    Console.WriteLine("PlantId: FAILED");
+                    return null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                Console.WriteLine("PlantId: FAILED (exception)");
+                error++;
+            }
+            return null;
+        }
+
         void TestQueryState(string state, int queryval)
         {
             Console.WriteLine("Testing Query State:  " + state);
@@ -310,12 +366,7 @@ namespace TestOWL
         }
 
 
-        //These are the URLs for the plant jpgs from USDA
-        public static string imageURL(string plant_id)
-        {
-            return "http://plants.usda.gov/gallery/pubs/" + plant_id + "_001_pvp.jpg";
-        }
-
+    
         bool CompareObjects(FloraObj FO, FloraObj FO2, bool bFullQuery)
         {
             bool bMatch = FO.PlantId.Trim().ToLower() == FO2.PlantId.Trim().ToLower();
@@ -377,6 +428,25 @@ namespace TestOWL
             return bMatch;
         }
 
+        private FloraObj FillInsertObject(string plantid)
+        {
+            FloraObj FL = new FloraObj();
+            FL.PlantId = plantid;
+            FL.Name = "Abelia ??grandiflora";
+            FL.ColorFlower = "Purple";
+            FL.ColorFoliage = "Dark Green";
+            FL.ColorFruitSeed = "Brown";
+            FL.TextureFoliage = "Medium";
+            FL.Shape = "Semi-Erect";
+            FL.Pattern = "Dicot";
+            FL.USState = "FL";
+            FL.Type = "Shrub";
+            FL.ImageURL = "Test";
+            FL.UserName = "Admin";
+            FL.Password = "Admin";
+            return FL;
+        }
+
 
         private void FillTestObject()
         {
@@ -394,6 +464,152 @@ namespace TestOWL
             TestObj.ImageURL = "";
         }
 
+
+        /// <summary>
+        /// Insert the flora object
+        /// </summary>
+        /// <param name="Flora">Insert the given flora object</param>
+        FloraObj Insert(FloraObj Flora)
+        {
+            Console.WriteLine("Testing Insert");
+            try
+            {
+                HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
+                GETRequest.Method = "PUT";
+
+                string json = JsonConvert.SerializeObject(Flora);
+
+                using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
+                {
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                
+
+                HttpWebResponse GETResponse = (HttpWebResponse)GETRequest.GetResponse();
+
+                Stream GETResponseStream = GETResponse.GetResponseStream();
+                StreamReader sr = new StreamReader(GETResponseStream);
+
+                string resultjson = sr.ReadToEnd();
+                FloraObj FLO = JsonConvert.DeserializeObject<FloraObj>(resultjson);
+
+                if (FLO.Result == "Inserted Entry")
+                {
+                    Console.WriteLine("Test Insert:  SUCCESS");
+                }
+                else
+                {
+                    Console.WriteLine("Test Insert:  FAILED");
+                    error++;
+                }
+
+                return FLO;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                Console.WriteLine("Test Insert:  FAILED");
+                error++;
+                return null;
+            }
+            total++;
+            
+        }
+
+        private void TestInsert()
+        {
+            //---Test a basic insert
+            FloraObj Flora = FillInsertObject("test");
+            Flora = Insert(Flora);
+
+            FloraObj Compare = Query(Flora.PlantId);
+
+            if(CompareObjects(Flora,Compare, false))
+            {
+                Console.WriteLine("Insert First Compare:  Success");
+                total++;
+            }
+            else
+            {
+                Console.WriteLine("Insert First Compare:  Failure");
+                error++;
+            }
+
+            //---Test no plantid
+            Flora = FillInsertObject("");
+            Flora = Insert(Flora);
+
+            Compare = Query(Flora.PlantId);
+
+            if (CompareObjects(Flora, Compare, false))
+            {
+                Console.WriteLine("Insert Second Compare:  Success");
+                total++;
+            }
+            else
+            {
+                Console.WriteLine("Insert Second Compare:  Failure");
+                error++;
+            }
+
+            //---Test duplicate plantid
+            Flora = FillInsertObject("test");
+            Flora = Insert(Flora);
+
+            Compare = Query(Flora.PlantId);
+
+            if (CompareObjects(Flora, Compare, false))
+            {
+                Console.WriteLine("Insert Third Compare:  Success");
+                total++;
+            }
+            else
+            {
+                Console.WriteLine("Insert Third Compare:  Failure");
+                error++;
+            }
+
+            //---Test duplicate plant name
+            Flora = FillInsertObject("test");
+            Flora = Insert(Flora);
+
+            if (CompareObjects(Flora, Compare, false))
+            {
+                Console.WriteLine("Insert Fourth Compare:  Success");
+                total++;
+            }
+            else
+            {
+                Console.WriteLine("Insert Fourth Compare:  Failure");
+                error++;
+            }
+
+        }
+
+
+        private void TestDelete()
+        {
+            //---Test delete by plant id
+
+            //---Test delete by plant id that doesn't exist
+
+        }
+
+        private void TestLogin()
+        {
+            //---Test invalid login
+
+            //---Test valid login
+
+            //---Test empty object
+
+            //---Test long strings
+            
+        }
 
         public void Main(string[] args)
         {
@@ -416,10 +632,21 @@ namespace TestOWL
             //---Test the comple queries
             TestORFields();
 
+            //---Test logging in
+            TestLogin();
+
+            //---Try Inserting some values
+            TestInsert();
+
+            //---Try Deleting
+            TestDelete();
+
+
             //---Test the image launching code
             TestImageLaunch();
- 
 
+           
+ 
             Console.WriteLine("There were " + error + " errors and " + success + " successful tests out of " + total + " total tests.");
 
             Console.ReadLine();
