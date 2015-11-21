@@ -464,6 +464,45 @@ namespace TestOWL
             TestObj.ImageURL = "";
         }
 
+        string Delete(FloraObj FLO)
+        {
+            Console.WriteLine("Testing Delete");
+            try
+            {
+                string json = JsonConvert.SerializeObject(FLO);
+                
+                HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
+                GETRequest.Method = "DELETE";
+
+                using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
+                {
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+
+
+                HttpWebResponse GETResponse = (HttpWebResponse)GETRequest.GetResponse();
+
+                Stream GETResponseStream = GETResponse.GetResponseStream();
+                StreamReader sr = new StreamReader(GETResponseStream);
+
+                string resultjson = sr.ReadToEnd();
+                FLO = JsonConvert.DeserializeObject<FloraObj>(resultjson);
+                return FLO.Result;
+              
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                Console.WriteLine("Test Delete:  FAILED");
+                error++;
+                return "Exception";
+            }
+            total++;
+        }
 
         /// <summary>
         /// Insert the flora object
@@ -500,6 +539,7 @@ namespace TestOWL
                 if (FLO.Result == "Inserted Entry")
                 {
                     Console.WriteLine("Test Insert:  SUCCESS");
+                    success++;
                 }
                 else
                 {
@@ -507,6 +547,7 @@ namespace TestOWL
                     error++;
                 }
 
+                total++;
                 return FLO;
             }
             catch (Exception e)
@@ -520,7 +561,7 @@ namespace TestOWL
             
         }
 
-        private void TestInsert()
+        private string TestInsert()
         {
             //---Test a basic insert
             FloraObj Flora = FillInsertObject("test");
@@ -531,12 +572,14 @@ namespace TestOWL
             if(CompareObjects(Flora,Compare, false))
             {
                 Console.WriteLine("Insert First Compare:  Success");
+                success++;
                 total++;
             }
             else
             {
                 Console.WriteLine("Insert First Compare:  Failure");
                 error++;
+                total++;
             }
 
             //---Test no plantid
@@ -548,12 +591,14 @@ namespace TestOWL
             if (CompareObjects(Flora, Compare, false))
             {
                 Console.WriteLine("Insert Second Compare:  Success");
+                success++;
                 total++;
             }
             else
             {
                 Console.WriteLine("Insert Second Compare:  Failure");
                 error++;
+                total++;
             }
 
             //---Test duplicate plantid
@@ -565,12 +610,14 @@ namespace TestOWL
             if (CompareObjects(Flora, Compare, false))
             {
                 Console.WriteLine("Insert Third Compare:  Success");
+                success++;
                 total++;
             }
             else
             {
                 Console.WriteLine("Insert Third Compare:  Failure");
                 error++;
+                total++;
             }
 
             //---Test duplicate plant name
@@ -580,35 +627,186 @@ namespace TestOWL
             if (CompareObjects(Flora, Compare, false))
             {
                 Console.WriteLine("Insert Fourth Compare:  Success");
+                success++;
                 total++;
             }
             else
             {
                 Console.WriteLine("Insert Fourth Compare:  Failure");
                 error++;
+                total++;
             }
-
+            return Flora.PlantId;
         }
 
 
-        private void TestDelete()
+        private void TestDelete(string plantid)
         {
+            FloraObj FLO = new FloraObj();
+            FLO.PlantId = plantid;
+            FLO.UserName = "Admin";
+            FLO.Password = "Admin";
+
+
             //---Test delete by plant id
+            string result = Delete(FLO);
+
+            if (result == "Deleted Entry")
+            {
+                Console.WriteLine("Test Delete:  SUCCESS");
+                success++;
+            }
+            else
+            {
+                Console.WriteLine("Test Delete:  FAILED");
+                error++;
+            }
+            total++;
+
+            FLO.PlantId = "Not in Database";
 
             //---Test delete by plant id that doesn't exist
+            result = Delete(FLO);
+
+            if (result == "Invalid plantID")
+            {
+                Console.WriteLine("Test Delete:  SUCCESS");
+                success++;
+            }
+            else
+            {
+                Console.WriteLine("Test Delete:  FAILED");
+                error++;
+            }
+            total++;
+
+            FLO.PlantId = "";
+
+            //---Test delete by plant id that doesn't exist
+            result = Delete(FLO);
+
+            if (result == "Authenticated")
+            {
+                Console.WriteLine("Test Delete:  SUCCESS");
+                success++;
+            }
+            else
+            {
+                Console.WriteLine("Test Delete:  FAILED");
+                error++;
+            }
+            total++;
+        }
+
+
+        private string Login(string username, string password)
+        {
+            FloraObj Flora = new FloraObj();
+            Flora.UserName = username;
+            Flora.Password = password;
+
+            Console.WriteLine("Testing Login");
+            try
+            {
+                HttpWebRequest GETRequest = (HttpWebRequest)WebRequest.Create(url);
+                GETRequest.Method = "PUT";
+
+                string json = JsonConvert.SerializeObject(Flora);
+
+                using (var streamWriter = new StreamWriter(GETRequest.GetRequestStream()))
+                {
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                HttpWebResponse GETResponse = (HttpWebResponse)GETRequest.GetResponse();
+
+                Stream GETResponseStream = GETResponse.GetResponseStream();
+                StreamReader sr = new StreamReader(GETResponseStream);
+
+                string resultjson = sr.ReadToEnd();
+                FloraObj FLO = JsonConvert.DeserializeObject<FloraObj>(resultjson);
+
+          
+                return FLO.Result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                Console.WriteLine("Test Login:  FAILED");
+                error++;
+                return "";
+            }
+            total++;
 
         }
+
 
         private void TestLogin()
         {
+            string result;
             //---Test invalid login
+            result = Login("Fail", "Admin");
+            if(result == "Authenticated")
+            {
+                Console.WriteLine("Test Login:  FAILED");
+                error++;
+                total++;
+            }
+            else
+            {
+                Console.WriteLine("Test Login:  SUCCESS");
+                success++;
+                total++;
+            }
 
             //---Test valid login
+            result = Login("Admin", "Admin");
+            if (result == "Authenticated")
+            {
+                Console.WriteLine("Test Login:  SUCCESS");
+                success++;
+                total++;
+            }
+            else
+            {
+                Console.WriteLine("Test Login:  FAILED");
+                error++;
+                total++;
+            }
 
             //---Test empty object
+            result = Login("", "");
+            if (result == "Authenticated")
+            {
+                Console.WriteLine("Test Login:  FAILED");
+                error++;
+                total++;
+            }
+            else
+            {
+                Console.WriteLine("Test Login:  SUCCESS");
+                success++;
+                total++;
+            }
 
             //---Test long strings
-            
+            result = Login("asdffffffffdfsdafsafsdfadsfdsafdasfasdfadsfsdafadssdfadfsafsda", "afdsasfdfsdafdasfadsafdsfdsafadsfadsfdasfadsfsdaadfsfadsfasd");
+            if (result == "Authenticated")
+            {
+                Console.WriteLine("Test Login:  FAILED");
+                error++;
+                total++;
+            }
+            else
+            {
+                Console.WriteLine("Test Login:  SUCCESS");
+                success++;
+                total++;
+            }
+
         }
 
         public void Main(string[] args)
@@ -636,10 +834,10 @@ namespace TestOWL
             TestLogin();
 
             //---Try Inserting some values
-            TestInsert();
+            string plantid = TestInsert();
 
             //---Try Deleting
-            TestDelete();
+            TestDelete(plantid);
 
 
             //---Test the image launching code

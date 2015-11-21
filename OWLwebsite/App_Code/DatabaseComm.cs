@@ -599,6 +599,13 @@ public class DatabaseComm
             command.Connection.Open();
             command.CommandText = sqlInserString;
 
+            if(FLO.PlantId == "" || !checkplantid(FLO.PlantId))
+            {
+                FLO.Result = "Invalid plantID";
+                return;
+            }
+
+
             SqlParameter plant_id = new SqlParameter("@plant_id", FLO.PlantId);
 
 
@@ -623,7 +630,7 @@ public class DatabaseComm
     public void Deletetype(string plantid) // delete for plant table.
     {
         //using parametirized query
-        string sqlInserString = "DELETE  FROM type WHERE plant_id=@plant_id ";
+        string sqlInserString = "DELETE  FROM planttype WHERE plant_id=@plant_id ";
 
         SqlConnection conn = new SqlConnection(conn_string);
         SqlCommand command = new SqlCommand();
