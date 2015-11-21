@@ -10,16 +10,137 @@
     <script data-main="src/adminMain" src="lib/require.js"></script>
 </head>
 <body>
-<div id="header">
-    <img id="logo" src="Owl.png"><h1>OWL Administration Tool</h1>
+    <div id="page-header">
+        <!-- Navigation bar -->
+        <div id="navigation-bar">
+          <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                  <img src="./Owl.png" alt="OWL Mascot" style="width:40px;height:40px;position:absolute;top:5px;left:2px;"
+                  class="img-rounded">
+              </a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="./About.html">About<span class="sr-only">(current)</span></a></li>
+              <li><a href="./ContactUs.html">Contact</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <li><a href="./OWL.html">Home</a></li>
+              <li><a href="./OWLAdmin.html">Admin Login</a></li>
+          </ul>
+      </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 </div>
-<div id="system_inputs"></div>
-<div id="output_display"></div>
-<!--<button type="button" id="answerButton">answer</button>-->
-<!--<div id="result_display">-->
+
+<!-- Banner in the background -->
+<div class="container">
+    <img id="logo" src="Owl.png">
+    <div id="banner" class="jumbotron">
+      <a href="./OWL.html" id="jumbotron"><h1>OWL Administration Tool</h1></a>
+  </div> 
+</div>
+
+<div class="container-fluid">
+
+    <div id="Login">
+      <div class="row">
+        <div class="col-xs-9 col-xs-offset-4">
+            <form action="*******ACTION_PAGE.php**********">
+                <p>User Name:
+                    <input type="text" name="username" value="">
+                </p>
+                <p>Password:&nbsp;&nbsp;
+                    <input type="text" name="password" value="">
+                </p>
+                <div class="col-xs-4 col-xs-offset-1">
+                    <input class="btn btn-default" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <div class="row">
+        <br/>
+        <div class="col-xs-5 col-xs-offset-1">
+            <div id="system_inputs">
+            </div>
+        </div>
+        <div class="col-xs-5 col-xs-offset-6">
+            <div id="output_display">
+            </div>
+        </div>
+    </div>
+    
+    <!--<button type="button" id="answerButton">answer</button>-->
+    <!--<div id="result_display">-->
     <!--<div id="output_img"></div>-->
     <!--<div id="output_desc"></div>-->
     <!--&lt;!&ndash;    <button id="test_button">TEST INPUTS</button> &ndash;&gt;-->
-<!--</div>-->
+    <!--</div>-->
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div id="footer" class="row">
+      <br/>
+      <div id="footer1" class="col-sm-3">
+        <img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:90px;height:114px" class="img-rounded">
+    </div>
+
+    <div id="footer2" class="col-sm-2">
+        <p>General</p>
+        <p><a href="./About.html">About</a></p>
+        <p><a href="./QuickLinks.html">Quick Links</a></p>
+        <p><a href="./FAQs.html">FAQs</a></p>
+    </div>
+
+    <div id="footer3" class="col-sm-2">
+        <p>Contact</p>
+        <p><a href="./ContactUs.html">Contact us</a></p>
+        <p><a href="./ReportBug.html">Report a Bug</a></p>
+    </div>
+
+    <div id="footer4" class="col-xs-3">
+        <p>Follow</p>
+        <a href="https://www.facebook.com/USDA/?fref=ts"><img src="./pictures/LOGOS/Facebook/logos-and-badges_f-logo_online/png/FB-f-Logo__blue_50.png" alt="FB Logo" style="width:57px;height:57px" class="img-rounded"></a>
+        <a href="https://instagram.com/usdagov/"><img src="./pictures/LOGOS/Instagram/1Multi-ColorLogo_online/Instagram_Icon_Large.png" alt="Instagram Logo" style="width:60px;height:60px" class="img-rounded"></a>
+        <a href="https://twitter.com/USDA?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img src="./pictures/LOGOS/Twitter/brand guideline logos/TwitterLogo_55acee.png" alt="Twitter Logo" style="width:62px;height:62px" class="img-rounded"></a>
+
+    </div>
+
+    <div id="admin" class="col-sm-1">
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button" class="btn btn-default">Admin Login</button>
+      </div>
+  </div>
+
+</div>
+</div>
 </body>
 </html>

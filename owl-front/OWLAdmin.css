@@ -14,24 +14,48 @@
     line-height:150px;
 }
 
+/*#page-header {
+    background-color:#99E699;
+}*/
+
+.jumbotron {
+    background-color: #99E699;
+}
+
+h1 {
+    text-align: center;
+}
+
+a#jumbotron:link    {color:brown; text-decoration:none}
+a#jumbotron:visited {color:brown; text-decoration:none}
+a#jumbotron:hover   {color:brown; text-decoration:none}
+a#jumbotron:active  {color:brown; text-decoration:none}
+
 #system_inputs {
     background-color: #FFFFFF;
     position: absolute;
-    top: 200px;
-    left: 0px;
+ /*   top: 500px;
+    left: 0px;*/
     height: 400px;
     width: 400px;
-    padding: 12px;
+/*    margin: 5px;
+    padding: 12px;*/
+    border: 1px solid black;
 }
 
 #output_display {
     background-color: #FFFFFF;
     position: absolute;
-    top: 200px;
-    left: 400px;
+/*    top: 500px;
+    left: 400px;*/
     height: 400px;
     width: 400px;
-    margin: 5px;
-    padding: 12px;
-    border: 1px solid black;
+/*    margin: 5px;
+    padding: 12px;*/
+    border: 1px solid red;
+}
+
+#footer {
+    color:white;
+    background-color:#046405;
 }
