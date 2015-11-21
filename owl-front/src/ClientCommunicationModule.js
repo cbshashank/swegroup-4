@@ -2,13 +2,12 @@
  * Created by Scott on 10/7/2015.
  */
 
-define(['jquery', 'ResultDisplay', 'views/AdminResultDisplay'], function ($, ResultDisplay, AdminResultDisplay) {
+define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) {
 
     function ClientCommunicationModule() {
     }
 
     var output_display = new ResultDisplay();
-    var admin_display = new AdminResultDisplay();
     var serverAddress = "https://localhost:32297";
 
     ClientCommunicationModule.prototype.onResultReceived = function(result){};

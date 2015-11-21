@@ -2,7 +2,7 @@
  * Created by Scott on 10/7/2015.
  */
 //There are multiple selections titled: �Location�, �Setting�, �Color�, �Shape�, �Texture�, �Smell�, and �Pattern�.
-define( ['SystemInputs','ClientCommunicationModule','ResultDisplay'], function(SystemInputs) {
+define( ['SystemInputs','ClientCommunicationModule'], function(SystemInputs, ClientCommunicationModule) {
     input = new SystemInputs();
 
     describe("System input testing", function() {

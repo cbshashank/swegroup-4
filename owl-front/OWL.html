@@ -11,205 +11,207 @@
 </head>
 
 <body>
-    <!-- OWL ICON -->
-    <div id="page-header">
-        <div id="navigation-bar">
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
-                            <img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:33px;height:42px;position:absolute;top: 10px;left:22px;"
-                            class="img-rounded">
-                        </a>
-                    </div>
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="./About.html">About<span class="sr-only">(current)</span></a></li>
-                            <li><a href="./ContactUs.html">Contact</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="./OWL.html">Home</a></li>
-                            <li><a href="./OWLAdmin.html">Admin Login</a></li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav><!-- /.navbar navbar-inverse -->
-        </div><!-- /.navigation-bar -->
-
-        <div class="row">
-            <div class="col-xs-1 col-sm-1"></div>
-            <div class="col-xs-3 col-sm-2">
-                <a href="./OWL.html">
-                    <img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:120px;height:150px"
-                    class="img-rounded">
-                </a>
-            </div>
-
-            <!-- Banner in the background -->
-            <div class="container">
-                <div id="banner" class="jumbotron">
-                    <a href="./OWL.html" id="jumbotron"><h1>Online Wildlife Library</h1></a>
-
-                    <h2>Try Our Interactive Identifier</h2>
-                    <h2>to Discover and Learn about Plants</h2>
+<!-- OWL ICON -->
+<div id="page-header">
+    <div id="navigation-bar">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <img src="./pictures/owl_library_small.png" alt="OWL Mascot"
+                             style="width:33px;height:42px;position:absolute;top: 10px;left:22px;"
+                             class="img-rounded">
+                    </a>
                 </div>
-            </div>
-        </div>
-        <!-- MISSING big plants search icon -->
-        <!-- <img src="./pictures/tree_dummy.png" alt="Plant Search" style="width:171px;height:171px" class="img-rounded"> -->
 
-        <!-- MISSING big animals search icon -->
-        <!-- <img src="./pictures/owl.jpg" alt="Plant Search" style="width:171px;height:171px" class="img-rounded"> -->
-    </div><!-- ./page-header -->
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-1 col-sm-1"></div>
-            <div class="col-xs-6 col-sm-6">
-                <h3>Use our interactive plant identifier to quickly and easily work out what plant you saw.</h3>
-            </div>
-        </div>
-        <div class="container">
-            <div id="search" class="section">
-                <h1>Your Search</h1>
-
-                <!-- big navigation bar for each search question -->
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation">
-                        <a href="#USState" aria-controls="USState" role="tab" data-toggle="tab">Location</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#Type" aria-controls="Type" role="tab" data-toggle="tab">Type</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#ColorFlower" aria-controls="ColorFlower" role="tab"
-                        data-toggle="tab">Flower Colors</a></li>
-                        <li role="presentation">
-                            <a href="#ColorFoliage" aria-controls="ColorFoliage" role="tab"
-                            data-toggle="tab">Leaf Colors</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#ColorFruitSeed" aria-controls="ColorFruitSeed" role="tab"
-                            data-toggle="tab">Fruit/Seed Colors</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#Shape" aria-controls="Shape" role="tab"
-                            data-toggle="tab">Shape</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#TextureFoliage" aria-controls="TextureFoliage" role="tab"
-                            data-toggle="tab">Texture</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#Pattern" aria-controls="Pattern" role="tab" data-toggle="tab">Pattern</a>
-                        </li>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="./About.html">About<span class="sr-only">(current)</span></a></li>
+                        <li><a href="./ContactUs.html">Contact</a></li>
                     </ul>
-
-
-                    <!-- Tab panes -->
-                    <!-- Name and picture for each question-value -->
-                    <div id="system_inputs"></div>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-
-                    <div id="buttons">
-                        <!-- reset button -->
-                        <input class="btn btn-default" type="submit" value="Reset" id="resetButton">
-                        <!-- submit button -->
-                        <input class="btn btn-default" type="submit" value="Submit" id="answerButton">
-                    </div>
-                    <br/>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="./OWL.html">Home</a></li>
+                        <li><a href="./OWLAdmin.html">Admin Login</a></li>
+                    </ul>
                 </div>
-
-                <div id="results_display" class="section">
-                    <h1>Your Results</h1>
-                    <!--  Value picture + Name -->
-                    <div id="imageContainer"></div>
-                    <div id="googleResults"></div>
-                    <div id="googleImages"></div>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                </div>
+                <!-- /.navbar-collapse -->
             </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <!-- /.navbar navbar-inverse -->
+    </div>
+    <!-- /.navigation-bar -->
 
-            <!-- Google search results -->
-            <div id="GoogleSearch">
+    <div class="row">
+        <div class="col-xs-1 col-sm-1"></div>
+        <div class="col-xs-3 col-sm-2">
+            <a href="./OWL.html">
+                <img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:120px;height:150px"
+                     class="img-rounded">
+            </a>
+        </div>
 
-                <!-- Left half - Google safe search -->
+        <!-- Banner in the background -->
+        <div class="container">
+            <div id="banner" class="jumbotron">
+                <a href="./OWL.html" id="jumbotron"><h1>Online Wildlife Library</h1></a>
 
-                <!-- Right half - Google image safe search -->
+                <h2>Try Our Interactive Identifier</h2>
 
+                <h2>to Discover and Learn about Plants</h2>
             </div>
+        </div>
+    </div>
+    <!-- MISSING big plants search icon -->
+    <!-- <img src="./pictures/tree_dummy.png" alt="Plant Search" style="width:171px;height:171px" class="img-rounded"> -->
+
+    <!-- MISSING big animals search icon -->
+    <!-- <img src="./pictures/owl.jpg" alt="Plant Search" style="width:171px;height:171px" class="img-rounded"> -->
+</div>
+<!-- ./page-header -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-1 col-sm-1"></div>
+        <div class="col-xs-6 col-sm-6">
+            <h3>Use our interactive plant identifier to quickly and easily work out what plant you saw.</h3>
+        </div>
+    </div>
+    <div class="container">
+        <div id="search" class="section">
+            <h1>Your Search</h1>
+
+            <!-- big navigation bar for each search question -->
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation">
+                    <a href="#USState" aria-controls="USState" role="tab" data-toggle="tab">Location</a>
+                </li>
+                <li role="presentation">
+                    <a href="#Type" aria-controls="Type" role="tab" data-toggle="tab">Type</a>
+                </li>
+                <li role="presentation">
+                    <a href="#ColorFlower" aria-controls="ColorFlower" role="tab"
+                       data-toggle="tab">Flower Colors</a></li>
+                <li role="presentation">
+                    <a href="#ColorFoliage" aria-controls="ColorFoliage" role="tab"
+                       data-toggle="tab">Leaf Colors</a>
+                </li>
+                <li role="presentation">
+                    <a href="#ColorFruitSeed" aria-controls="ColorFruitSeed" role="tab"
+                       data-toggle="tab">Fruit/Seed Colors</a>
+                </li>
+                <li role="presentation">
+                    <a href="#Shape" aria-controls="Shape" role="tab"
+                       data-toggle="tab">Shape</a>
+                </li>
+                <li role="presentation">
+                    <a href="#TextureFoliage" aria-controls="TextureFoliage" role="tab"
+                       data-toggle="tab">Texture</a>
+                </li>
+                <li role="presentation">
+                    <a href="#Pattern" aria-controls="Pattern" role="tab" data-toggle="tab">Pattern</a>
+                </li>
+            </ul>
+
+
+            <!-- Tab panes -->
+            <!-- Name and picture for each question-value -->
+            <div id="system_inputs"></div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <br/>
 
-            <div id="footer" class="row">
-                <br/>
-                <div class="col-xs-1">
-                </div>
-                <div id="footer1" class="col-xs-2">
-                    <img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:90px;height:114px;"
-                    class="img-rounded">
-                </div>
+            <div id="buttons">
+                <!-- reset button -->
+                <input class="btn btn-default" type="submit" value="Reset" id="resetButton">
+                <!-- submit button -->
+                <input class="btn btn-default" type="submit" value="Submit" id="answerButton">
+            </div>
+            <br/>
+        </div>
 
-                <div id="footer2" class="col-sm-2">
-                    <p>General</p>
+        <h1>Your Results</h1>
 
-                    <p><a href="./About.html">About</a></p>
+        <div id="resultDisplay" class="section">
+        </div>
+    </div>
 
-                    <p><a href="./QuickLinks.html">Quick Links</a></p>
+    <!-- Google search results -->
+    <div id="GoogleSearch">
 
-                    <p><a href="./FAQs.html">FAQs</a></p>
-                </div>
+        <!-- Left half - Google safe search -->
 
-                <div id="footer3" class="col-sm-2">
-                    <p>Contact</p>
+        <!-- Right half - Google image safe search -->
 
-                    <p><a href="./ContactUs.html">Contact us</a></p>
+    </div>
+    <br/>
 
-                    <p><a href="./ReportBug.html">Report a Bug</a></p>
-                </div>
+    <div id="footer" class="row">
+        <br/>
 
-                <div id="footer4" class="col-sm-3">
-                    <p>Follow</p>
-                    <a href="https://www.facebook.com/USDA/?fref=ts"><img
-                        src="./pictures/LOGOS/Facebook/logos-and-badges_f-logo_online/png/FB-f-Logo__blue_50.png"
-                        alt="FB Logo" style="width:57px;height:57px" class="img-rounded">
+        <div class="col-xs-1">
+        </div>
+        <div id="footer1" class="col-xs-2">
+            <img src="./pictures/owl_library_small.png" alt="OWL Mascot" style="width:90px;height:114px;"
+                 class="img-rounded">
+        </div>
+
+        <div id="footer2" class="col-sm-2">
+            <p>General</p>
+
+            <p><a href="./About.html">About</a></p>
+
+            <p><a href="./QuickLinks.html">Quick Links</a></p>
+
+            <p><a href="./FAQs.html">FAQs</a></p>
+        </div>
+
+        <div id="footer3" class="col-sm-2">
+            <p>Contact</p>
+
+            <p><a href="./ContactUs.html">Contact us</a></p>
+
+            <p><a href="./ReportBug.html">Report a Bug</a></p>
+        </div>
+
+        <div id="footer4" class="col-sm-3">
+            <p>Follow</p>
+            <a href="https://www.facebook.com/USDA/?fref=ts"><img
+                    src="./pictures/LOGOS/Facebook/logos-and-badges_f-logo_online/png/FB-f-Logo__blue_50.png"
+                    alt="FB Logo" style="width:57px;height:57px" class="img-rounded">
+            </a>
+            <a href="https://instagram.com/usdagov/"><img
+                    src="./pictures/LOGOS/Instagram/1Multi-ColorLogo_online/Instagram_Icon_Large.png"
+                    alt="Instagram Logo" style="width:60px;height:60px" class="img-rounded">
+            </a>
+            <a href="https://twitter.com/USDA?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
+                <img src="./pictures/LOGOS/Twitter/brand guideline logos/TwitterLogo_55acee.png" alt="Twitter Logo"
+                     style="width:62px;height:62px" class="img-rounded">
+            </a>
+
+        </div>
+
+        <div id="admin" class="col-xs-1">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">
+                    <a href="./OWLAdmin.html">Admin Login
                     </a>
-                    <a href="https://instagram.com/usdagov/"><img src="./pictures/LOGOS/Instagram/1Multi-ColorLogo_online/Instagram_Icon_Large.png" alt="Instagram Logo" style="width:60px;height:60px" class="img-rounded">
-                    </a>
-                    <a href="https://twitter.com/USDA?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
-                        <img src="./pictures/LOGOS/Twitter/brand guideline logos/TwitterLogo_55acee.png" alt="Twitter Logo" style="width:62px;height:62px" class="img-rounded">
-                    </a>
-
-                </div>
-
-                <div id="admin" class="col-xs-1">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default">
-                            <a href="./OWLAdmin.html">Admin Login
-                            </a>
-                        </button>
-                    </div>
-                </div><!-- #admin -->
-            </div><!-- #footer -->
-        </div><!-- #footer -->
-    </div><!-- .container-fluid -->
+                </button>
+            </div>
+        </div>
+        <!-- #admin -->
+    </div>
+    <!-- #footer -->
+</div>
+<!-- #footer -->
+</div><!-- .container-fluid -->
 </body>
 </html>
