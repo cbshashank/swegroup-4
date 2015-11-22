@@ -92,14 +92,16 @@ public class Service :  IHttpHandler
 
         try
         {
-
+            Logger.WriteLog("Getting Question Categories...");
             QuestionAnsList = DAO.TransferQuestionAns();
+            Logger.WriteLog("Sending Question Categories...");
             context.Response.Write(JsonConvert.SerializeObject(QuestionAnsList));
         }
         catch (Exception e)
         {
             //---Do logging here about message - could be a post message for the server, could be a badly formed JSON
             context.Response.Write("Invalid Message!");
+            Logger.WriteError(e.ToString());
         }
     }
 
@@ -108,16 +110,19 @@ public class Service :  IHttpHandler
         string json = new StreamReader(context.Request.InputStream).ReadToEnd();
         try
         {
-
+            
             FloraObj newObj = JsonConvert.DeserializeObject<FloraObj>(json);
+            Logger.WriteLog("DELETE call on:  " + newObj.PlantId);
 
             if (!newObj.CheckStringSize())
             {
                 context.Response.Write("Message has improper string size!");
+                Logger.WriteLog("Invalid String length on DELETE");
             }
             else
             {
                 DAO.Delete(newObj);
+                Logger.WriteLog("Object Delete call finished.");
                 context.Response.Write(JsonConvert.SerializeObject(newObj));
             }
         }
@@ -125,6 +130,7 @@ public class Service :  IHttpHandler
         {
             //---Do logging here about message - could be a post message for the server, could be a badly formed JSON
             context.Response.Write("Invalid Message!");
+            Logger.WriteError(e.ToString());
         }
 
     }
@@ -137,14 +143,16 @@ public class Service :  IHttpHandler
         {
 
             FloraObj newObj = JsonConvert.DeserializeObject<FloraObj>(json);
-
+            Logger.WriteLog("Querying for Object");
             if (!newObj.CheckStringSize())
             {
                 context.Response.Write("Message has improper string size!");
+                Logger.WriteLog("Invalid String length on QUERY");
             }
             else
             {
                 IList<FloraObj> FloraObjList = DAO.Query(newObj);
+                Logger.WriteLog("Object Queried");
                 context.Response.Write(JsonConvert.SerializeObject(FloraObjList));
             }
         }
@@ -153,7 +161,8 @@ public class Service :  IHttpHandler
 
             //---Do logging here about message - could be a post message for the server, could be a badly formed JSON
             context.Response.Write("Invalid Message!");
-            
+            Logger.WriteError(e.ToString());
+
         }
     }
 
@@ -163,17 +172,19 @@ public class Service :  IHttpHandler
 
         string json = new StreamReader(context.Request.InputStream).ReadToEnd();
         try
-        { 
-            
+        {
+            Logger.WriteLog("Inserting Object");
             FloraObj newObj = JsonConvert.DeserializeObject<FloraObj>(json);
 
             if(!newObj.CheckStringSize())
             {
                 context.Response.Write("Message has improper string size!");
+                Logger.WriteLog("Invalid String length on INSERT");
             }
             else
             {
                 DAO.Insert(newObj);
+                Logger.WriteLog("Object Inserted");
                 context.Response.Write(JsonConvert.SerializeObject(newObj));
             }
         }
@@ -181,6 +192,7 @@ public class Service :  IHttpHandler
         {
             //---Do logging here about message - could be a post message for the server, could be a badly formed JSON
             context.Response.Write("Invalid Message!");
+            Logger.WriteError(e.ToString());
         }
         
 
