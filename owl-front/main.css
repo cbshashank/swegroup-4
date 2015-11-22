@@ -68,8 +68,30 @@ a#thumbnail:hover   {text-decoration:none}
 a#thumbnail:active  {text-decoration:none}
 
 .section {
-    outline: 1px solid gray;
     border-style: outset;
+}
+
+/* OVERRIDE BOOTSTRAP
+    make sure that the row of question answer choices are offset to the same extent */
+.checkbox-inline + .checkbox-inline, .radio-inline + .radio-inline {
+    margin-top: 0px;
+    margin-left: 0px;
+}
+
+label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+label > input + div > img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:5px solid transparent;
+}
+label > input:checked + div > img { /* (RADIO CHECKED) IMAGE STYLES */
+  border:5px solid green;
+}
+
+label > input + div > p { /* (RADIO CHECKED) IMAGE STYLES */
+  text-align: center;
 }
 
 /*#results_display {
@@ -83,7 +105,7 @@ a#thumbnail:active  {text-decoration:none}
 }
 
 #buttons {
-	text-align: right;
+	text-align: center;
 }
 
 #admin {

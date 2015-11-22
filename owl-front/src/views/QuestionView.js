@@ -108,31 +108,63 @@ define(function () {
 
         this.optionsHTML = function (options, urls) {
             var container = document.createElement('div');
-            container.className = "row";
+            //container.className = "row";
+            
+            var form = document.createElement('form');
+            form.role = "form";
+            container.appendChild(form);
 
             for (var i = 0; i < options.length; i++) {
                 var radio = optionRadioHTML(options[i], urls[i], this);
-                container.appendChild(radio);
+                form.appendChild(radio);
             }
+            
             return container;
         };
 
         /* Create options as
-         // CODE for enclosing thumbnails in ROW in function RadioQuestionWidget(questions)
-         <div class="row">
-         // Code for creating THUMBNAILS is in function optionRadioHTML(option)
-         <div class="col-sm-6 col-sm-1">
-         <div class="thumbnail">
-         <img src="..." alt="...">
-         <div class="caption">
-         <p>...</p>
-         </div>
-         </div>
-         </div>
-         </div>
-         */
+    <form role="form">
+        <label class="radio-inline">
+              <input type="radio" name=this.getTerm value=option />
+              <div>
+                <img src="./pictures/type/shrub.jpg" alt="..." style="width:150px;height:150px"></img>
+                <p>...</p>
+              </div>
+        </label>
+    </form>
+        */
 
         function optionRadioHTML(option, url, RadioQuestionWidget) {
+            var label = document.createElement('label');
+            label.className = "radio-inline";
+
+            var input = document.createElement('input');
+            input.type = "radio";
+            input.name = this.getTerm;
+            input.value = option;
+            
+            var thumbnail = document.createElement('div');
+
+            var img = document.createElement('img');
+            img.src = url;
+            img.alt = option;
+            img.style = "width:160px;height:160px";
+
+            var caption = document.createElement('p');
+            caption.innerHTML = option;
+
+            // populate the options
+            thumbnail.onclick = function () {
+                RadioQuestionWidget.setMyAnswer(option);
+            }
+
+            label.appendChild(input);
+            label.appendChild(thumbnail);
+            thumbnail.appendChild(img);
+            thumbnail.appendChild(caption);
+
+            return label;
+            /*
             var container = document.createElement('div');
             container.className = "col-md-2";
 
@@ -159,7 +191,7 @@ define(function () {
             thumbnail.appendChild(thumbnailCaption);
             thumbnailCaption.appendChild(thumbnailCaptionText);
 
-            return container;
+            return container; */
         }
     }
 
