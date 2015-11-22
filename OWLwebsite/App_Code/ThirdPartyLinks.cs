@@ -13,14 +13,14 @@ public class ThirdPartyLinks
        
     public static string GoogleLink(string query)
     {
-        string googlelink = "https://www.google.com/search?q=";
+        string googlelink = "https://www.google.com/search?q/";
         googlelink += query;
         return googlelink;
     }
 
     public static string GoogleImageLink(string query)
     {
-        string googlelink = "www.google.com/search?q=";
+        string googlelink = "https://www.google.com/search?q/";
         googlelink += query;
         googlelink += "&source=lnms&tbm=isch";
         return googlelink;

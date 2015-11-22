@@ -7,7 +7,8 @@ define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) 
     function ClientCommunicationModule() {
     }
 
-    var output_display = new ResultDisplay();
+    //var output_display = new ResultDisplay();
+    var admin_display = new AdminResultDisplay();
     var serverAddress = "https://localhost:32297";
 
     ClientCommunicationModule.prototype.onResultReceived = function(result){};
@@ -22,7 +23,7 @@ define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) 
             success: function (in_data) {  //On Successful service call
                 var result = JSON.parse(in_data);
                 that.onResultReceived(result);
-                output_display.updateResultDisplay(result);
+                //output_display.updateResultDisplay(result);
             },
             error: (function () {          //When Service call fails
                 alert("Error");
