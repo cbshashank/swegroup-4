@@ -13,6 +13,7 @@ define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) 
     ClientCommunicationModule.prototype.onResultReceived = function(result){};
 
     ClientCommunicationModule.prototype.sendAnswers = function (answers) {
+        var that = this;
         $.ajax({
             url: serverAddress,            // Location of the service
             type: "POST",                  //GET or POST or PUT or DELETE verb
@@ -20,7 +21,7 @@ define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) 
             dataType: "text",
             success: function (in_data) {  //On Successful service call
                 var result = JSON.parse(in_data);
-                this.onResultReceived(result);
+                that.onResultReceived(result);
                 output_display.updateResultDisplay(result);
             },
             error: (function () {          //When Service call fails
