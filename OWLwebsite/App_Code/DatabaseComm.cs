@@ -120,8 +120,8 @@ public class DatabaseComm
         if (bAdvancedQuery)
         {
             //---Special case query for US state and type
-            sqlQueryString = BuildSQLWhereOr("us_state", FLO.USState, "@us_state", count, sqlQueryString, command, out count);
-            sqlQueryString = BuildSQLWhereOr("type", FLO.Type, "@type", count, sqlQueryString, command, out count);
+            sqlQueryString = BuildSQLWhere("us_state", FLO.USState, "@us_state", count, sqlQueryString, command, out count);
+            sqlQueryString = BuildSQLWhere("type", FLO.Type, "@type", count, sqlQueryString, command, out count);
         }
 
         //---Open the connection

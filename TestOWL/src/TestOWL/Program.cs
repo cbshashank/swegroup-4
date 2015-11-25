@@ -828,7 +828,8 @@ namespace TestOWL
             TestQueryFields();
 
             //---Test the comple queries
-            TestORFields();
+            //---No longer necessary - we can't send more than one type or location
+            //TestORFields();
 
             //---Test logging in
             TestLogin();
