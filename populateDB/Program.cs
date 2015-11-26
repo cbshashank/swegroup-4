@@ -19,7 +19,8 @@ namespace populateDB
             DataTable location = makeLocationDt(conn);
             DataTable planttype =makeplantTypedt(conn);
             DataTable questionanstable = makequestionanstable(conn);
-            loadtable(plant,location,planttype, questionanstable, conn);
+			DataTable admin = makeAdmindt(conn);
+            loadtable(plant,location,planttype, questionanstable, admin, conn);
 
             conn.Close();
             
@@ -139,8 +140,19 @@ namespace populateDB
             }
             query.Length -= 1;
             query.Append(");");
+            try
+            {
+                SqlCommand sqlplantQuery = new SqlCommand(query.ToString(), conn);
+                sqlplantQuery.ExecuteNonQuery();
+                Console.WriteLine("Executed: " + query.ToString());
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            query.Clear();
 			
-						
 			// This creates the Admin table
 			query.Append("CREATE TABLE admin (");
 			for (int i = 0; i < adminColumns.Length; i++)
@@ -159,7 +171,7 @@ namespace populateDB
 			query.Length -= 1;
             query.Append(");");
 			
-            try
+			try
             {
                 SqlCommand sqlplantQuery = new SqlCommand(query.ToString(), conn);
                 sqlplantQuery.ExecuteNonQuery();
@@ -171,8 +183,7 @@ namespace populateDB
                 Console.WriteLine(e);
             }
             query.Clear();
-
-        }
+        }		
         //This creates a c# datatable for Plant from the csv file
         public static DataTable makePlantdt(SqlConnection conn)
         {
@@ -304,8 +315,40 @@ namespace populateDB
 
 
         }
+		// This creates a C# datatable for Admin from the csv file
+		public static DataTable makeAdmindt(SqlConnection conn)
+		{
+			
+			DataTable dtAdmin = new DataTable();
+
+            try
+            {
+                string[] Lines = File.ReadAllLines("TABLE_admin.csv");
+                string[] Fields;
+                Fields = Lines[0].Split(new char[] { ',' });
+                int Cols = Fields.GetLength(0);
+                //1st row must be column names; no forcing to lower case for username and password.
+                for (int i = 0; i < Cols; i++)
+                    dtAdmin.Columns.Add(Fields[i], typeof(string));
+                DataRow Row;
+                for (int i = 1; i < Lines.GetLength(0); i++)
+                {
+                    Fields = Lines[i].Split(new char[] { ',' });
+                    Row = dtAdmin.NewRow();
+                    for (int f = 0; f < Cols; f++)
+                        Row[f] = Fields[f];
+                    dtAdmin.Rows.Add(Row);
+                }
+                Console.WriteLine("Admin DataTable Created");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return dtAdmin;
+		}
         //loads the datatables onto the DB
-        public static void loadtable(DataTable plant, DataTable location, DataTable plantType, DataTable questionans, SqlConnection conn)
+        public static void loadtable(DataTable plant, DataTable location, DataTable plantType, DataTable questionans, DataTable admin, SqlConnection conn)
         {
            String Plantsquery ="";
            String Locationquery="";
@@ -376,7 +419,23 @@ namespace populateDB
             }
             Console.WriteLine("Loaded data into Question Answers table.");
             
-
+			Console.WriteLine("Now loading data into Admin table.");
+			
+			for (int i = 0; i < admin.Rows.Count; i++)
+            {
+                Ptquery = ("INSERT INTO admin(username, password) VALUES('" + admin.Rows[i][0].ToString().Trim() + "','" + admin.Rows[i][1].ToString().Trim() + "');");
+                try
+                {
+                    SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
+                    ptQuery.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+            Console.WriteLine("Loaded data into Admin table.");
+			
         }
 
         
