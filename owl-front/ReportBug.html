@@ -56,12 +56,6 @@
         </div>     
       </div>
     </div>
-    <!-- MISSING big plants search icon -->
-    <!-- <img src="./pictures/tree_dummy.png" alt="Plant Search" style="width:171px;height:171px" class="img-rounded"> -->
-
-    <!-- MISSING big animals search icon -->
-    <!-- <img src="./pictures/owl.jpg" alt="Plant Search" style="width:171px;height:171px" class="img-rounded"> -->
-
   </div>
 
   <div class="container-fluid">
@@ -70,20 +64,13 @@
         <div class="col-xs-9 col-xs-offset-3">
           <h1>Report a Bug</h1>
           <p>Please report a bug in case if you see any programmatic or data errors in the program.</p>
-          <form action="*******ACTION_PAGE.php**********">
-            First name:<br>
-            <input type="text" name="firstname" value="">
-            <br>
-            Last name:<br>
-            <input type="text" name="lastname" value="">
-            <br>
-            Email Address: <br>
-            <input type="text" name="email" value="">
+          <form action="reportbug.asp">
+            Subject:<br>
+            <input type="text" name="subject" value=""  maxlength="90" size="68" required>
             <br>
             Message:
             <br>
-            <textarea name="Describe your bug" rows="5" cols="70">
-            </textarea>
+            <textarea name="Describe your bug" rows="5" cols="70" required></textarea>
             <br>
             <input class="btn btn-default" type="submit" value="Submit">
           </form>
@@ -119,7 +106,7 @@
 
       <div id="admin" class="col-sm-1">
         <div class="btn-group" role="group" aria-label="...">
-          <button type="button" class="btn btn-default"><a href="./OWLLogin.html">Admin Login</a></button>
+          <button type="button" class="btn btn-default">Admin Login</button>
         </div>
       </div>
 
