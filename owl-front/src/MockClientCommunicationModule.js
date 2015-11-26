@@ -14,10 +14,12 @@ define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) 
 
     ClientCommunicationModule.prototype.sendAnswers = function (answers) {
         this.onResultReceived([{
+            Name: "A plant",
             ImageURL: "http://companionplants.com/images/small-plant2.jpg",
             GoogleURL: "https://en.wikipedia.org/wiki/Carnivorous_plant",
             GoogleImagesURL: "https://en.wikipedia.org/wiki/Carnivorous_plant"
         }, {
+            Name: "Other plant",
             ImageURL: "http://companionplants.com/images/small-plant2.jpg",
             GoogleURL: "https://en.wikipedia.org/wiki/Carnivorous_plant",
             GoogleImagesURL: "https://en.wikipedia.org/wiki/Carnivorous_plant"

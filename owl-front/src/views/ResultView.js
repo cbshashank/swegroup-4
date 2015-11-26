@@ -10,6 +10,7 @@ define(function () {
         for (var i = 0; i < model.length; i++) {
             var item = model[i];
             var itemDisplay = document.createElement("div");
+            itemDisplay.appendChild(this.displayName(item.Name));
             itemDisplay.appendChild(this.displayImage(item.ImageURL));
             itemDisplay.appendChild(this.displayGoogleResults(item.GoogleURL));
             itemDisplay.appendChild(this.displayGoogleImages(item.GoogleImagesURL));
@@ -21,20 +22,31 @@ define(function () {
         this.resultDisplay.innerHTML = "";
     };
 
+    ResultView.prototype.displayName = function(name){
+        var header = document.createElement("h2");
+        header.className = "text-left";
+        header.innerHTML = name;
+        return header;
+    };
+
     ResultView.prototype.displayImage = function (imageURL) {
         var img = document.createElement("img");
         img.src = imageURL;
-        return img;
+        var paragraph = document.createElement("p");
+        paragraph.appendChild(img);
+        return paragraph;
     };
 
     ResultView.prototype.displayGoogleResults = function (googleURL) {
         var frame = document.createElement("iframe");
+        frame.className = "span5";
         frame.src = googleURL;
         return frame;
     };
 
     ResultView.prototype.displayGoogleImages = function (googleImageURL) {
         var frame = document.createElement("iframe");
+        frame.className = "span5";
         frame.src = googleImageURL;
         return frame;
     };
