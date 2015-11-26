@@ -34,7 +34,7 @@ namespace populateDB
             StringBuilder query = new StringBuilder();
             //These are attributes of Plant Table
             String[] plantColumns = { "plant_id", "name", "color_flower", "color_foliage", "color_fruit_seed", "texture_foliage", "shape", "pattern", "image" };
-            String[] plantColumnTypes = { "VARCHAR(30)", "VARCHAR(200)", "VARCHAR(100)", "VARCHAR(200)", "VARCHAR(100)", "VARCHAR(100)", "VARCHAR(150)", "VARCHAR(150)", "VARCHAR(5000)" };
+            String[] plantColumnTypes = { "VARCHAR(30) NOT NULL", "VARCHAR(200) NOT NULL", "VARCHAR(100)", "VARCHAR(200)", "VARCHAR(100)", "VARCHAR(100)", "VARCHAR(150)", "VARCHAR(150)", "VARCHAR(5000)" };
 
             //These are attributes of Location Table
             String[] locationColumns = { "plant_id", "us_state" };
