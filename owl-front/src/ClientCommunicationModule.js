@@ -37,7 +37,7 @@ define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) 
             type: "GET", 		//GET or POST or PUT or DELETE verb
             dataType: "text",
             success: function (in_data) {//On Successful service call
-                alert(in_data);
+                // **** FOR DEBUGGING --- alert(in_data);
                 var result = JSON.parse(in_data);
                 onReceive(result);
             },
