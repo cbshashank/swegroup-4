@@ -47,7 +47,12 @@ namespace populateDB
             //These are the attributes of the QuestionAns table
             String[] questionanscolumns = { "question", "answer", "url" };
             String[] questionColumnTypes = { "Varchar(100)", "VARCHAR(50)", "VARCHAR(50)" };
-
+			
+			//These are the attributes of the Admin table
+			String[] adminColumns = { "username", "password" };
+			String[] adminColumnTypes = { "VARCHAR(20)", "VARCHAR(30)" };
+			String[] adminColumnContraints = { "PRIMARY KEY (username)"};
+			
             //This creates the Plant table
             query.Append("CREATE TABLE plant (");
             for (int i = 0; i < plantColumns.Length; i++)
@@ -134,6 +139,26 @@ namespace populateDB
             }
             query.Length -= 1;
             query.Append(");");
+			
+						
+			// This creates the Admin table
+			query.Append("CREATE TABLE admin (");
+			for (int i = 0; i < adminColumns.Length; i++)
+			{
+				query.Append(adminColumns[i]);
+				query.Append(" ");
+				query.Append(adminColumnTypes[i]);
+				query.Append(",");
+			}
+			// This adds the Admin table constraints
+			for (int i = 0; i < adminColumnContraints; i++)
+			{
+				query.Append(adminColumnContraints[i]);
+				query.Append(",");
+			}
+			query.Length -= 1;
+            query.Append(");");
+			
             try
             {
                 SqlCommand sqlplantQuery = new SqlCommand(query.ToString(), conn);
