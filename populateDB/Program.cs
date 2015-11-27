@@ -46,8 +46,8 @@ namespace populateDB
             String[] ptColumnTypes = { "VARCHAR(20)", "VARCHAR(50)" };
 
             //These are the attributes of the QuestionAns table
-            String[] questionanscolumns = { "question", "answer", "url" };
-            String[] questionColumnTypes = { "Varchar(100)", "VARCHAR(50)", "VARCHAR(50)" };
+            String[] questionanscolumns = { "question", "question_text", "answer", "url" };
+            String[] questionColumnTypes = { "Varchar(100)", "Varchar(100)", "VARCHAR(50)", "VARCHAR(50)" };
 			
 			//These are the attributes of the Admin table
 			String[] adminColumns = { "username", "password" };
@@ -406,7 +406,7 @@ namespace populateDB
 
             for (int i = 0; i < questionans.Rows.Count; i++)
             {
-                Ptquery = ("INSERT INTO questionans(question, answer, url) VALUES('" + questionans.Rows[i][0].ToString().Trim() + "','" + questionans.Rows[i][1].ToString().Trim() + "','" + questionans.Rows[i][2].ToString().Trim() + "');");
+                Ptquery = ("INSERT INTO questionans(question, question_text, answer, url) VALUES('" + questionans.Rows[i][0].ToString().Trim() + "','" + questionans.Rows[i][1].ToString().Trim() + "','" + questionans.Rows[i][2].ToString().Trim() + "','" + questionans.Rows[i][3].ToString().Trim() + "');");
                 try
                 {
                     SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
