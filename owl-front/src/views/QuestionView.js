@@ -8,13 +8,16 @@ define(function () {
         var questionContainer = document.getElementById('system_inputs');
         questionContainer.className = 'tab-content';
 
-        var answerButton = document.getElementById('answerButton');
         var resetButton = document.getElementById('resetButton');
         var widgets = [];
+        var that = this;
+        var lastQuestions;
 
         this.setModel = function (questions) {
+            lastQuestions = questions;
+            questionContainer.innerHTML = "";
             for (var i = 0; i < questions.length; i++) {
-                var widget = widgetFactory(questions[i]);
+                var widget = widgetFactory(questions[i], that.onAnswer.bind(that));
                 questionContainer.appendChild(widget.asHTML());
                 widgets.push(widget);
             }
@@ -22,7 +25,6 @@ define(function () {
 
         this.getAnswers = function () {
             var answers = {};
-
             for (var i = 0; i < widgets.length; i++) {
                 var answer = widgets[i].getAnswer();
                 if (answer)
@@ -31,13 +33,8 @@ define(function () {
             return answers;
         };
 
-        this.onAnswer = function (action) {
-            answerButton.addEventListener('click', action);
-        };
-
         resetButton.addEventListener('click', function () {
-            for (var i = 0; i < widgets.length; i++)
-                widgets[i].setAnswer(null);
+            that.setModel(lastQuestions);
         });
     }
 
@@ -46,12 +43,12 @@ define(function () {
      * (ex: radioButtons, listSelects, imageButtons, ...)
      * @param question
      */
-    function widgetFactory(question) {
+    function widgetFactory(question, onAnswer) {
         switch (question.term) {
             case 'USState':
-                return new SelectQuestionWidget(question);
+                return new SelectQuestionWidget(question, onAnswer);
             default:
-                return new RadioQuestionWidget(question);
+                return new RadioQuestionWidget(question, onAnswer);
         }
     }
 
@@ -60,7 +57,7 @@ define(function () {
      * @param question
      * @constructor
      */
-    function AbstractQuestionWidget(question) {
+    function AbstractQuestionWidget(question, onAnswer) {
 
         var answer;
 
@@ -70,6 +67,7 @@ define(function () {
 
         this.setAnswer = function (value) {
             answer = value;
+            onAnswer();
         };
 
         this.getTerm = function () {
@@ -98,13 +96,11 @@ define(function () {
      * Display options as a group of radio buttons
      * @constructor
      */
-    function RadioQuestionWidget(questions) {
-        AbstractQuestionWidget.call(this, questions);
+    function RadioQuestionWidget(questions, onAnswer) {
 
+        AbstractQuestionWidget.call(this, questions, onAnswer);
 
-        this.setMyAnswer = function (value) {
-            this.setAnswer(value);
-        };
+        var that = this;
 
         this.optionsHTML = function (options, urls) {
             var container = document.createElement('div');
@@ -115,7 +111,7 @@ define(function () {
             container.appendChild(form);
 
             for (var i = 0; i < options.length; i++) {
-                var radio = optionRadioHTML(options[i], urls[i], this);
+                var radio = optionRadioHTML(options[i], urls[i]);
                 form.appendChild(radio);
             }
             
@@ -134,7 +130,7 @@ define(function () {
     </form>
         */
 
-        function optionRadioHTML(option, url, RadioQuestionWidget) {
+        function optionRadioHTML(option, url) {
             var label = document.createElement('label');
             label.className = "radio-inline";
 
@@ -153,10 +149,7 @@ define(function () {
             var caption = document.createElement('p');
             caption.innerHTML = option;
 
-            // populate the options
-            thumbnail.onclick = function () {
-                RadioQuestionWidget.setMyAnswer(option);
-            }
+            thumbnail.onclick = that.setAnswer.bind(that, option);
 
             label.appendChild(input);
             label.appendChild(thumbnail);
@@ -199,9 +192,9 @@ define(function () {
      * Displays options as a select list
      * @constructor
      */
-    function SelectQuestionWidget(questions) {
+    function SelectQuestionWidget(questions, onAnswer) {
 
-        AbstractQuestionWidget.call(this, questions);
+        AbstractQuestionWidget.call(this, questions, onAnswer);
 
         this.optionsHTML = function (options, urls) {
             var select = document.createElement('select');

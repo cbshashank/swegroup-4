@@ -13,6 +13,7 @@ define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) 
     };
 
     ClientCommunicationModule.prototype.sendAnswers = function (answers) {
+        console.log(answers);
         this.onResultReceived([{
             Name: "A plant",
             ImageURL: "http://companionplants.com/images/small-plant2.jpg",
