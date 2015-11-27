@@ -14,6 +14,23 @@ namespace populateDB
         {
             SqlConnection conn = new SqlConnection("user id=username;" + "password=password;" + "server=.\\SQLExpress;" + "Trusted_Connection=yes;" + "database=OWL;" + "Connect Timeout=6000000");
             conn.Open();
+
+            // delete tables from past run
+            try
+            {
+                StringBuilder query = new StringBuilder();
+                query.Append("DROP TABLE plant; DROP TABLE location; DROP TABLE location; DROP TABLE plantType; DROP TABLE questionans; DROP TABLE admin;");
+                SqlCommand sqlplantQuery = new SqlCommand(query.ToString(), conn);
+                sqlplantQuery.ExecuteNonQuery();
+                Console.WriteLine("Executed: " + query.ToString());
+                query.Clear();
+                Console.WriteLine("Cleared populateDB tables from last run");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No populateDB tables from last run");
+            }
+
             createTables(conn);
             DataTable plant=makePlantdt(conn);
             DataTable location = makeLocationDt(conn);
@@ -163,14 +180,14 @@ namespace populateDB
 				query.Append(",");
 			}
 			// This adds the Admin table constraints
-			for (int i = 0; i < adminColumnContraints; i++)
+			for (int i = 0; i < adminColumnContraints.Length; i++)
 			{
 				query.Append(adminColumnContraints[i]);
 				query.Append(",");
 			}
 			query.Length -= 1;
             query.Append(");");
-			
+            Console.WriteLine(query);
 			try
             {
                 SqlCommand sqlplantQuery = new SqlCommand(query.ToString(), conn);
