@@ -106,12 +106,12 @@ namespace TestOWL
         /// <param name="name"></param>
         /// <param name="list"></param>
         /// <returns></returns>
-        public FloraObj FindItem(string name, IList<FloraObj> list)
+        public FloraObj FindItem(string plantid, IList<FloraObj> list)
         {
             int idx = 0;
             for(int ii = 0; ii < list.Count; ii++)
             {
-                if(list[ii].Name == name)
+                if(list[ii].PlantId == plantid)
                 {
                     idx = ii;
                     break;
@@ -228,7 +228,7 @@ namespace TestOWL
                     Console.WriteLine("TestQuery " + state + ": FAILED");
                     error++;
                 }
-                else if (CompareObjects(TestObj, FindItem(TestObj.Name,FLO),false))
+                else if (CompareObjects(TestObj, FindItem(TestObj.PlantId,FLO),false))
                 {
                     Console.WriteLine("TestQuery " + state + ": SUCCESS");
                     success++;
@@ -284,7 +284,7 @@ namespace TestOWL
                     Console.WriteLine("TestQuery " + state + ": FAILED");
                     error++;
                 }
-                else if (CompareObjects(TestObj, FindItem(TestObj.Name, FLO), false))
+                else if (CompareObjects(TestObj, FindItem(TestObj.PlantId, FLO), false))
                 {
                     Console.WriteLine("TestQuery " + state + ": SUCCESS");
                     success++;
@@ -623,6 +623,7 @@ namespace TestOWL
             //---Test duplicate plant name
             Flora = FillInsertObject("test");
             Flora = Insert(Flora);
+            Compare = Query(Flora.PlantId);
 
             if (CompareObjects(Flora, Compare, false))
             {

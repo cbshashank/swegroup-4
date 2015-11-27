@@ -81,7 +81,7 @@ public class DatabaseComm
             //****--assumes that all of the other fields are filled in.
             //---The basic query
             sqlQueryString =
-          "SELECT Plant.plant_id, name, color_flower, color_foliage, color_fruit_seed, texture_foliage, shape, pattern, image FROM Plant";
+          "SELECT DISTINCT Plant.plant_id, name, color_flower, color_foliage, color_fruit_seed, texture_foliage, shape, pattern, image FROM Plant";
 
             //---There are no WHERE statements
             count = 0;
@@ -92,7 +92,7 @@ public class DatabaseComm
             //****--NEED WHERE CLAUSES.
             //---The advanced query
             sqlQueryString =
-          "SELECT Plant.plant_id, name, color_flower, color_foliage, color_fruit_seed, texture_foliage, shape, pattern, image, us_state, type FROM Plant,Location,PlantType WHERE Plant.plant_id=Location.plant_id AND Plant.plant_id=PlantType.plant_id";
+          "SELECT DISTINCT Plant.plant_id, name, color_flower, color_foliage, color_fruit_seed, texture_foliage, shape, pattern, image, us_state, type FROM Plant,Location,PlantType WHERE Plant.plant_id=Location.plant_id AND Plant.plant_id=PlantType.plant_id";
             //---There are two conditionals here
             count = 2;
         }
@@ -140,7 +140,7 @@ public class DatabaseComm
 
 
             //---Determine if an object already exists
-            FloraObj AddObj = null;//findPlant_Id(floraObjList, plant_id);
+            FloraObj AddObj = findPlant_Id(floraObjList, plant_id);
             if (AddObj == null)
             {
                 AddObj = new FloraObj();
@@ -164,7 +164,7 @@ public class DatabaseComm
                 //---Add this floraobj to our list of objects
                 floraObjList.Add(AddObj);
             }
-            else
+           /* else
             {
                 //---This object exists.  All the values should be the same except for location or type
                 int length;
@@ -192,7 +192,7 @@ public class DatabaseComm
                 }
 
 
-            }
+            }*/
         }
 
 
@@ -404,7 +404,7 @@ public class DatabaseComm
         if (!string.IsNullOrEmpty(plantid))
         {
 
-            sqlQueryString = "SELECT plant_id  from plant WHERE plant_id = @plant_id";
+            sqlQueryString = "SELECT plant_id  from plant WHERE UPPER(plant_id) = UPPER(@plant_id)";
 
             command.Connection.Open();
 
@@ -418,13 +418,16 @@ public class DatabaseComm
             if (ReturnResult.HasRows)
             {
                 ReturnResult.Read();
-                if
-                  (ReturnResult["plant_id"].ToString() == plantid)
+                string plant_id_inDB = ReturnResult["plant_id"].ToString();
+                if (plant_id_inDB.Trim().ToUpper() == plantid.ToUpper())
                 {
                     found = true;
                     conn.Close();
                     return found;
-
+                }
+                else
+                {
+                    conn.Close();
                 }
 
             }
@@ -456,6 +459,14 @@ public class DatabaseComm
                 
                 return;
             }
+
+
+            if(string.IsNullOrEmpty(FLO.PlantId) && string.IsNullOrEmpty(FLO.Name))
+            {
+                FLO.Result = "Insert Failed:  need plantid or name";
+                return;
+            }
+
 
             //using parametirized query
             string sqlInserString =
@@ -653,7 +664,7 @@ public class DatabaseComm
     public void Deletelocation(string plantid) // delete for plant table.
     {
         //using parametirized query
-        string sqlInserString = "DELETE  FROM location WHERE plant_id=@plant_id ";
+        string sqlInserString = "DELETE FROM location WHERE plant_id=@plant_id ";
 
         SqlConnection conn = new SqlConnection(conn_string);
         SqlCommand command = new SqlCommand();
@@ -662,7 +673,6 @@ public class DatabaseComm
         command.CommandText = sqlInserString;
 
         SqlParameter plant_id = new SqlParameter("@plant_id", plantid);
-
 
         command.Parameters.AddRange(new SqlParameter[]{
                 plant_id});
