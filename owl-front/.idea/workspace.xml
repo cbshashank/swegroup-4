@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f76047b-5fa0-4860-89b2-e6505ba05364" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MockClientCommunicationModule.js" afterPath="$PROJECT_DIR$/src/MockClientCommunicationModule.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OWL.html" afterPath="$PROJECT_DIR$/OWL.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controllers/QuestionController.js" afterPath="$PROJECT_DIR$/src/controllers/QuestionController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/QuestionView.js" afterPath="$PROJECT_DIR$/src/views/QuestionView.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
     </list>
     <ignored path="owl-front.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="QuestionView.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="QuestionView.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/QuestionView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.6196722">
+            <state vertical-scroll-proportion="0.0">
               <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
                 <element signature="e#3609#3968#0" expanded="false" />
@@ -49,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.027868852">
+              <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -104,12 +101,12 @@
         <option value="$PROJECT_DIR$/tests/specs/Result-spec.js" />
         <option value="$PROJECT_DIR$/tests/specs/OWL-front-spec.js" />
         <option value="$PROJECT_DIR$/src/ClientCommunicationModule.js" />
-        <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/views/ResultView.js" />
         <option value="$PROJECT_DIR$/src/MockClientCommunicationModule.js" />
         <option value="$PROJECT_DIR$/OWL.html" />
         <option value="$PROJECT_DIR$/src/controllers/QuestionController.js" />
         <option value="$PROJECT_DIR$/src/views/QuestionView.js" />
+        <option value="$PROJECT_DIR$/src/main.js" />
       </list>
     </option>
   </component>
@@ -686,22 +683,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/QuestionView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.6196722">
+        <state vertical-scroll-proportion="0.0">
           <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
           <folding>
             <element signature="e#3609#3968#0" expanded="false" />
             <element signature="e#4889#5882#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.027868852">
+          <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
