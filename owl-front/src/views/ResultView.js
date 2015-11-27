@@ -13,7 +13,7 @@ define(function () {
             itemDisplay.appendChild(this.displayName(item.Name));
             itemDisplay.appendChild(this.displayImage(item.ImageURL));
             itemDisplay.appendChild(this.displayGoogleResults(item.GoogleURL));
-            itemDisplay.appendChild(this.displayGoogleImages(item.GoogleImagesURL));
+            itemDisplay.appendChild(this.displayGoogleImages(item.GoogleImageURL));
             this.resultDisplay.appendChild(itemDisplay);
         }
     };
