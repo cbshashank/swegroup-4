@@ -19,3 +19,9 @@ C:\swe-group4\populateDB\obj\Debug\populateDB.pdb
 C:\swe-group4\populateDB\bin\Debug\populateDB.exe
 C:\swe-group4\populateDB\bin\Debug\populateDB.pdb
 C:\swe-group4\populateDB\obj\Debug\populateDB.csprojResolveAssemblyReference.cache
+C:\Users\Shashank Chitti\Documents\swegroup-4\populateDB\bin\Debug\populateDB.exe.config
+C:\Users\Shashank Chitti\Documents\swegroup-4\populateDB\obj\Debug\populateDB.exe
+C:\Users\Shashank Chitti\Documents\swegroup-4\populateDB\obj\Debug\populateDB.pdb
+C:\Users\Shashank Chitti\Documents\swegroup-4\populateDB\bin\Debug\populateDB.exe
+C:\Users\Shashank Chitti\Documents\swegroup-4\populateDB\bin\Debug\populateDB.pdb
+C:\Users\Shashank Chitti\Documents\swegroup-4\populateDB\obj\Debug\populateDB.csprojResolveAssemblyReference.cache

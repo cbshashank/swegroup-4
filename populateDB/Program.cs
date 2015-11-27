@@ -44,7 +44,7 @@ namespace populateDB
             
            
         }
-
+       
         public static void createTables(SqlConnection conn)
         {
 
@@ -376,7 +376,7 @@ namespace populateDB
 
             for (int i=0; i<plant.Rows.Count;i++)
             {
-                    Plantsquery=("INSERT INTO plant(plant_id,name,color_flower,color_foliage,color_fruit_seed,texture_foliage,shape,pattern,image) VALUES('" + plant.Rows[i][0].ToString().Trim() + "','" + plant.Rows[i][1].ToString().Trim() + "','" + plant.Rows[i][3].ToString().Trim() + "','" + plant.Rows[i][4].ToString().Trim() + "','" + plant.Rows[i][6].ToString().Trim() + "','" + plant.Rows[i][5].ToString().Trim() + "','" + plant.Rows[i][7].ToString().Trim() + "','" + plant.Rows[i][2].ToString().Trim() + "','plants.usda.gov/gallery/standard/" + plant.Rows[i][0].ToString().Trim() + "_001_shp.jpg');");
+                    Plantsquery=("INSERT INTO plant(plant_id,name,color_flower,color_foliage,color_fruit_seed,texture_foliage,shape,pattern,image) VALUES('" + plant.Rows[i][0].ToString().Trim() + "','" + plant.Rows[i][1].ToString().Trim() + "','" + plant.Rows[i][3].ToString().Trim() + "','" + plant.Rows[i][4].ToString().Trim() + "','" + plant.Rows[i][6].ToString().Trim() + "','" + plant.Rows[i][5].ToString().Trim() + "','" + plant.Rows[i][7].ToString().Trim() + "','" + plant.Rows[i][2].ToString().Trim() + "','" + plant.Rows[i][8].ToString().Trim() + "');");
                 try {
                     SqlCommand pQuery = new SqlCommand(Plantsquery, conn);
                     pQuery.ExecuteNonQuery();
