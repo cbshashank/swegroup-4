@@ -144,7 +144,8 @@ define(function () {
             var img = document.createElement('img');
             img.src = url;
             img.alt = option;
-            img.style = "width:160px;height:160px";
+            img.width=  160;
+	    img.height=160;
 
             var caption = document.createElement('p');
             caption.innerHTML = option;
