@@ -144,8 +144,13 @@ define(function () {
             var img = document.createElement('img');
             img.src = url;
             img.alt = option;
+<<<<<<< Updated upstream
             img.width=  160;
 	    img.height=160;
+=======
+            img.width = "160";
+			img.height = "160";
+>>>>>>> Stashed changes
 
             var caption = document.createElement('p');
             caption.innerHTML = option;
