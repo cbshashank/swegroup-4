@@ -105,7 +105,7 @@ define(function () {
         this.optionsHTML = function (options, urls) {
             var container = document.createElement('div');
             //container.className = "row";
-            
+
             var form = document.createElement('form');
             form.role = "form";
             container.appendChild(form);
@@ -114,7 +114,7 @@ define(function () {
                 var radio = optionRadioHTML(options[i], urls[i]);
                 form.appendChild(radio);
             }
-            
+
             return container;
         };
 
@@ -138,19 +138,14 @@ define(function () {
             input.type = "radio";
             input.name = this.getTerm;
             input.value = option;
-            
+
             var thumbnail = document.createElement('div');
 
             var img = document.createElement('img');
             img.src = url;
             img.alt = option;
-<<<<<<< Updated upstream
-            img.width=  160;
-	    img.height=160;
-=======
             img.width = "160";
 			img.height = "160";
->>>>>>> Stashed changes
 
             var caption = document.createElement('p');
             caption.innerHTML = option;
