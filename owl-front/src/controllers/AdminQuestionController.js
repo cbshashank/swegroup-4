@@ -6,6 +6,10 @@ define(function () {
             console.log(view.getAnswers());
             communication.insertData(view.getAnswers());
         });
+        view.deleteData(function () {
+            console.log(view.getAnswers());
+            communication.deleteData(view.getAnswers());
+        });
     }
 
     return AdminQuestionController;

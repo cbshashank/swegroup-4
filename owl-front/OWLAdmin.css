@@ -1,6 +1,10 @@
 #logo {
-    float:left;
-    vertical-align: middle;
+   float:left;
+    position: relative;
+    top: -50px;
+//    left: -50px;
+//    border: 1px solid black;
+//    vertical-align: middle;
 }
 
 #header {
@@ -20,6 +24,7 @@
 
 .jumbotron {
     background-color: #99E699;
+    color: #008000;
 }
 
 h1 {
@@ -33,23 +38,29 @@ a#jumbotron:active  {color:brown; text-decoration:none}
 
 #system_inputs {
     background-color: #FFFFFF;
-    position: absolute;
- /*   top: 500px;
-    left: 0px;*/
-    height: 400px;
-    width: 400px;
+//    position: absolute;
+/*       top: 500px;
+       left: 0px;*/
+//    height: 500px;
+//    width: 400px;
 /*    margin: 5px;
     padding: 12px;*/
-    border: 1px solid black;
+ //   border: 1px solid black;
+}
+
+#system_deletion {
+    background-color: #FFFFFF;
+//    height: 300px;
+ //   border: 1px solid black;
 }
 
 #output_display {
     background-color: #FFFFFF;
-    position: absolute;
+//    position: absolute;
 /*    top: 500px;
     left: 400px;*/
-    height: 400px;
-    width: 400px;
+    height: 620px;
+//    width: 400px;
 /*    margin: 5px;
     padding: 12px;*/
     border: 1px solid red;

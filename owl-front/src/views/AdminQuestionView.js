@@ -1,33 +1,50 @@
 define(function () {
     var submissionButton = document.createElement('button');
+    var deletionButton = document.createElement('button');
 
     function AdminQuestionView() {
         var questionContainer = document.getElementById('system_inputs');
+        var deletionContainer = document.getElementById('system_deletion');
         var widgets = [];
 
         this.setModel = function (questions) {
-            this.setTextWidget("PlantId");
-            this.setTextWidget("Name");
-            this.setTextWidget("ImageURL");
+            var questionTitle = document.createElement('h3');
+            questionTitle.innerHTML = "New Plant Insertion";
+            questionContainer.appendChild(questionTitle);
+            questionContainer.appendChild(document.createElement('br'));
+            this.setTextWidget("PlantId", questionContainer);
+            this.setTextWidget("Name", questionContainer);
+            this.setTextWidget("ImageURL", questionContainer);
             for (var i = 0; i < questions.length; i++) {
                 if (questions[i].options.length > 1) {
                     var widget = new AdminSelectionQuestionWidget(questions[i]);
-                    this.appendWidget(widget);
+                    this.appendWidget(widget, questionContainer);
                 }
             }
 
             submissionButton.setAttribute('class', "btn btn-default");
             submissionButton.innerHTML = "Submit Data";
             questionContainer.appendChild(submissionButton);
+
+            var deletionTitle = document.createElement('h3');
+            deletionTitle.innerHTML = "Plant Deletion";
+            deletionContainer.appendChild(deletionTitle);
+            deletionContainer.appendChild(document.createElement('br'));
+            this.setTextWidget("PlantId", deletionContainer);
+
+            deletionButton.setAttribute('class', "btn btn-default");
+            deletionButton.innerHTML = "Submit Deletion";
+            deletionContainer.appendChild(deletionButton);
+
         };
 
-        this.setTextWidget = function(name) {
+        this.setTextWidget = function(name, container) {
             var textWidget = new AdminTextQuestionWidget(name);
-            this.appendWidget(textWidget);
+            this.appendWidget(textWidget, container);
         };
 
-        this.appendWidget = function(widget) {
-            questionContainer.appendChild(widget.asHTML());
+        this.appendWidget = function(widget, container) {
+            container.appendChild(widget.asHTML());
             widgets.push(widget);
         };
 
@@ -46,6 +63,10 @@ define(function () {
 
         this.insertData = function (action) {
             submissionButton.addEventListener('click', action);
+        };
+
+        this.deleteData = function (action) {
+            deletionButton.addEventListener('click', action);
         };
     }
 
