@@ -353,7 +353,7 @@ namespace TestOWL
                 IList<FloraObj> FLO = JsonConvert.DeserializeObject<List<FloraObj>>(resultjson);
                 if (FLO != null && FLO.Count > 0)
                 {
-                    Process.Start("HTTP://WWW." + FLO[0].ImageURL);
+                    Process.Start(FLO[0].ImageURL);
                     Process.Start(FLO[0].GoogleURL);
                     Process.Start(FLO[0].GoogleImageURL);
                 }

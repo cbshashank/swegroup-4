@@ -143,7 +143,7 @@ public class Service :  IHttpHandler
         {
 
             FloraObj newObj = JsonConvert.DeserializeObject<FloraObj>(json);
-            Logger.WriteLog("Querying for Object");
+            Logger.WriteLog("Querying for Object:  " + json);
             if (!newObj.CheckStringSize())
             {
                 context.Response.Write("Message has improper string size!");

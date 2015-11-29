@@ -14,7 +14,27 @@ namespace populateDB
         {
             SqlConnection conn = new SqlConnection("user id=username;" + "password=password;" + "server=.\\SQLExpress;" + "Trusted_Connection=yes;" + "database=OWL;" + "Connect Timeout=6000000");
             conn.Open();
+<<<<<<< Updated upstream
             dropTables (conn, "OWL.dbo.plant", "OWL.dbo.location", "OWL.dbo.admin", "OWL.dbo.plantType", "OWL.dbo.questionans");
+=======
+
+            // delete tables from past run
+            try
+            {
+                StringBuilder query = new StringBuilder();
+                query.Append("DROP TABLE plant; DROP TABLE location; DROP TABLE location; DROP TABLE plantType; DROP TABLE questionans; DROP TABLE AdminTb;");
+                SqlCommand sqlplantQuery = new SqlCommand(query.ToString(), conn);
+                sqlplantQuery.ExecuteNonQuery();
+                Console.WriteLine("Executed: " + query.ToString());
+                query.Clear();
+                Console.WriteLine("Cleared populateDB tables from last run");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No populateDB tables from last run");
+            }
+
+>>>>>>> Stashed changes
             createTables(conn);
             DataTable plant=makePlantdt(conn);
             DataTable location = makeLocationDt(conn);
@@ -170,7 +190,7 @@ namespace populateDB
             query.Clear();
 			
 			// This creates the Admin table
-			query.Append("CREATE TABLE admin (");
+			query.Append("CREATE TABLE AdminTb (");
 			for (int i = 0; i < adminColumns.Length; i++)
 			{
 				query.Append(adminColumns[i]);
@@ -355,7 +375,7 @@ namespace populateDB
                         Row[f] = Fields[f];
                     dtAdmin.Rows.Add(Row);
                 }
-                Console.WriteLine("Admin DataTable Created");
+                Console.WriteLine("AdminTb DataTable Created");
             }
             catch (Exception e)
             {
@@ -364,7 +384,7 @@ namespace populateDB
             return dtAdmin;
 		}
         //loads the datatables onto the DB
-        public static void loadtable(DataTable plant, DataTable location, DataTable plantType, DataTable questionans, DataTable admin, SqlConnection conn)
+        public static void loadtable(DataTable plant, DataTable location, DataTable plantType, DataTable questionans, DataTable AdminTb, SqlConnection conn)
         {
            String Plantsquery ="";
            String Locationquery="";
@@ -435,11 +455,11 @@ namespace populateDB
             }
             Console.WriteLine("Loaded data into Question Answers table.");
             
-			Console.WriteLine("Now loading data into Admin table.");
+			Console.WriteLine("Now loading data into AdminTb table.");
 			
 			for (int i = 0; i < admin.Rows.Count; i++)
             {
-                Ptquery = ("INSERT INTO admin(username, password) VALUES('" + admin.Rows[i][0].ToString().Trim() + "','" + admin.Rows[i][1].ToString().Trim() + "');");
+                Ptquery = ("INSERT INTO AdminTb(username, password) VALUES('" + admin.Rows[i][0].ToString().Trim() + "','" + admin.Rows[i][1].ToString().Trim() + "');");
                 try
                 {
                     SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
@@ -450,7 +470,7 @@ namespace populateDB
                     Console.WriteLine(e);
                 }
             }
-            Console.WriteLine("Loaded data into Admin table.");
+            Console.WriteLine("Loaded data into AdminTb table.");
 			
         }
 
