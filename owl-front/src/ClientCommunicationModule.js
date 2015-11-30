@@ -86,7 +86,7 @@ define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) 
     };
 
     ClientCommunicationModule.prototype.deleteData = function (data) {
-        var check = window.confirm("Are you sure you want to delete " + data.Name + "?");
+        var check = window.confirm("Are you sure you want to delete " + data.PlantId + "?");
         if (check) {
             $.ajax({
                 url: serverAddress, 		// Location of the service

@@ -6,6 +6,7 @@ define(function () {
         var questionContainer = document.getElementById('system_inputs');
         var deletionContainer = document.getElementById('system_deletion');
         var widgets = [];
+        var deletionWidgets = [];
 
         this.setModel = function (questions) {
             var questionTitle = document.createElement('h3');
@@ -45,7 +46,11 @@ define(function () {
 
         this.appendWidget = function(widget, container) {
             container.appendChild(widget.asHTML());
-            widgets.push(widget);
+            if (container == deletionContainer) {
+                deletionWidgets.push(widget);
+            } else {
+                widgets.push(widget);
+            }
         };
 
         this.getAnswers = function () {
@@ -59,6 +64,15 @@ define(function () {
             answers["UserName"] = "Admin";
             answers["Password"] = "Admin";
             return answers;
+        };
+
+        this.getDeletionSubject = function () {
+            var subject = {};
+
+            subject[deletionWidgets[0].getTerm()] = deletionWidgets[0].getAnswer();
+            subject["UserName"] = "Admin";
+            subject["Password"] = "Admin";
+            return subject;
         };
 
         this.insertData = function (action) {

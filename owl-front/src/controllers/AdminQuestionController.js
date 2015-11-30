@@ -7,8 +7,8 @@ define(function () {
             communication.insertData(view.getAnswers());
         });
         view.deleteData(function () {
-            console.log(view.getAnswers());
-            communication.deleteData(view.getAnswers());
+            console.log(view.getDeletionSubject());
+            communication.deleteData(view.getDeletionSubject());
         });
     }
 
