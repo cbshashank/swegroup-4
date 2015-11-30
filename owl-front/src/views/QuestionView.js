@@ -146,9 +146,9 @@ define(function () {
             img.alt = option;
             img.width = "160";
 			img.height = "160";
->>>>>>> Stashed changes
+			img.height = "160";
 
-            var caption = document.createElement('p');
+            var caption = document.createElement('h4');
             caption.innerHTML = option;
 
             thumbnail.onclick = that.setAnswer.bind(that, option);

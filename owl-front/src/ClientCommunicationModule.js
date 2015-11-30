@@ -9,7 +9,7 @@ define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) 
 
     //var output_display = new ResultDisplay();
     var admin_display = new AdminResultDisplay();
-    var serverAddress = "http://localhost:32296";
+    var serverAddress = "https://localhost:32297";
 
     ClientCommunicationModule.prototype.onResultReceived = function(result){};
 

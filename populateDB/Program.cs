@@ -14,9 +14,7 @@ namespace populateDB
         {
             SqlConnection conn = new SqlConnection("user id=username;" + "password=password;" + "server=.\\SQLExpress;" + "Trusted_Connection=yes;" + "database=OWL;" + "Connect Timeout=6000000");
             conn.Open();
-<<<<<<< Updated upstream
             dropTables (conn, "OWL.dbo.plant", "OWL.dbo.location", "OWL.dbo.admin", "OWL.dbo.plantType", "OWL.dbo.questionans");
-=======
 
             // delete tables from past run
             try
@@ -34,7 +32,7 @@ namespace populateDB
                 Console.WriteLine("No populateDB tables from last run");
             }
 
->>>>>>> Stashed changes
+
             createTables(conn);
             DataTable plant=makePlantdt(conn);
             DataTable location = makeLocationDt(conn);
@@ -457,9 +455,9 @@ namespace populateDB
             
 			Console.WriteLine("Now loading data into AdminTb table.");
 			
-			for (int i = 0; i < admin.Rows.Count; i++)
+			for (int i = 0; i < AdminTb.Rows.Count; i++)
             {
-                Ptquery = ("INSERT INTO AdminTb(username, password) VALUES('" + admin.Rows[i][0].ToString().Trim() + "','" + admin.Rows[i][1].ToString().Trim() + "');");
+                Ptquery = ("INSERT INTO AdminTb(username, password) VALUES('" + AdminTb.Rows[i][0].ToString().Trim() + "','" + AdminTb.Rows[i][1].ToString().Trim() + "');");
                 try
                 {
                     SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
