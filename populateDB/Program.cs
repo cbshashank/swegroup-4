@@ -14,27 +14,6 @@ namespace populateDB
         {
             SqlConnection conn = new SqlConnection("user id=username;" + "password=password;" + "server=.\\SQLExpress;" + "Trusted_Connection=yes;" + "database=OWL;" + "Connect Timeout=6000000");
             conn.Open();
-<<<<<<< Updated upstream
-            dropTables (conn, "OWL.dbo.plant", "OWL.dbo.location", "OWL.dbo.admin", "OWL.dbo.plantType", "OWL.dbo.questionans");
-=======
-
-            // delete tables from past run
-            try
-            {
-                StringBuilder query = new StringBuilder();
-                query.Append("DROP TABLE plant; DROP TABLE location; DROP TABLE location; DROP TABLE plantType; DROP TABLE questionans; DROP TABLE AdminTb;");
-                SqlCommand sqlplantQuery = new SqlCommand(query.ToString(), conn);
-                sqlplantQuery.ExecuteNonQuery();
-                Console.WriteLine("Executed: " + query.ToString());
-                query.Clear();
-                Console.WriteLine("Cleared populateDB tables from last run");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("No populateDB tables from last run");
-            }
-
->>>>>>> Stashed changes
             createTables(conn);
             DataTable plant=makePlantdt(conn);
             DataTable location = makeLocationDt(conn);
@@ -48,22 +27,7 @@ namespace populateDB
             
            
         }
-       public static void dropTables(SqlConnection conn, string t1, string t2, string t3, string t4, string t5)
-        {
-            String query = "drop table " + t1 + "; drop table " + t2 + ";drop table " + t3 + "; drop table " + t4 + "; drop table "+ t5+ ";";
-            try
-            {
-                SqlCommand sqlplantQuery = new SqlCommand(query, conn);
-                sqlplantQuery.ExecuteNonQuery();
-                Console.WriteLine("Executed: " + query);
 
- 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
         public static void createTables(SqlConnection conn)
         {
 
@@ -190,7 +154,7 @@ namespace populateDB
             query.Clear();
 			
 			// This creates the Admin table
-			query.Append("CREATE TABLE AdminTb (");
+			query.Append("CREATE TABLE admin (");
 			for (int i = 0; i < adminColumns.Length; i++)
 			{
 				query.Append(adminColumns[i]);
@@ -199,14 +163,14 @@ namespace populateDB
 				query.Append(",");
 			}
 			// This adds the Admin table constraints
-			for (int i = 0; i < adminColumnContraints.Length; i++)
+			for (int i = 0; i < adminColumnContraints; i++)
 			{
 				query.Append(adminColumnContraints[i]);
 				query.Append(",");
 			}
 			query.Length -= 1;
             query.Append(");");
-            Console.WriteLine(query);
+			
 			try
             {
                 SqlCommand sqlplantQuery = new SqlCommand(query.ToString(), conn);
@@ -375,7 +339,7 @@ namespace populateDB
                         Row[f] = Fields[f];
                     dtAdmin.Rows.Add(Row);
                 }
-                Console.WriteLine("AdminTb DataTable Created");
+                Console.WriteLine("Admin DataTable Created");
             }
             catch (Exception e)
             {
@@ -384,7 +348,7 @@ namespace populateDB
             return dtAdmin;
 		}
         //loads the datatables onto the DB
-        public static void loadtable(DataTable plant, DataTable location, DataTable plantType, DataTable questionans, DataTable AdminTb, SqlConnection conn)
+        public static void loadtable(DataTable plant, DataTable location, DataTable plantType, DataTable questionans, DataTable admin, SqlConnection conn)
         {
            String Plantsquery ="";
            String Locationquery="";
@@ -395,7 +359,7 @@ namespace populateDB
 
             for (int i=0; i<plant.Rows.Count;i++)
             {
-                    Plantsquery=("INSERT INTO plant(plant_id,name,color_flower,color_foliage,color_fruit_seed,texture_foliage,shape,pattern,image) VALUES('" + plant.Rows[i][0].ToString().Trim() + "','" + plant.Rows[i][1].ToString().Trim() + "','" + plant.Rows[i][3].ToString().Trim() + "','" + plant.Rows[i][4].ToString().Trim() + "','" + plant.Rows[i][6].ToString().Trim() + "','" + plant.Rows[i][5].ToString().Trim() + "','" + plant.Rows[i][7].ToString().Trim() + "','" + plant.Rows[i][2].ToString().Trim() + "','" + plant.Rows[i][8].ToString().Trim() + "');");
+                    Plantsquery=("INSERT INTO plant(plant_id,name,color_flower,color_foliage,color_fruit_seed,texture_foliage,shape,pattern,image) VALUES('" + plant.Rows[i][0].ToString().Trim() + "','" + plant.Rows[i][1].ToString().Trim() + "','" + plant.Rows[i][3].ToString().Trim() + "','" + plant.Rows[i][4].ToString().Trim() + "','" + plant.Rows[i][6].ToString().Trim() + "','" + plant.Rows[i][5].ToString().Trim() + "','" + plant.Rows[i][7].ToString().Trim() + "','" + plant.Rows[i][2].ToString().Trim() + "','plants.usda.gov/gallery/standard/" + plant.Rows[i][0].ToString().Trim() + "_001_shp.jpg');");
                 try {
                     SqlCommand pQuery = new SqlCommand(Plantsquery, conn);
                     pQuery.ExecuteNonQuery();
@@ -455,11 +419,11 @@ namespace populateDB
             }
             Console.WriteLine("Loaded data into Question Answers table.");
             
-			Console.WriteLine("Now loading data into AdminTb table.");
+			Console.WriteLine("Now loading data into Admin table.");
 			
 			for (int i = 0; i < admin.Rows.Count; i++)
             {
-                Ptquery = ("INSERT INTO AdminTb(username, password) VALUES('" + admin.Rows[i][0].ToString().Trim() + "','" + admin.Rows[i][1].ToString().Trim() + "');");
+                Ptquery = ("INSERT INTO admin(username, password) VALUES('" + admin.Rows[i][0].ToString().Trim() + "','" + admin.Rows[i][1].ToString().Trim() + "');");
                 try
                 {
                     SqlCommand ptQuery = new SqlCommand(Ptquery.ToString(), conn);
@@ -470,7 +434,7 @@ namespace populateDB
                     Console.WriteLine(e);
                 }
             }
-            Console.WriteLine("Loaded data into AdminTb table.");
+            Console.WriteLine("Loaded data into Admin table.");
 			
         }
 

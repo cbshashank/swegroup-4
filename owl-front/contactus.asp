@@ -71,7 +71,7 @@ BUFromEmail = "wguan12@bu.edu"
 BUPassword  = ""
 
 Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendusing") = 2
-Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserver") ="smtp.bu.edu"
+Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserver") ="smtp.gmail.edu"
 Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserverport") = 465
 
 Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpusessl") = 1
@@ -79,14 +79,14 @@ Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/
 Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60
 
 Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
-Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendusername") = BUFromEmail
-Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendpassword") = BUPassword
+Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendusername") = "cs473673team4owl@gmail.com"
+Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "cs473673team4owlproj"
 
 Mail.Configuration.Fields.Update
 
 Mail.Subject="OWL Project - Contact Us Email - " & Request.QueryString("subject")
-Mail.From="wguan12@bu.edu"
-Mail.To="wguan12@bu.edu"
+Mail.From="cs473673team4owl@gmail.com"
+Mail.To="cs473673team4owl@gmail.com"
 Mail.TextBody=Request.QueryString("message")
 
 Mail.Send
