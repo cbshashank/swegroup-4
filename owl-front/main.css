@@ -87,10 +87,10 @@ label > input + div > img{ /* IMAGE STYLES */
   border:5px solid transparent;
 }
 label > input:checked + div > img { /* (RADIO CHECKED) IMAGE STYLES */
-  border:5px solid green;
+  border:8px solid green;
 }
 
-label > input + div > p { /* (RADIO CHECKED) IMAGE STYLES */
+label > input + div > h4 { /* (RADIO CHECKED) IMAGE STYLES */
   text-align: center;
 }
 
