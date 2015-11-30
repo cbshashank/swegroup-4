@@ -145,8 +145,7 @@ define(function () {
             img.src = url;
             img.alt = option;
             img.width = "160";
-			img.height = "160";
->>>>>>> Stashed changes
+	    img.height = "160";
 
             var caption = document.createElement('p');
             caption.innerHTML = option;
