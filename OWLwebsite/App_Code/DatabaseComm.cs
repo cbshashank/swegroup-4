@@ -14,6 +14,16 @@ public class DatabaseComm
     private string conn_string;
 
     /// <summary>
+    /// The default image to display if the picture is null
+    /// </summary>
+    private const string default_image = "./pictures/owl.jpg";
+
+    /// <summary>
+    /// string value to identify an empty URL in the database
+    /// </summary>
+    private const string empty_image = "NULL";
+
+    /// <summary>
     /// The constructor for the connection to the database
     /// </summary>
     /// <param name="connection"></param>
@@ -153,6 +163,13 @@ public class DatabaseComm
                 AddObj.Shape = ReturnResult.GetString(6);
                 AddObj.Pattern = ReturnResult.GetString(7);
                 AddObj.ImageURL = ReturnResult.GetString(8);
+
+                if(string.IsNullOrEmpty(AddObj.ImageURL) || AddObj.ImageURL.ToUpper() == empty_image)
+                {
+                    AddObj.ImageURL = default_image;
+                }
+
+
                 AddObj.GoogleImageURL = ThirdPartyLinks.GoogleImageLink(AddObj.Name);
                 AddObj.GoogleURL = ThirdPartyLinks.GoogleLink(AddObj.Name);
 
