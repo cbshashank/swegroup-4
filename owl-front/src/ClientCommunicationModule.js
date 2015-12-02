@@ -99,8 +99,8 @@ define(['jquery', 'views/AdminResultDisplay'], function ($, AdminResultDisplay) 
                     //                alert("result=" + result);
 
                     var output = "";
-                    output = output + "<p><b>Deleted Element: </b><br//>";
-                    output = output + "PlantId: " + result.PlantId + "<br//>";
+                    output = output + "<p>";
+                    output = output + "PlantId " + result.PlantId + ":  " + result.Result + "<br//>";
                     output = output + "<//p>";
 
                     admin_display.updateResultDisplay(output);
