@@ -3,12 +3,12 @@ define(function () {
     var deletionButton = document.createElement('button');
 
     function AdminQuestionView() {
-        var questionContainer = document.getElementById('system_inputs');
-        var deletionContainer = document.getElementById('system_deletion');
         var widgets = [];
         var deletionWidgets = [];
 
         this.setModel = function (questions) {
+            var questionContainer = document.getElementById('system_inputs');
+            var deletionContainer = document.getElementById('system_deletion');
             var questionTitle = document.createElement('h3');
             questionTitle.innerHTML = "New Plant Insertion";
             questionContainer.appendChild(questionTitle);
@@ -46,7 +46,7 @@ define(function () {
 
         this.appendWidget = function(widget, container) {
             container.appendChild(widget.asHTML());
-            if (container == deletionContainer) {
+            if (container == document.getElementById('system_deletion')) {
                 deletionWidgets.push(widget);
             } else {
                 widgets.push(widget);
@@ -61,8 +61,6 @@ define(function () {
                     answers[widgets[i].getTerm()] = answer;
                 }
             }
-            answers["UserName"] = "Admin";
-            answers["Password"] = "Admin";
             return answers;
         };
 
@@ -70,8 +68,7 @@ define(function () {
             var subject = {};
 
             subject[deletionWidgets[0].getTerm()] = deletionWidgets[0].getAnswer();
-            subject["UserName"] = "Admin";
-            subject["Password"] = "Admin";
+
             return subject;
         };
 
@@ -81,6 +78,13 @@ define(function () {
 
         this.deleteData = function (action) {
             deletionButton.addEventListener('click', action);
+        };
+
+        this.logout = function(action) {
+            var logoutLink = document.getElementById('logout-link');
+            logoutLink.onclick = action;
+            var logoutButton = document.getElementById('logout-button');
+            logoutButton.addEventListener('click' ,action);
         };
     }
 

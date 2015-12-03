@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="OWLAdmin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script data-main="src/adminMain" src="lib/require.js"></script>
+    <script data-main="src/loginMain" src="lib/require.js"></script>
 </head>
 <body>
     <div id="page-header">
@@ -31,7 +31,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
               <li><a href="./OWL.html">Home</a></li>
-              <li><a href="./OWLAdmin.html">Admin Login</a></li>
+              <li><a href="./OWLLogin.html">Admin Login</a></li>
           </ul>
       </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -40,10 +40,11 @@
 
 <!-- Banner in the background -->
 <div class="container">
-    <img id="logo" src="Owl.png">
     <div id="banner" class="jumbotron">
-      <a href="./OWL.html" id="jumbotron"><h1>OWL Administration Tool</h1></a>
-  </div> 
+        <img id="logo" src="Owl.png">
+        <H1>OWL Administration Tool</H1>
+        <!--      <a href="./OWL.html" id="jumbotron"><h1>OWL Administration Tool</h1></a> -->
+    </div>
 </div>
 
 <div class="container-fluid">
@@ -51,17 +52,17 @@
     <div id="Login">
       <div class="row">
         <div class="col-xs-9 col-xs-offset-4">
-            <form action="*******ACTION_PAGE.php**********">
+            <!--<form action="*******ACTION_PAGE.php**********"> -->
                 <p>User Name:
-                    <input type="text" name="username" value="">
+                    <input id="username" type="text" name="username" value=""/>
                 </p>
                 <p>Password:&nbsp;&nbsp;
-                    <input type="text" name="password" value="">
+                    <input id="password" type="text" name="password" value=""/>
                 </p>
                 <div class="col-xs-4 col-xs-offset-1">
-                    <input class="btn btn-default" type="submit" value="Submit">
+                    <button id="loginButton" class="btn btn-default">Submit</button>
                 </div>
-            </form>
+<!--            </form> -->
         </div>
     </div>
 
@@ -98,10 +99,12 @@
     <div id="admin" class="col-sm-1">
         <div class="btn-group" role="group" aria-label="...">
           <button type="button" class="btn btn-default"><a href="./OWLLogin.html">Admin Login</a></button>
-      </div>
-  </div>
+        </div>
+    </div>
 
+    </div>
 </div>
 </div>
+    </div>
 </body>
 </html>
