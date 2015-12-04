@@ -16,6 +16,7 @@ define(function () {
         this.setModel = function (questions) {
             lastQuestions = questions;
             questionContainer.innerHTML = "";
+            widgets = [];
             for (var i = 0; i < questions.length; i++) {
                 var widget = widgetFactory(questions[i], that.onAnswer.bind(that));
                 questionContainer.appendChild(widget.asHTML());
