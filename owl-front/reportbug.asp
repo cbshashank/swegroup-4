@@ -67,32 +67,38 @@
   </div>
 
   <div class="container-fluid">
-    <div id="ContactUsEmailSent">
+    <div id="ReportBugEmailSent">
       <div class="row">
         <div class="col-xs-10 col-xs-offset-1">
 			<%
-Dim Mail, BUFromEmail, BUPassword
+Dim Mail, Email, Password
 Set Mail = CreateObject("CDO.Message")
-BUFromEmail = "wguan12@bu.edu"
-BUPassword  = ""
+Email = "cs473673team4owl@yahoo.com"
+Password  = "cs!@473673team4owlproj"
 
 Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendusing") = 2
-Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserver") ="smtp.gmail.edu"
+Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserver") ="smtp.mail.yahoo.com"
 Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpserverport") = 465
+
+Mail.Configuration.Fields.Item ("EnableSsl") = true
+
+Mail.Configuration.Fields.Item ("UseDefaultCredentials") = true
+
+Mail.Configuration.Fields.Item ("Credentials") = basicCredential
 
 Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpusessl") = 1
 
 Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60
 
 Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
-Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendusername") = "cs473673team4owl@gmail.com"
-Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendpassword") = "cs473673team4owlproj"
+Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendusername") = Email
+Mail.Configuration.Fields.Item ("http://schemas.microsoft.com/cdo/configuration/sendpassword") = Password
 
 Mail.Configuration.Fields.Update
 
 Mail.Subject="OWL Project - Report a Bug Email - " & Request.QueryString("subject")
-Mail.From="cs473673team4owl@gmail.com"
-Mail.To="cs473673team4owl@gmail.com"
+Mail.From=Email
+Mail.To=Email
 Mail.TextBody=Request.QueryString("message")
 
 Mail.Send
