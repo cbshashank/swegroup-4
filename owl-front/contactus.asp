@@ -32,7 +32,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="./OWL.html">Home</a></li>
-              <li><a href="./OWLAdmin.html">Admin Login</a></li>
+              <li><a href="./OWLLogin.html">Admin Login</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -134,7 +134,7 @@ Set Mail = Nothing
 
       <div id="admin" class="col-sm-1">
         <div class="btn-group" role="group" aria-label="...">
-          <button type="button" class="btn btn-default">Admin Login</button>
+          <a href="./OWLLogin.html" class="btn btn-info" role="button">Admin Login</a>
         </div>
       </div>
 
